@@ -1,0 +1,37 @@
+{
+  "signup": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "username": "asdfasdf",
+      "nickname": "asdf@naver.com",
+      "password": "asdf1234",
+      "id": 2
+    },
+    {
+      "username": "asdfasdf",
+      "password": "asdf1234",
+      "email": "asdf@naver.com",
+      "id": 3
+    },
+    {
+      "username": "asdf",
+      "password": "asdf1234",
+      "email": "asdf@naver.com",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
