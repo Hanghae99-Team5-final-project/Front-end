@@ -6,6 +6,8 @@ const instance = axios.create({
 });
 
 export const apis = {
+  /////유저///////
   signUp: (userInfo) => instance.post("signup", userInfo),
+  Login: (userInfo) => instance.post("login", userInfo),
 };
 export default apis;

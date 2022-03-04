@@ -10,25 +10,33 @@
       "nickname": "asdf@naver.com",
       "password": "asdf1234",
       "id": 2
-    },
-    {
-      "username": "asdfasdf",
-      "password": "asdf1234",
-      "email": "asdf@naver.com",
-      "id": 3
-    },
-    {
-      "username": "asdf",
-      "password": "asdf1234",
-      "email": "asdf@naver.com",
-      "id": 4
     }
   ],
-  "comments": [
+  "login": [
     {
       "id": 1,
       "body": "some comment",
       "postId": 1
+    },
+    {
+      "username": "asdfsadf",
+      "password": "asdf1234",
+      "id": 2
+    },
+    {
+      "username": "asdf1234",
+      "password": "asdf1234",
+      "id": 3
+    },
+    {
+      "username": "asdf1234",
+      "password": "asdf1234",
+      "id": 4
+    },
+    {
+      "username": "asdf2134",
+      "password": "asdf1234",
+      "id": 5
     }
   ],
   "profile": {

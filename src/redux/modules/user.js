@@ -19,19 +19,37 @@ const initialState = {
 };
 
 // middleware actions
-const loginAction = (user) => {
-  return function (dispatch, getState, { history }) {
-    console.log(history);
-    dispatch(setUser(user));
-    history.push("/");
+const loginFB = (id, password) => {
+  return async function (dispatch, getState, { history }) {
+    const userInfo = {
+      username: id,
+      password: password,
+    };
+
+    await apis
+      .Login(userInfo)
+      .then((res) => {
+        window.alert(res.data);
+        history.push("/");
+        return;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
+
+// const loginAction = (user) => {
+//   return function (dispatch, getState, { history }) {
+//     console.log(history);
+//     dispatch(setUser(user));
+//     history.push("/");
+//   };
+// };
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
     const userInfo = {
-      //   .post("http://localhost:3003/signup",
-
       username: id,
       password: password,
       email: email,
@@ -40,12 +58,9 @@ const signupFB = (id, password, email) => {
     await apis
       .signUp(userInfo)
       .then((res) => {
-        // if (res.data === "성공적으로 회원 가입이 완료 되었습니다.") {
         window.alert(res.data);
-        history.push("/");
+        history.push("/login");
         return;
-        // }
-        // window.alert(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +90,8 @@ export default handleActions(
 const actionCreators = {
   logOut,
   getUser,
-  loginAction,
+  // loginAction,
+  loginFB,
   signupFB,
 };
 
