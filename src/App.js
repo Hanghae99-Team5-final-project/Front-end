@@ -16,11 +16,13 @@ import WatchCodyWrite from "./codypages/WatchCodyWrite";
 import WatchDetail from "./codypages/WatchDetail";
 import WatchPage from "./codypages/WatchPage";
 import Header from "./components/Header";
+import NavbarButton from "./option/NavbarButton";
 function App() {
   return (
     <>
       <AppWrap>
         <Header />
+        <NavbarButton />
       </AppWrap>
       <ContentWrap>
         <Switch>
@@ -47,7 +49,7 @@ function App() {
 
           <Route path="/watchcodywrite" component={WatchCodyWrite} />
           <Route path="/watchdetail/:id" component={WatchDetail} />
-          <Route path="/watchpage"  exact component={WatchPage} />
+          <Route path="/watchpage" exact component={WatchPage} />
           <Route path="/" exact component={MainPage} />
           <Redirect from="*" to="/" />
         </Switch>
