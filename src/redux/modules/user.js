@@ -1,13 +1,16 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
+import { setCookie, deleteCookie } from "../../Cookie";
 import apis from "../../api/apis";
 // actions
+const LOG_IN = "LOG_OUT";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 // action creators
+const logIn = createAction(LOG_OUT, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -29,23 +32,59 @@ const loginFB = (id, password) => {
     await apis
       .Login(userInfo)
       .then((res) => {
-        window.alert(res.data);
-        history.push("/");
-        return;
+        console.log(res);
+        if (!res.data.ok) {
+          // window.alert(res.data.errorMessage);
+          window.alert(res.data);
+          history.push("/");
+          return;
+        }
+        dispatch(setUser(res.data));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userNickname", res.data.userNickname);
+        history.replace("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        alert(err.response);
+        console.log(err.response);
       });
   };
 };
 
-// const loginAction = (user) => {
+// const loginCheckFB = () => {
+//   const token = localStorage.getItem("token");
 //   return function (dispatch, getState, { history }) {
-//     console.log(history);
-//     dispatch(setUser(user));
-//     history.push("/");
+//     axios({
+//       method: "get",
+//       url: "http://3.34.130.88/api/users/me",
+//       headers: {
+//         "content-type": "application/json;charset=UTF-8",
+//         accept: "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     })
+//       .then((res) => {
+//         console.log(res);
+
+//         dispatch(
+//           setUser({
+//             userNickname: res.data.userNickname,
+//           })
+//         );
+//       })
+//       .catch((err) => {
+//         console.log("로그인 확인 실패", err);
+//       });
 //   };
 // };
+
+const loginAction = (user) => {
+  return function (dispatch, getState, { history }) {
+    console.log(history);
+    dispatch(logIn(user));
+    history.push("/");
+  };
+};
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
@@ -71,8 +110,15 @@ const signupFB = (id, password, email) => {
 // reducer
 export default handleActions(
   {
+    [LOG_IN]: (state, action) =>
+      produce(state, (draft) => {
+        setCookie("is_login", "success");
+        draft.user = action.payload.user;
+        draft.is_login = true;
+      }),
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
+        setCookie("is_login", "success");
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
@@ -88,11 +134,13 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
+  logIn,
   logOut,
   getUser,
-  // loginAction,
+  loginAction,
   loginFB,
   signupFB,
+  // loginCheckFB,
 };
 
 export { actionCreators };

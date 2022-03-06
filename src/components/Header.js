@@ -1,10 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { getCookie, deleteCookie } from "../Cookie";
+import { getCookie, deleteCookie, setCookie } from "../Cookie";
 import { Grid, Text, Button } from "../elements";
-import { history } from "../redux/configStore";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [is_login, setIsLogin] = React.useState(false);
 
   React.useEffect(() => {
@@ -39,20 +44,11 @@ const Header = (props) => {
           >
             내정보
           </button>
+
           <button
             text-size="16px"
             _onClick={() => {
-              history.replace("/signup");
-            }}
-          >
-            알림
-          </button>
-          <button
-            text-size="16px"
-            _onClick={() => {
-              {
-                deleteCookie("user_id");
-              }
+              deleteCookie("user_id");
             }}
           >
             로그아웃

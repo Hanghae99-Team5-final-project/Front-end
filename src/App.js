@@ -1,6 +1,8 @@
 import "./App.css";
 import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./redux/configStore";
 import MainPage from "./pages/MainPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -25,34 +27,36 @@ function App() {
         <NavbarButton />
       </AppWrap>
       <ContentWrap>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/mypage/:id" component={MyPage} />
-          <Route path="/mypage" component={MyPage} />
-          <Route path="/cartpage" component={CartPage} />
-          <Route path="/admin" component={AdminPage} />
-          <Route path="/adminsignup" component={AdminSignup} />
-          {/* ///////////////////// */}
-          <Route path="/mywatchcodywrite" component={MyWatchCodyWrite} />
-          <Route
-            path="/watchcodydetail/:id"
-            exact
-            component={WatchCodyDetail}
-          />
-          <Route
-            path="/watchcodymainpage/:id"
-            exact
-            component={WatchCodyMainPage}
-          />
-          <Route path="/watchcodymainpage" component={WatchCodyMainPage} />
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/mypage/:id" component={MyPage} />
+            <Route path="/mypage" component={MyPage} />
+            <Route path="/cartpage" component={CartPage} />
+            <Route path="/admin" component={AdminPage} />
+            <Route path="/adminsignup" component={AdminSignup} />
+            {/* ///////////////////// */}
+            <Route path="/mywatchcodywrite" component={MyWatchCodyWrite} />
+            <Route
+              path="/watchcodydetail/:id"
+              exact
+              component={WatchCodyDetail}
+            />
+            <Route
+              path="/watchcodymainpage/:id"
+              exact
+              component={WatchCodyMainPage}
+            />
+            <Route path="/watchcodymainpage" component={WatchCodyMainPage} />
 
-          <Route path="/watchcodywrite" component={WatchCodyWrite} />
-          <Route path="/watchdetail/:id" component={WatchDetail} />
-          <Route path="/watchpage" exact component={WatchPage} />
-          <Route path="/" exact component={MainPage} />
-          <Redirect from="*" to="/" />
-        </Switch>
+            <Route path="/watchcodywrite" component={WatchCodyWrite} />
+            <Route path="/watchdetail/:id" component={WatchDetail} />
+            <Route path="/watchpage" exact component={WatchPage} />
+            <Route path="/" exact component={MainPage} />
+            <Redirect from="*" to="/" />
+          </Switch>
+        </ConnectedRouter>
       </ContentWrap>
     </>
   );

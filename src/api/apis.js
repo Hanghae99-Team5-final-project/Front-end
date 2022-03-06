@@ -1,8 +1,19 @@
 import axios from "axios";
-const USER_TOKEN = sessionStorage.getItem("X-AUTH-TOKEN");
 
 const instance = axios.create({
   baseURL: "http://localhost:3003",
+  headers: {
+    "content-type": "application/json;charset=UTF-8", // 자바스크립트는 json형태로 받아와야 한다.
+    accept: "application/json",
+  },
+});
+
+const token = localStorage.getItem("token");
+
+instance.interceptors.request.use(function (config) {
+  const accessToken = localStorage.token;
+  config.headers.common["Authorization"] = `Bearer ${accessToken}`; // header에 토큰값을 넣는다 => header에 토큰값이 있어 앞으로 request를 자유자재로 할 수 있다.
+  return config;
 });
 
 export const apis = {
