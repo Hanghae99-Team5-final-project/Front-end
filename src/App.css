@@ -39,6 +39,7 @@
 .container {
   display: flex;
   flex-direction: row-reverse;
+  border-radius: 10px;
 }
 .item {
   display: flex;

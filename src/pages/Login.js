@@ -1,27 +1,30 @@
 import React from "react";
 import { Text, Input, Grid, Button } from "../elements";
-import { getCookie, setCookie, deleteCookie } from "../Cookie";
+
+import Kakaologin from "../components/Kakaologin";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { deleteCookie, getCookie, setCookie } from "../Cookie";
 
 const Login = (props) => {
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
-
   const login = () => {
-    if (id === "" || pwd === "") {
-      window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
-      return;
-    }
+    // if (id === "" || pwd === "") {
+    //   window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
+    //   return;
+    // }
 
-    dispatch(userActions.loginFB(id, pwd));
+    dispatch(userActions.loginAction({ user_name: "perl" }));
   };
 
   return (
     <React.Fragment>
+      <Kakaologin />
+
       <Grid padding="16px">
         <Text size="32px" bold>
           로그인
