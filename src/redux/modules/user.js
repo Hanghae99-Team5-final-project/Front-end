@@ -4,13 +4,13 @@ import axios from "axios";
 import { setCookie, deleteCookie } from "../../Cookie";
 import apis from "../../api/apis";
 // actions
-const LOG_IN = "LOG_OUT";
+const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 // action creators
-const logIn = createAction(LOG_OUT, (user) => ({ user }));
+const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -124,6 +124,7 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
+        deleteCookie("is_login");
         draft.user = null;
         draft.is_login = false;
       }),

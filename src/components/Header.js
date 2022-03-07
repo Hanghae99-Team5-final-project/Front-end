@@ -10,18 +10,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [is_login, setIsLogin] = React.useState(false);
-
-  React.useEffect(() => {
-    let cookie = getCookie("user_id");
-    console.log(cookie);
-
-    if (cookie) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  });
+  const is_login = useSelector((state) => state.user.is_login);
 
   if (is_login) {
     return (
@@ -48,7 +37,7 @@ const Header = (props) => {
           <button
             text-size="16px"
             _onClick={() => {
-              deleteCookie("user_id");
+              dispatch(userActions.logOut({}));
             }}
           >
             로그아웃

@@ -18,7 +18,7 @@ const Login = (props) => {
     //   return;
     // }
 
-    dispatch(userActions.loginAction({ user_name: "perl" }));
+    dispatch(userActions.logIn({ user_name: "perl" }));
   };
 
   return (
