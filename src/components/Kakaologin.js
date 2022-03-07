@@ -14,7 +14,8 @@ const ButtonWrap = Styled.div`
   color: transparent;
   width: 300px;
   height: 60px;
-    
+ cursor: pointer;
+  
 `;
 
 const { Kakao } = window;

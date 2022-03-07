@@ -68,6 +68,7 @@ const Signup = () => {
 
       <Text margin="0px 0px 8px 0px ">이메일 확인</Text>
       <UserInput
+        margin="0px 0px 20px 0px"
         _onChange={(e) => {
           setEmail(e.target.value);
         }}

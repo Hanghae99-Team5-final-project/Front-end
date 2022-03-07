@@ -23,5 +23,8 @@ export const apis = {
   signUp: (userInfo) => instance.post("/api/user/signup", userInfo),
   Login: (userInfo) => instance.post("/api/user/login", userInfo),
   IdCheck: (idInfo) => instance.post("/api/user/redunancy", idInfo),
+
+  //----- 조회 -----//
+  getPost: () => instance.get("/api/cody"),
 };
 export default apis;

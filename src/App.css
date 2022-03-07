@@ -49,4 +49,5 @@
 .navbar-dark .navbar-toggler {
   background-color: lightsteelblue;
   border-color: lightsteelblue;
+  background-size: cover;
 }
