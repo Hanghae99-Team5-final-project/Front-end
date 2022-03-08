@@ -15,18 +15,18 @@
       "username": "asdfasdf",
       "password": "asdf1234",
       "email": "asdf@naver.com",
-      "apiId": "user",
+
       "id": 3
     },
     {
       "username": "asdfasdf",
       "password": "asdf1234",
       "email": "asdf@naver.com",
-      "apiId": "user",
+
       "id": 4
     }
   ],
-  "login": [
+  "1234": [
     {
       "id": 1,
       "body": "some comment",
@@ -51,198 +51,6 @@
       "username": "asdf2134",
       "password": "asdf1234",
       "id": 5
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "ㅁㄴdf",
-      "apiId": "user",
-      "id": 6
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "ㅁㄴdf",
-      "apiId": "user",
-      "id": 7
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "ㅁㄴdf",
-      "apiId": "user",
-      "id": 8
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 9
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 10
-    },
-    {
-      "username": "ㅁㄴㅇㄹㅁㄴㅇㄹ",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 11
-    },
-    {
-      "username": "ㅁㄴㅇㄹㅁㄴㅇㄹ",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 12
-    },
-    {
-      "username": "ㅁㄴㅇㄹㅁ",
-      "password": "ㄴㄹasdf",
-      "apiId": "user",
-      "id": 13
-    },
-    {
-      "username": "ㅁㄴㅇㄹ",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 14
-    },
-    {
-      "username": "ㅁㄴㅇ",
-      "password": "ㅁㄴㅇ",
-      "apiId": "user",
-      "id": 15
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 16
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 17
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 18
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 19
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 20
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 21
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 22
-    },
-    {
-      "username": "asdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 23
-    },
-    {
-      "username": "asdfasdf",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 24
-    },
-    {
-      "username": "asdfasdf",
-      "password": "asdfasdf",
-      "apiId": "user",
-      "id": 25
-    },
-    {
-      "username": "asdfasdf",
-      "password": "zxcv",
-      "apiId": "user",
-      "id": 26
-    },
-    {
-      "username": "asdfasdf",
-      "password": "zxcv",
-      "apiId": "user",
-      "id": 27
-    },
-    {
-      "username": "asdfasdfsadf",
-      "password": "zxcvasdf",
-      "apiId": "user",
-      "id": 28
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 29
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 30
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 31
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 32
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 33
-    },
-    {
-      "username": "asdfasdfsadfasdf",
-      "password": "asdfzxcvasdfsadf",
-      "apiId": "user",
-      "id": 34
-    },
-    {
-      "username": "asdfasdfsadfasdfasdf",
-      "password": "asdfzxcvasdfsadfasdf",
-      "apiId": "user",
-      "id": 35
-    },
-    {
-      "username": "asdfasdfsadfasdfasdf",
-      "password": "asdfzxcvasdfsadfasdf",
-      "apiId": "user",
-      "id": 36
-    },
-    {
-      "username": "asdfa",
-      "password": "asdf",
-      "apiId": "user",
-      "id": 37
     }
   ],
   "profile": {

@@ -58,53 +58,56 @@ const WatchCodyMainPage = () => {
   console.log(post_list);
 
   React.useEffect(() => {
-    dispatch(postActions.getPostFB());
+    if (post_list.length < 3) {
+      dispatch(postActions.getPostFB());
+    }
   }, []);
+
   const [Items, setItem] = useState([
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
     {
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codycontent: "벨앤로스 BR 01 사이버 스컬",
+      codyContent: "벨앤로스 BR 01 사이버 스컬",
     },
   ]);
   return (
@@ -118,7 +121,7 @@ const WatchCodyMainPage = () => {
                   <img size="15%" src={menu.imageUrl} />
                 </Link>
               </div>
-              <p className="artist_name">{menu.codycontent}</p>
+              <p className="artist_name">{menu.codyContent}</p>
             </div>
           );
         })}

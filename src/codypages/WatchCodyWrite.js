@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import StarRating from "../option/StarRating";
+
 const WatchCodyWriteBlock = styled.div`
   .container {
   }
@@ -14,7 +17,10 @@ const WatchCodyWriteBlock = styled.div`
     justify-content: center;
   }
   .lb-text {
-    padding: 10px 20px;
+    display: flex;
+    font-size: 35px;
+
+    padding: 10px 30px;
     border-radius: 10px;
     background-color: rgb(233, 236, 239);
     margin-inline-end: auto;
@@ -32,8 +38,21 @@ const WatchCodyWriteBlock = styled.div`
       transition: all 500ms;
     }
   }
+  .lb-star {
+    display: flex;
+    margin-inline-end: auto;
+  }
 `;
-const WatchCodyWrite = () => {
+const WatchCodyWrite = (props) => {
+  const [contents, setContents] = useState("");
+
+  const changeContents = (e) => {
+    setContents(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  console.log(contents);
   return (
     <div>
       <WatchCodyWriteBlock>
@@ -84,7 +103,10 @@ const WatchCodyWrite = () => {
             >
               <Form.Control type="file" />
             </Form.Group>
-            <h5 className="lb-text">평점</h5>
+            <div className="lb-star">
+              <h5 className="lb-text">평점 </h5>
+              <StarRating />
+            </div>
             <Button className="lb-button" variant="light">
               등록하기
             </Button>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
+import StarRating from "../option/StarRating";
 const WatchCodyUpdateBlock = styled.div`
   .container {
   }
@@ -14,7 +15,10 @@ const WatchCodyUpdateBlock = styled.div`
     justify-content: center;
   }
   .lb-text {
-    padding: 10px 20px;
+    display: flex;
+    font-size: 35px;
+
+    padding: 10px 30px;
     border-radius: 10px;
     background-color: rgb(233, 236, 239);
     margin-inline-end: auto;
@@ -31,6 +35,10 @@ const WatchCodyUpdateBlock = styled.div`
       opacity: 0.3;
       transition: all 500ms;
     }
+  }
+  .lb-star {
+    display: flex;
+    margin-inline-end: auto;
   }
 `;
 function WatchCodyUpdate() {
@@ -84,7 +92,10 @@ function WatchCodyUpdate() {
             >
               <Form.Control type="file" />
             </Form.Group>
-            <h5 className="lb-text">평점</h5>
+            <div className="lb-star">
+              <h5 className="lb-text">평점 </h5>
+              <StarRating />
+            </div>
             <Button className="lb-button" variant="light">
               수정하기
             </Button>

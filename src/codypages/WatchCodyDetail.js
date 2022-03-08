@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { setCookie } from "../Cookie";
-import { InputGroup, FormControl } from "react-bootstrap";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaPencilAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+import { useDispatch } from "react-redux";
+import CommentItem from "../components/CommentItem";
+import moment from "moment";
 const WatchCodyDetailBlock = styled.div`
   .lb-review {
   }
@@ -15,15 +17,35 @@ const WatchCodyDetailBlock = styled.div`
     cursor: pointer;
   }
 `;
-function WatchCodyDetail() {
+function WatchCodyDetail(props) {
+  const dispatch = useDispatch();
+  const [commentContent, setCommentContent] = useState("");
+
+  const Params = useParams();
+  const commentId = Params.commentId;
+  const commentUser = localStorage.commentUser;
+  const createdAt = moment().format("YYYY-MM-DD hh:mm:ss");
+
+  const changeComment = (e) => {
+    setCommentContent(e.target.value);
+    console.log(e.target.value);
+  };
+  const writeComment = () => {
+    dispatch(
+      commentActions.addCommentFB(
+        commentUser,
+        commentContent,
+        commentId,
+        createdAt
+      )
+    );
+    setCommentContent("");
+  };
   return (
     <div>
       <WatchCodyDetailBlock>
         <div className="lb-icons">
-          <Link to="/watchcodyupdate/:id">
-            <FaPencilAlt role="button" tabIndex="0" />
-          </Link>
-          <FaTrashAlt role="button" tabIndex="0" />
+          <Link to="/watchcodyupdate/:id"></Link>
         </div>
         <InputGroup className="mb-3" style={{ height: "50px" }}>
           <FormControl
@@ -49,38 +71,20 @@ function WatchCodyDetail() {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3" style={{ height: "200px" }}>
+        <InputGroup className="mb-3" style={{ height: "50px" }}>
           <FormControl
+            variant="outlined"
             placeholder="댓글 내용"
             aria-label="Username"
             aria-describedby="basic-addon1"
+            onChange={changeComment}
+            value={commentContent}
           />
+          <Button onClick={writeComment} variant="primary">
+            좀 되라
+          </Button>
         </InputGroup>
-        <div className="lb-review">
-          <InputGroup className="mb-3" style={{ height: "60px", width: "60%" }}>
-            <FormControl
-              placeholder="댓글"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-            <div className="lb-icons">
-              <FaPencilAlt role="button" tabIndex="0" />
-              <FaTrashAlt role="button" tabIndex="0" />
-            </div>
-          </InputGroup>
-
-          <InputGroup className="mb-3" style={{ height: "60px", width: "60%" }}>
-            <FormControl
-              placeholder="댓글"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-            <div className="lb-icons">
-              <FaPencilAlt role="button" tabIndex="0" />
-              <FaTrashAlt role="button" tabIndex="0" />
-            </div>
-          </InputGroup>
-        </div>
+        <CommentItem />
       </WatchCodyDetailBlock>
     </div>
   );
