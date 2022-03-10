@@ -23,7 +23,7 @@ const initialState = {
   list: [],
 };
 
-const getCommentDB = (commentId) => {
+const getCommentFB = (commentId) => {
   return function (dispatch, getState, { history }) {
     apis
       .getComment(commentId)
@@ -90,7 +90,7 @@ export default handleActions(
 
 const actionCreators = {
   addCommentFB,
-  getCommentDB,
+  getCommentFB,
   getComment,
   addComment,
   deleteComment,

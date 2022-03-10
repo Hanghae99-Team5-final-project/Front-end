@@ -5,7 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Text } from "../elements";
 import { actionCreators as commentActions } from "../redux/modules/comment";
-
+import CommentList from "./CommentList";
 const CommentItem = (props) => {
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
