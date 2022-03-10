@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../option/StarRating";
+import { actionCreators as commentActions } from "../redux/modules/comment";
+import axios from "axios";
+import star from "react-rating-stars-component/dist/star";
 
 const WatchCodyWriteBlock = styled.div`
   .container {
@@ -53,6 +56,17 @@ const WatchCodyWrite = (props) => {
   };
 
   console.log(contents);
+  // const Test = (
+
+  // ) => {
+  //   const userId = 1234;
+  //   const codyTitle = "제목";
+  //   const watchBrand = "롤렉스";
+  //   const watchModel = "G-shock";
+  //   const codyContent = "16억개";
+  //   const star = 5;
+  // };
+  // axios.addPostFB(userId, codyTitle, watchBrand, watchModel, codyContent, star);
   return (
     <div>
       <WatchCodyWriteBlock>

@@ -17,8 +17,11 @@ const Login = (props) => {
     //   window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
     //   return;
     // }
-
-    dispatch(userActions.logIn({ user_name: "perl" }));
+    const username = "jaemin";
+    const password = "asdf1234";
+    dispatch(
+      userActions.loginAction({ username: "jaemin", password: "asdf1234" })
+    );
   };
 
   return (

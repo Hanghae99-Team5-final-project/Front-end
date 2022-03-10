@@ -3,6 +3,7 @@ import { produce } from "immer";
 import apis from "../../api/apis";
 import moment from "moment";
 import { useSSRSafeId } from "@react-aria/ssr";
+import axios from "axios";
 
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
@@ -44,28 +45,29 @@ const getPostFB = () => {
   };
 };
 
-const addPostFB = (contents = "") => {
-  return async function (dispatch, getState, { history }) {
-    const _user = getState().user.user;
+const addPostFB = (
+  userId,
+  codyTitle,
+  watchBrand,
+  watchModel,
+  codyContent,
+  star
+) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .post("http://3.35.167.81:8080/api/cody", {
+        userId: 1234,
+        codyTitle: "제목",
+        watchBrand: "문페이즈",
+        watchModel: "G-shock250",
+        codyContent: "16억개",
+        imageUrl: "사진",
+        star: 5,
+      })
 
-    const user_info = {
-      user_name: _user.user_name,
-      user_id: _user.uid,
-      user_profile: _user.user_profile,
-    };
-
-    const _post = {
-      ...initialPost,
-      contents: contents,
-      modifiedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-    };
-    const _userId_data = { ...(contents = "") };
-    console.log(_userId_data);
-    await apis
-      .addPost({ ...user_info, ..._post })
       .then((res) => {
         console.log(res.data);
-        dispatch(addPost({ userId: res.data.userId, ..._userId_data }));
+        dispatch(addPost({ userId: res.data.userId }));
         history.replace("/");
       })
       .catch((err) => {
