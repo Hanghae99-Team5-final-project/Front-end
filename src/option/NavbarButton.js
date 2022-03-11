@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import "../App.css";
 
@@ -24,45 +25,67 @@ const NavbarButtonBlock = styled.div`
     height: 60px;
     cursor: pointer;
   }
-  * {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: montserrat;
-  }
+ 
   nav {
     background: #2b334d;
-    height: 80px;
     width: 100%;
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      height: 80px;
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+
+
+      .title-wrap {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        right: 100px;
+
+        > li {
+          padding: 3%;
+          color: #fff;
+          list-style: none;
+        }
+      }
+    }
   }
+
+
   label.logo {
     color: white;
     font-size: 30px;
-    line-height: 30px;
+    line-height: 1;
 
     font-weight: bold;
-    margin-left: 100px;
-    margin-top: 10px;
+  }
+  @media (min-width: 992px) {
+  .nav-link {
+  }
+  .sticky {
+  }
+  .logo {
+  }
+
+  nav {
+  }
+  label.logo {
   }
   nav ul {
-    color: white;
-    float: right;
-    margin-right: 20px;
   }
   nav ul li {
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 5px;
   }
 
   li {
-    :hover {
-      opacity: 0.5;
     }
+  }
   }
 `;
 
@@ -70,18 +93,21 @@ function NavbarButton() {
   return (
     <NavbarButtonBlock>
       <nav>
-        <label className="logo">
-          SPRING <span style={{ marginLeft: "23px" }}>WATCH</span>
-        </label>
-        <ul>
-          <li className="active" style={{ color: "#c9bda0" }}>
-            WATCH
-          </li>
-          <li style={{ color: "#c9bda0" }}>STYLE</li>
-          <li>LOGIN</li>
-          <li>CART</li>
-          <li>MY PAGE</li>
-        </ul>
+        <div className="nav-wrap">
+          <label className="logo">
+            SPRING <span style={{ marginLeft: "23px" }}>WATCH</span>
+          </label>
+          <ul className="title-wrap">
+            <li>WATCH</li>
+            <li>STYLE</li>
+            <li>LOGIN</li>
+            <li>CART</li>
+            <li>MY PAGE</li>
+            <li>
+              <GiHamburgerMenu />
+            </li>
+          </ul>
+        </div>
       </nav>
     </NavbarButtonBlock>
   );

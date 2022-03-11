@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, Input, Grid, Button } from "../elements";
+import { Text, Input, Button } from "../elements";
+import styled from "styled-components";
 
 import Kakaologin from "../components/Kakaologin";
 
@@ -19,40 +20,40 @@ const Login = (props) => {
     // }
     const username = "jaemin";
     const password = "asdf1234";
-    dispatch(
-      userActions.loginAction({ username: "jaemin", password: "asdf1234" })
-    );
+    dispatch(userActions.loginAction({ username, password }));
   };
+
+  const Wrap = styled.div`
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    transition: 0.5s;
+  `;
 
   return (
     <React.Fragment>
       <Kakaologin />
-
-      <Grid padding="16px">
+      <Wrap>
         <Text size="32px" bold>
           로그인
         </Text>
 
-        <Grid padding="16px 0px">
-          <Input
-            label="아이디"
-            placeholder="아이디를 입력해주세요."
-            _onChange={(e) => {
-              setId(e.target.value);
-            }}
-          />
-        </Grid>
+        <Input
+          label="아이디"
+          placeholder="아이디를 입력해주세요."
+          _onChange={(e) => {
+            setId(e.target.value);
+          }}
+        />
 
-        <Grid padding="16px 0px">
-          <Input
-            label="패스워드"
-            placeholder="패스워드 입력해주세요."
-            type="password"
-            _onChange={(e) => {
-              setPwd(e.target.value);
-            }}
-          />
-        </Grid>
+        <Input
+          label="패스워드"
+          placeholder="패스워드 입력해주세요."
+          type="password"
+          _onChange={(e) => {
+            setPwd(e.target.value);
+          }}
+        />
 
         <Button
           text="로그인하기"
@@ -61,7 +62,7 @@ const Login = (props) => {
             login();
           }}
         ></Button>
-      </Grid>
+      </Wrap>
     </React.Fragment>
   );
 };
