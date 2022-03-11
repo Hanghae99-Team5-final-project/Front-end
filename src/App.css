@@ -51,3 +51,6 @@
   border-color: lightsteelblue;
   background-size: cover;
 }
+html {
+  top: 0;
+}
