@@ -4,28 +4,16 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import "../App.css";
 
-import logo_design from "../design/스프링워치-로고2.png";
-const NavbarButtonBlock = styled.div`
-  .nav-link {
-    color: white;
+// import logo_design from "../design/스프링워치-로고2.png";
+const Navbar = styled.div`
+  .is-pc {
+    display: none;
   }
-  .sticky {
-    position: sticky;
-    top: 0;
-  }
-  .logo {
-    /* background-image: url(${logo_design});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: 10px; */
 
-    color: white;
-    width: 100px;
-    height: 60px;
-    cursor: pointer;
+  .is-mb {
+    display: block;
   }
- 
+
   nav {
     background: #2b334d;
     width: 100%;
@@ -38,8 +26,19 @@ const NavbarButtonBlock = styled.div`
       height: 80px;
       position: relative;
       width: 100%;
-      max-width: 1200px;
 
+      .logo {
+        color: white;
+        width: 100px;
+        height: 60px;
+        cursor: pointer;
+        color: white;
+        font-size: 30px;
+        line-height: 1;
+        font-weight: bold;
+        position: absolute;
+        left: 20px;
+      }
 
       .title-wrap {
         display: flex;
@@ -47,43 +46,55 @@ const NavbarButtonBlock = styled.div`
         padding: 0;
         margin: 0;
         position: absolute;
-        right: 100px;
+        right: 20px;
 
         > li {
           padding: 3%;
           color: #fff;
           list-style: none;
+
+          .menu {
+          }
         }
       }
     }
   }
 
-
-  label.logo {
-    color: white;
-    font-size: 30px;
-    line-height: 1;
-
-    font-weight: bold;
-  }
   @media (min-width: 992px) {
-  .nav-link {
-  }
-  .sticky {
-  }
-  .logo {
+    .is-pc {
+      display: block;
+    }
+
+    .is-mb {
+      display: none;
+    }
+
+    nav {
+      .nav-wrap {
+        max-width: 1000px;
+        .logo {
+        }
+        .title-wrap {
+          > li {
+            padding: 20px;
+          }
+        }
+      }
+    }
   }
 
-  nav {
-  }
-  label.logo {
-  }
-  nav ul {
-  }
-  nav ul li {
-  }
-
-  li {
+  @media (min-width:1200px) {
+    nav {
+      .nav-wrap {
+        max-width: 1200px;
+        .logo {
+        }
+        .title-wrap {
+          > li {
+            padding: 30px;
+          }
+        }
+      }
     }
   }
   }
@@ -91,12 +102,27 @@ const NavbarButtonBlock = styled.div`
 
 function NavbarButton() {
   return (
-    <NavbarButtonBlock>
-      <nav>
+    <Navbar>
+      <nav className="is-mb">
         <div className="nav-wrap">
-          <label className="logo">
-            SPRING <span style={{ marginLeft: "23px" }}>WATCH</span>
-          </label>
+          <div className="logo">
+            SPRING <br />
+            <span style={{ marginLeft: "23px" }}>WATCH</span>
+          </div>
+          <ul className="title-wrap">
+            <li>
+              <GiHamburgerMenu size="30" />
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <nav className="is-pc">
+        <div className="nav-wrap">
+          <div className="logo">
+            SPRING <br />
+            <span style={{ marginLeft: "23px" }}>WATCH</span>
+          </div>
           <ul className="title-wrap">
             <li>WATCH</li>
             <li>STYLE</li>
@@ -104,12 +130,12 @@ function NavbarButton() {
             <li>CART</li>
             <li>MY PAGE</li>
             <li>
-              <GiHamburgerMenu />
+              <GiHamburgerMenu size="30" />
             </li>
           </ul>
         </div>
       </nav>
-    </NavbarButtonBlock>
+    </Navbar>
   );
 }
 

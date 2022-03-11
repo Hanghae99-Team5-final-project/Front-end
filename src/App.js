@@ -74,7 +74,7 @@ function App() {
 }
 
 const ContentWrap = styled.div`
-  margin: 0 auto;
+  /* margin: 0 auto; */
   box-sizing: border-box;
 `;
 
