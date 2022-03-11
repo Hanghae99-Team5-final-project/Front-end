@@ -1,51 +1,88 @@
 import React from "react";
 import styled from "styled-components";
-import { Navbar, Container, NavDropdown, Nav } from "react-bootstrap";
+
 import "../App.css";
+
+import logo_design from "../design/스프링워치-로고2.png";
 const NavbarButtonBlock = styled.div`
   .nav-link {
     color: white;
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+  .logo {
+    /* background-image: url(${logo_design});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px; */
+
+    color: white;
+    width: 100px;
+    height: 60px;
+    cursor: pointer;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: montserrat;
+  }
+  nav {
+    background: #2b334d;
+    height: 80px;
+    width: 100%;
+  }
+  label.logo {
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+
+    font-weight: bold;
+    margin-left: 100px;
+    margin-top: 10px;
+  }
+  nav ul {
+    color: white;
+    float: right;
+    margin-right: 20px;
+  }
+  nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+
+  li {
+    :hover {
+      opacity: 0.5;
+    }
   }
 `;
 
 function NavbarButton() {
   return (
     <NavbarButtonBlock>
-      <Navbar className="container" variant="dark" bg="dark" expand="">
-        <Container>
-          <Navbar.Brand>비고</Navbar.Brand>
-          <Navbar.Brand>비고</Navbar.Brand>
-          <Navbar.Brand>시계 코디</Navbar.Brand>
-          <div className="nav-link">
-            <NavDropdown
-              variant="dark"
-              bg="dark"
-              style={{
-                fontSize: "22px",
-                marginRight: "10px",
-                padding: "10px 10px",
-              }}
-              title="시계"
-              id="navbarScrollingDropdown"
-            >
-              <NavDropdown.Item href="#action3">• 디지털</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">• 커플</NavDropdown.Item>
-              <NavDropdown.Item href="#action5">• 스마트</NavDropdown.Item>
-            </NavDropdown>
-          </div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <div className="item">
-                <Nav.Link>신상</Nav.Link>
-                <Nav.Link>베스트</Nav.Link>
-                <Nav.Link>오늘출발</Nav.Link>
-                <Nav.Link>득템찬스</Nav.Link>
-              </div>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <nav>
+        <label className="logo">
+          SPRING <span style={{ marginLeft: "23px" }}>WATCH</span>
+        </label>
+        <ul>
+          <li className="active" style={{ color: "#c9bda0" }}>
+            WATCH
+          </li>
+          <li style={{ color: "#c9bda0" }}>STYLE</li>
+          <li>LOGIN</li>
+          <li>CART</li>
+          <li>MY PAGE</li>
+        </ul>
+      </nav>
     </NavbarButtonBlock>
   );
 }

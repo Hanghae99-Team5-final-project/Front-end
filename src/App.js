@@ -26,7 +26,7 @@ function App() {
     <>
       <Template>
         <AppWrap>
-          <Header />
+          {/* <Header /> */}
           <NavbarButton />
         </AppWrap>
         <ContentWrap>
