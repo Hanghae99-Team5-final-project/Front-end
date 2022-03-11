@@ -39,25 +39,23 @@ const Input = (props) => {
 
   return (
     <>
-      <Grid>
-        {label && <Text margin="0px">{label}</Text>}
-        {is_submit ? (
-          <ElInput
-            {...styles}
-            type={type}
-            placeholder={placeholder}
-            onChange={_onChange}
-            value={value}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                onSubmit(e);
-              }
-            }}
-          />
-        ) : (
-          <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
-        )}
-      </Grid>
+      {label && <Text margin="0px">{label}</Text>}
+      {is_submit ? (
+        <ElInput
+          {...styles}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          value={value}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              onSubmit(e);
+            }
+          }}
+        />
+      ) : (
+        <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
+      )}
     </>
   );
 };
@@ -78,18 +76,26 @@ Input.defaultProps = {
 const ElTextarea = styled.textarea`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   border: 1px solid #212121;
-  width: 100%;
+  width: 50%;
   padding: 12px 4px;
   box-sizing: border-box;
+
+  @media (min-width: 992px) {
+    width: 100%;
+  }
 `;
 
 const ElInput = styled.input`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
   ${(props) => (props.is_width ? `width: ${props.is_width};` : "width: 100%;")}
   border: 1px solid #212121;
-  width: ${(props) => props.width};
+  width: 50%;
   padding: 12px 4px;
   box-sizing: border-box;
+
+  @media (min-width: 992px) {
+    width: 80%;
+  }
 `;
 
 export default Input;
