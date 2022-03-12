@@ -4,12 +4,16 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/configStore";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./redux/configStore";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
