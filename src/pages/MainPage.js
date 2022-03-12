@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { setCookie } from "../Cookie";
-import logo_design from "../design/스프링워치-로고1.png";
+// import logo_design from "../design/스프링워치-로고1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
 
@@ -30,8 +30,6 @@ const MainPageBlock = styled.div`
 `;
 
 const Logo = styled.div`
-  background-image: url(${logo_design});
-
   background-size: cover;
   border-radius: 10px;
 
