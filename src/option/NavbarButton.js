@@ -113,6 +113,7 @@ const Navbar = styled.div`
     }
     to {
       top: 300px;
+      transform: rotate(-360deg);
     }
   }
 
@@ -126,6 +127,7 @@ const Navbar = styled.div`
     }
     to {
       bottom: 300px;
+      transform: rotate(-360deg);
     }
   }
 
@@ -178,13 +180,6 @@ const Navbar = styled.div`
           }
         }
       }
-    }
-  }
-  .list {
-    list-style: none;
-
-    a:link {
-      text-decoration: none;
     }
   }
 
