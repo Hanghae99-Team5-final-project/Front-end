@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { Link } from "react-router-dom";
 import "../App.css";
 
 // import logo_design from "../design/스프링워치-로고2.png";
 const Navbar = styled.div`
+  .follow {
+  }
   .is-pc {
     display: none;
   }
@@ -17,6 +19,8 @@ const Navbar = styled.div`
   nav {
     background: #2b334d;
     width: 100%;
+    position: fixed;
+    top: 0;
 
     .nav-wrap {
       display: flex;
@@ -59,7 +63,13 @@ const Navbar = styled.div`
       }
     }
   }
+  .list {
+    list-style: none;
 
+    a:link {
+      text-decoration: none;
+    }
+  }
   @media (min-width: 992px) {
     .is-pc {
       display: block;
@@ -83,7 +93,7 @@ const Navbar = styled.div`
     }
   }
 
-  @media (min-width:1200px) {
+  @media (min-width: 1200px) {
     nav {
       .nav-wrap {
         max-width: 1200px;
@@ -97,12 +107,11 @@ const Navbar = styled.div`
       }
     }
   }
-  }
 `;
 
 function NavbarButton() {
   return (
-    <Navbar>
+    <Navbar className="follow">
       <nav className="is-mb">
         <div className="nav-wrap">
           <div className="logo">
@@ -124,11 +133,23 @@ function NavbarButton() {
             <span style={{ marginLeft: "23px" }}>WATCH</span>
           </div>
           <ul className="title-wrap">
-            <li>WATCH</li>
-            <li>STYLE</li>
-            <li>LOGIN</li>
-            <li>CART</li>
-            <li>MY PAGE</li>
+            <div className="list">
+              <a href="watchpage">
+                <li>WATCH</li>
+              </a>
+              <a href="watchcodymainpage">
+                <li>STYLE</li>
+              </a>
+              <a href="login">
+                <li>LOGIN</li>
+              </a>
+              <a href="cartpage">
+                <li>CART</li>
+              </a>
+              <a href="mypage">
+                <li>MY PAGE</li>
+              </a>
+            </div>
             <li>
               <GiHamburgerMenu size="30" />
             </li>
