@@ -52,10 +52,9 @@ const Navbar = styled.div`
         position: absolute;
         right: 20px;
 
-        > li {
+        > a {
           padding: 3%;
           color: #fff;
-          list-style: none;
 
           .menu {
           }
@@ -115,8 +114,10 @@ function NavbarButton() {
       <nav className="is-mb">
         <div className="nav-wrap">
           <div className="logo">
-            SPRING <br />
-            <span style={{ marginLeft: "23px" }}>WATCH</span>
+            <Link to="/">
+              SPRING <br />
+              <span style={{ marginLeft: "23px" }}>WATCH</span>
+            </Link>
           </div>
           <ul className="title-wrap">
             <li>
@@ -129,27 +130,17 @@ function NavbarButton() {
       <nav className="is-pc">
         <div className="nav-wrap">
           <div className="logo">
-            SPRING <br />
-            <span style={{ marginLeft: "23px" }}>WATCH</span>
+            <Link to="/">
+              SPRING <br />
+              <span style={{ marginLeft: "23px" }}>WATCH</span>
+            </Link>
           </div>
           <ul className="title-wrap">
-            <div className="list">
-              <a href="watchpage">
-                <li>WATCH</li>
-              </a>
-              <a href="watchcodymainpage">
-                <li>STYLE</li>
-              </a>
-              <a href="login">
-                <li>LOGIN</li>
-              </a>
-              <a href="cartpage">
-                <li>CART</li>
-              </a>
-              <a href="mypage">
-                <li>MY PAGE</li>
-              </a>
-            </div>
+            <Link to="/watchpage">WATCH</Link>
+            <Link to="/watchcodymainpage">STYLE</Link>
+            <Link to="/login">LOGIN</Link>
+            <Link to="/cartpage">CART</Link>
+            <Link to="/mypage">MY PAGE</Link>
             <li>
               <GiHamburgerMenu size="30" />
             </li>
