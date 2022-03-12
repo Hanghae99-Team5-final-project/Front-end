@@ -95,6 +95,7 @@ export default Signup;
 const SignupWrap = styled.div`
   padding: 80px 40px;
   margin: 0 auto;
+  transition: 0.5s;
   text-align: center;
   @media (min-width: 992px) {
     width: 100%;
@@ -102,10 +103,11 @@ const SignupWrap = styled.div`
 `;
 
 const Wrap = styled.div`
-  padding: 80px 80px;
+  padding: 80px 40px;
   margin: 0 auto;
   text-align: center;
   transition: 0.5s;
+
   @media (min-width: 992px) {
     width: 100%;
   }

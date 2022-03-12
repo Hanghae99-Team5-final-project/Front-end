@@ -27,14 +27,14 @@ const initialPost = {
   imageUrl:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdOk4yqQXMe8PN7IZNSiySsODjAVU4viQnnw&usqp=CAU",
   contents: "",
-  createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-  modifiedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+  // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+  // modifiedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
 const getPostFB = () => {
-  return async function (dispatch, getState, { history }) {
-    await apis
-      .getPost()
+  return function (dispatch, getState, { history }) {
+    axios
+      .get("http://3.35.167.81:8080/api/cody")
       .then((res) => {
         console.log(res.data);
         dispatch(getPost(res.data));

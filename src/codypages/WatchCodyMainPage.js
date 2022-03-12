@@ -113,7 +113,7 @@ const WatchCodyMainPage = () => {
   return (
     <WatchCodyMainPageBlock>
       <div className="flex-item">
-        {Items.map((menu, idx) => {
+        {Items.allCodyList?.map((menu, idx) => {
           return (
             <div className="flex_box" key={idx}>
               <div className="box_hover">
