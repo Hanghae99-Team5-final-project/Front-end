@@ -38,54 +38,52 @@ const Signup = () => {
   };
 
   return (
-    <SignupWrap>
-      <Wrap>
-        <Text margin="0px 0px 8px 0px">아이디</Text>
-        <UserInput
-          _onChange={(e) => {
-            setId(e.target.value);
-          }}
-          placeholder=""
-          value={id}
-        />
-        <Text margin="0px 0px 8px 0px ">비밀번호</Text>
-        <UserInput
-          _onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          type="password"
-          placeholder=""
-          value={password}
-        />
+    <SignupWrap className="lm-media">
+      <Text margin="0px 0px 8px 0px">아이디</Text>
+      <UserInput
+        _onChange={(e) => {
+          setId(e.target.value);
+        }}
+        placeholder=""
+        value={id}
+      />
+      <Text margin="0px 0px 8px 0px ">비밀번호</Text>
+      <UserInput
+        _onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+        type="password"
+        placeholder=""
+        value={password}
+      />
 
-        <Text margin="0px 0px 8px 0px ">비밀번호 확인</Text>
-        <UserInput
-          _onChange={(e) => {
-            setPasswordCheck(e.target.value);
-          }}
-          type="password"
-          placeholder=""
-          value={password_check}
-        />
+      <Text margin="0px 0px 8px 0px ">비밀번호 확인</Text>
+      <UserInput
+        _onChange={(e) => {
+          setPasswordCheck(e.target.value);
+        }}
+        type="password"
+        placeholder=""
+        value={password_check}
+      />
 
-        <Text margin="0px 0px 8px 0px ">이메일 확인</Text>
-        <UserInput
-          margin="0px 0px 20px 0px"
-          _onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder=""
-          value={email}
-        />
+      <Text margin="0px 0px 8px 0px ">이메일 확인</Text>
+      <UserInput
+        margin="0px 0px 20px 0px"
+        _onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+        placeholder=""
+        value={email}
+      />
 
-        <Button
-          _onClick={() => {
-            signup();
-          }}
-        >
-          회원가입
-        </Button>
-      </Wrap>
+      <Button
+        _onClick={() => {
+          signup();
+        }}
+      >
+        회원가입
+      </Button>
     </SignupWrap>
   );
 };
@@ -93,22 +91,14 @@ const Signup = () => {
 export default Signup;
 
 const SignupWrap = styled.div`
-  padding: 80px 40px;
   margin: 0 auto;
   transition: 0.5s;
   text-align: center;
-  @media (min-width: 992px) {
-    width: 100%;
-  }
-`;
-
-const Wrap = styled.div`
-  padding: 80px 40px;
-  margin: 0 auto;
-  text-align: center;
-  transition: 0.5s;
+  width: 50%;
 
   @media (min-width: 992px) {
-    width: 100%;
+    .lm-media {
+      width: 80%;
+    }
   }
 `;
