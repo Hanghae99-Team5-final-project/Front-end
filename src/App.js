@@ -18,6 +18,7 @@ import WatchDetail from "./codypages/WatchDetail";
 import WatchPage from "./codypages/WatchPage";
 import Header from "./components/Header";
 import NavbarButton from "./option/NavbarButton";
+
 function App() {
   return (
     <>

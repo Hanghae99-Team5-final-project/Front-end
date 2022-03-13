@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo01 from "../images/logo01.png";
 import logo02 from "../images/logo02.png";
 import "../App.css";
@@ -36,11 +36,36 @@ function NavbarButton() {
             </Link>
           </div>
           <ul className="title-wrap">
-            <Link to="/watchpage">WATCH</Link>
-            <Link to="/watchcodymainpage">STYLE</Link>
-            <Link to="/login">LOGIN</Link>
-            <Link to="/cartpage">CART</Link>
-            <Link to="/mypage">MY PAGE</Link>
+            <NavLink
+              to="/watchpage"
+              activeStyle={{ color: "red", textDecoration: "underline" }}
+            >
+              WATCH
+            </NavLink>
+            <NavLink
+              to="/watchcodymainpage"
+              activeStyle={{ color: "red", textDecoration: "underline" }}
+            >
+              STYLE
+            </NavLink>
+            <NavLink
+              to="/login"
+              activeStyle={{ color: "red", textDecoration: "underline" }}
+            >
+              LOGIN
+            </NavLink>
+            <NavLink
+              to="/cartpage"
+              activeStyle={{ color: "red", textDecoration: "underline" }}
+            >
+              CART
+            </NavLink>
+            <NavLink
+              to="/mypage"
+              activeStyle={{ color: "red", textDecoration: "underline" }}
+            >
+              MY PAGE
+            </NavLink>
             <li>
               <GiHamburgerMenu size="30" />
             </li>
