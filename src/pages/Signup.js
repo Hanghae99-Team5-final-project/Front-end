@@ -5,14 +5,29 @@ import { Text, Button } from "../elements";
 import { idCheck, emailCheck, pwdCheck } from "../common";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const Signup = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [password_check, setPasswordCheck] = useState("");
   const [email, setEmail] = useState("");
-
+  const [idDup, setidDup] = useState(false);
   const dispatch = useDispatch();
+  const checkId = (id) => {
+    // axios
+    //   .post("http://3.35.167.81:8080/user/redunancy", {
+    //     username: id,
+    //   })
+    //   .then((res) => {
+    //     setidDup(true);
+    //     alert("사용가능한 아이디 입니다.");
+    //   })
+    //   .catch((err) => {
+    //     alert(err.response.data.errorMessage);
+    //   });
+  };
+
   const signup = () => {
     if (id === "" || password === "" || email === "") {
       window.alert("아이디, 패스워드 , 닉네임을 모두 입력해주세요!");
@@ -22,6 +37,10 @@ const Signup = () => {
       window.alert("아이디 형식이 맞지 않습니다!");
       return;
     }
+    // if (idDup === false) {
+    //   alert("아이디 중복확인을 해주세요.");
+    //   return false;
+    // }
     if (!emailCheck(email)) {
       window.alert("이메일 형식이 맞지 않습니다!");
       return;
@@ -39,14 +58,28 @@ const Signup = () => {
 
   return (
     <SignupWrap className="lm-media">
-      <Text margin="0px 0px 8px 0px">아이디</Text>
-      <UserInput
-        _onChange={(e) => {
-          setId(e.target.value);
-        }}
-        placeholder=""
-        value={id}
-      />
+      <Text margin="20px 0px 8px 0px">아이디</Text>
+      <div className="flex-box">
+        <UserInput
+          _onChange={(e) => {
+            setId(e.target.value);
+          }}
+          placeholder=""
+          value={id}
+        />
+        {/* <button
+          className="checkid"
+          onClick={() => {
+            if (!idCheck(id)) {
+              alert("영문 숫자만 가능합니다.");
+              return false;
+            }
+            checkId(id);
+          }}
+        >
+          중복 확인
+        </button> */}
+      </div>
       <Text margin="0px 0px 8px 0px ">비밀번호</Text>
       <UserInput
         _onChange={(e) => {
@@ -100,5 +133,12 @@ const SignupWrap = styled.div`
     .lm-media {
       width: 80%;
     }
+  }
+  .flex-box {
+    display: flex;
+  }
+  .checkid {
+    width: 150px;
+    background-color: lightgreen;
   }
 `;

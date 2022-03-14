@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import apis from "../../api/apis";
 import moment from "moment";
-import { useSSRSafeId } from "@react-aria/ssr";
+
 import axios from "axios";
 
 const GET_POST = "GET_POST";
