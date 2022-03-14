@@ -12,15 +12,15 @@ const Login = (props) => {
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
-  const [pwd, setPwd] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const login = () => {
-    // if (id === "" || pwd === "") {
-    //   window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
-    //   return;
-    // }
-    const username = "jaemin";
-    const password = "asdf1234";
-    dispatch(userActions.loginAction({ username, password }));
+    if (id === "" || password === "") {
+      window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
+      return;
+    }
+    // const username = "jaemin";
+    // const password = "asdf1234";
+    dispatch(userActions.loginFB({ id, password }));
   };
 
   const Wrap = styled.div`
@@ -38,20 +38,22 @@ const Login = (props) => {
           로그인
         </Text>
 
-        <Input
+        <input
           label="아이디"
           placeholder="아이디를 입력해주세요."
+          type="text"
           _onChange={(e) => {
             setId(e.target.value);
+            console.log(e.target.value);
           }}
         />
 
-        <Input
+        <input
           label="패스워드"
           placeholder="패스워드 입력해주세요."
           type="password"
           _onChange={(e) => {
-            setPwd(e.target.value);
+            setPassword(e.target.value);
           }}
         />
 

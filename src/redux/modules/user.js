@@ -4,13 +4,11 @@ import axios from "axios";
 import { setCookie, deleteCookie } from "../../Cookie";
 import apis from "../../api/apis";
 // actions
-const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 // action creators
-const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -24,13 +22,11 @@ const initialState = {
 // middleware actions
 const loginFB = (id, password) => {
   return async function (dispatch, getState, { history }) {
-    const userInfo = {
-      username: id,
-      password: password,
-    };
-
-    await apis
-      .Login(userInfo)
+    axios
+      .post("http://3.35.167.81:8080/user/login", {
+        username: id,
+        password: password,
+      })
       .then((res) => {
         console.log(res);
         if (!res.data.ok) {
@@ -40,8 +36,8 @@ const loginFB = (id, password) => {
           return;
         }
         dispatch(setUser(res.data));
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userNickname", res.data.userNickname);
+        sessionStorage.setItem("token", res.data.token);
+        sessionStorage.setItem("username", res.data.username);
         history.replace("/");
       })
       .catch((err) => {
@@ -51,40 +47,48 @@ const loginFB = (id, password) => {
   };
 };
 
-// const loginCheckFB = () => {
-//   const token = localStorage.getItem("token");
-//   return function (dispatch, getState, { history }) {
-//     axios({
-//       method: "get",
-//       url: "http://3.34.130.88/api/users/me",
-//       headers: {
-//         "content-type": "application/json;charset=UTF-8",
-//         accept: "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//       .then((res) => {
-//         console.log(res);
-
-//         dispatch(
-//           setUser({
-//             userNickname: res.data.userNickname,
-//           })
-//         );
-//       })
-//       .catch((err) => {
-//         console.log("로그인 확인 실패", err);
-//       });
-//   };
-// };
-
-const loginAction = (user) => {
+const loginCheckFB = () => {
+  const token = sessionStorage.getItem("token");
   return function (dispatch, getState, { history }) {
-    console.log(history);
-    dispatch(logIn(user));
-    history.push("/");
+    axios({
+      method: "get",
+      url: "http://3.35.167.81:8080/users/login",
+      headers: {
+        "content-type": "application/json;charset=UTF-8",
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+
+        dispatch(
+          setUser({
+            userId: res.data.username,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log("로그인 확인 실패", err);
+      });
   };
 };
+
+const logOutFB = () => {
+  return function (dispatch, getState, { history }) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    dispatch(logOut());
+    history.replace("/");
+  };
+};
+// const loginAction = (user) => {
+//   return function (dispatch, getState, { history }) {
+//     console.log(history);
+//     dispatch(logIn(user));
+//     history.push("/");
+//   };
+// };
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
@@ -109,20 +113,17 @@ const signupFB = (id, password, email) => {
 // reducer
 export default handleActions(
   {
-    [LOG_IN]: (state, action) =>
-      produce(state, (draft) => {
-        setCookie("is_login", "success");
-        draft.user = action.payload.user;
-        draft.is_login = true;
-      }),
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         setCookie("is_login", "success");
+        setCookie("userId", action.payload.user);
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
+        deleteCookie("is_login");
+        deleteCookie("userId");
         draft.user = null;
         draft.is_login = false;
       }),
@@ -133,13 +134,12 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
-  logIn,
   logOut,
   getUser,
-  loginAction,
+  logOutFB,
   loginFB,
   signupFB,
-  // loginCheckFB,
+  loginCheckFB,
 };
 
 export { actionCreators };

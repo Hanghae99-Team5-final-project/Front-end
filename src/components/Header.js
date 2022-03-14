@@ -10,9 +10,10 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const is_session = sessionStorage.getItem("token") ? true : false;
   const is_login = useSelector((state) => state.user.is_login);
 
-  if (is_login) {
+  if (is_login && is_session) {
     return (
       <HeaderWrap>
         <Text

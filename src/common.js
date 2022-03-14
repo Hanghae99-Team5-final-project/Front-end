@@ -7,7 +7,7 @@ export const emailCheck = (email) => {
 
 // 닉네임 형식
 export const idCheck = (id) => {
-  let Nickreg = /^[가-힣a-zA-Z]+$/;
+  let Nickreg = /^[a-zA-Z0-9]+$/;
   return Nickreg.test(id);
 };
 
