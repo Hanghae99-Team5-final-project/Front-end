@@ -4,17 +4,18 @@ import axios from "axios";
 import { setCookie, deleteCookie } from "../../Cookie";
 import apis from "../../api/apis";
 // actions
-const LOG_IN = "LOG_IN";
+// const LOG_IN = "LOG_IN";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 // action creators
-const logIn = createAction(LOG_IN, (user) => ({ user }));
+// const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
+const token = localStorage.getItem("token");
 // initialState
 const initialState = {
   user: null,
@@ -22,26 +23,22 @@ const initialState = {
 };
 
 // middleware actions
-const loginFB = (id, password) => {
+const loginFB = (username, password) => {
   return async function (dispatch, getState, { history }) {
-    const userInfo = {
-      username: id,
-      password: password,
-    };
-
     await apis
-      .Login(userInfo)
+      .Login(username, password, {
+        username: username,
+        password: password,
+      })
       .then((res) => {
         console.log(res);
-        if (!res.data.ok) {
-          // window.alert(res.data.errorMessage);
-          window.alert(res.data);
-          history.push("/");
-          return;
+        if (res.headers.authorization) {
+          localStorage.setItem("token", res.headers.authorization);
+          console.log(res.headers.authorization);
         }
+
         dispatch(setUser(res.data));
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userNickname", res.data.userNickname);
+
         history.replace("/");
       })
       .catch((err) => {
@@ -56,7 +53,7 @@ const loginFB = (id, password) => {
 //   return function (dispatch, getState, { history }) {
 //     axios({
 //       method: "get",
-//       url: "http://3.34.130.88/api/users/me",
+//       url: "http://3.35.167.81:8080/user/login",
 //       headers: {
 //         "content-type": "application/json;charset=UTF-8",
 //         accept: "application/json",
@@ -68,7 +65,7 @@ const loginFB = (id, password) => {
 
 //         dispatch(
 //           setUser({
-//             userNickname: res.data.userNickname,
+//             userId: res.data.username,
 //           })
 //         );
 //       })
@@ -78,13 +75,21 @@ const loginFB = (id, password) => {
 //   };
 // };
 
-const loginAction = (user) => {
+const logOutFB = () => {
   return function (dispatch, getState, { history }) {
-    console.log(history);
-    dispatch(logIn(user));
-    history.push("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    dispatch(logOut());
+    history.replace("/");
   };
 };
+// const loginAction = (user) => {
+//   return function (dispatch, getState, { history }) {
+//     console.log(history);
+//     dispatch(logIn(user));
+//     history.push("/");
+//   };
+// };
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
@@ -109,15 +114,8 @@ const signupFB = (id, password, email) => {
 // reducer
 export default handleActions(
   {
-    [LOG_IN]: (state, action) =>
-      produce(state, (draft) => {
-        setCookie("is_login", "success");
-        draft.user = action.payload.user;
-        draft.is_login = true;
-      }),
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        setCookie("is_login", "success");
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
@@ -133,12 +131,12 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
-  logIn,
   logOut,
   getUser,
-  loginAction,
+  logOutFB,
   loginFB,
   signupFB,
+  setUser,
   // loginCheckFB,
 };
 

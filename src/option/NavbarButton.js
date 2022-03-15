@@ -1,14 +1,93 @@
 import React from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import logo01 from "../images/logo01.png";
 import logo02 from "../images/logo02.png";
 import "../App.css";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { useDispatch, useSelector } from "react-redux";
 
 // import logo_design from "../design/스프링워치-로고2.png";
 
 function NavbarButton() {
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
+  const is_local = localStorage.getItem("token") ? true : false;
+
+  console.log(is_local);
+
+  if (is_login && is_local) {
+    return (
+      <Navbar>
+        <img src={logo01} alt="logo01" className="logo-img img1" />
+        <img src={logo01} alt="logo01" className="logo-img img2" />
+        <nav className="is-mb">
+          <div className="nav-wrap">
+            <div className="logo">
+              <Link to="/">
+                <img src={logo02} alt="logoImage" />
+              </Link>
+            </div>
+            <ul className="title-wrap">
+              <li>
+                <GiHamburgerMenu size="30" />
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <nav className="is-pc">
+          <div className="nav-wrap">
+            <div className="logo">
+              <Link to="/">
+                <img src={logo02} alt="logoImage" />
+              </Link>
+            </div>
+
+            <ul className="title-wrap">
+              <NavLink
+                to="/watchpage"
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                WATCH
+              </NavLink>
+              <NavLink
+                to="/watchcodymainpage"
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                STYLE
+              </NavLink>
+              <NavLink
+                _onClick={() => {
+                  dispatch(userActions.logOut({}));
+                }}
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                LOGOUT
+              </NavLink>
+              <NavLink
+                to="/cartpage"
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                CART
+              </NavLink>
+              <NavLink
+                to="/mypage"
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                MY PAGE
+              </NavLink>
+              <li>
+                <GiHamburgerMenu size="30" />
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </Navbar>
+    );
+  }
+
   return (
     <Navbar>
       <img src={logo01} alt="logo01" className="logo-img img1" />
@@ -35,6 +114,7 @@ function NavbarButton() {
               <img src={logo02} alt="logoImage" />
             </Link>
           </div>
+
           <ul className="title-wrap">
             <NavLink
               to="/watchpage"
@@ -61,10 +141,10 @@ function NavbarButton() {
               CART
             </NavLink>
             <NavLink
-              to="/mypage"
+              to="/signup"
               activeStyle={{ color: "red", textDecoration: "underline" }}
             >
-              MY PAGE
+              SIGN_UP
             </NavLink>
             <li>
               <GiHamburgerMenu size="30" />
@@ -75,7 +155,6 @@ function NavbarButton() {
     </Navbar>
   );
 }
-
 export default NavbarButton;
 
 const Navbar = styled.div`
