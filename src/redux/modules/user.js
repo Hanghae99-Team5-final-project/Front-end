@@ -38,8 +38,7 @@ const loginFB = (username, password) => {
         }
 
         dispatch(setUser(res.data));
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", res.data.user);
+
         history.replace("/");
       })
       .catch((err) => {
