@@ -23,12 +23,10 @@ const Login = (props) => {
     dispatch(userActions.loginAction({ username, password }));
   };
 
-  const Wrap = styled.div`
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-    transition: 0.5s;
-  `;
+  const changePwd = (e) => {
+    setPwd(e.target.value);
+    console.log("pwd = " + pwd);
+  };
 
   return (
     <React.Fragment>
@@ -38,22 +36,20 @@ const Login = (props) => {
           로그인
         </Text>
 
-        <Input
+        <input
           label="아이디"
           placeholder="아이디를 입력해주세요."
-          _onChange={(e) => {
-            setId(e.target.value);
-          }}
+          onChange={(e) => setId(e.target.value)}
         />
 
-        <Input
+        <input
           label="패스워드"
           placeholder="패스워드 입력해주세요."
           type="password"
-          _onChange={(e) => {
-            setPwd(e.target.value);
-          }}
+          onChange={(e) => setPwd(e.target.value)}
         />
+
+        <input type="text" onChange={changePwd} placeholder="" />
 
         <Button
           text="로그인하기"
@@ -68,3 +64,10 @@ const Login = (props) => {
 };
 
 export default Login;
+
+const Wrap = styled.div`
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  transition: 0.5s;
+`;

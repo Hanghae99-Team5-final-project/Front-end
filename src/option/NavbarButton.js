@@ -176,6 +176,10 @@ const Navbar = styled.div`
           padding: 3%;
           color: #fff;
 
+          &:hover {
+            text-decoration: underline;
+          }
+
           .menu {
           }
         }
