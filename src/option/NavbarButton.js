@@ -13,11 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 function NavbarButton() {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
-  const is_local = localStorage.getItem("token") ? true : false;
+  const is_token = localStorage.getItem("token") ? true : false;
 
-  console.log(is_local);
+  console.log(is_token);
 
-  if (is_login && is_local) {
+  if (is_login && is_token) {
     return (
       <Navbar>
         <img src={logo01} alt="logo01" className="logo-img img1" />
@@ -58,14 +58,16 @@ function NavbarButton() {
               >
                 STYLE
               </NavLink>
-              <NavLink
-                _onClick={() => {
-                  dispatch(userActions.logOut({}));
-                }}
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                LOGOUT
-              </NavLink>
+              {is_token && (
+                <NavLink
+                  _onClick={() => {
+                    dispatch(userActions.logOut({}));
+                  }}
+                  activeStyle={{ color: "red", textDecoration: "underline" }}
+                >
+                  LOGOUT
+                </NavLink>
+              )}
               <NavLink
                 to="/cartpage"
                 activeStyle={{ color: "red", textDecoration: "underline" }}
@@ -128,12 +130,14 @@ function NavbarButton() {
             >
               STYLE
             </NavLink>
-            <NavLink
-              to="/login"
-              activeStyle={{ color: "red", textDecoration: "underline" }}
-            >
-              LOGIN
-            </NavLink>
+            {!is_token && (
+              <NavLink
+                to="/login"
+                activeStyle={{ color: "red", textDecoration: "underline" }}
+              >
+                LOGIN
+              </NavLink>
+            )}
             <NavLink
               to="/cartpage"
               activeStyle={{ color: "red", textDecoration: "underline" }}
