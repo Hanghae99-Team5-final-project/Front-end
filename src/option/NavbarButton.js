@@ -13,11 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 function NavbarButton() {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
-  const is_session = sessionStorage.getItem("token") ? true : false;
+  const is_local = localStorage.getItem("token") ? true : false;
 
-  console.log(is_session);
+  console.log(is_local);
 
-  if (is_login && is_session) {
+  if (is_login && is_local) {
     return (
       <Navbar>
         <img src={logo01} alt="logo01" className="logo-img img1" />

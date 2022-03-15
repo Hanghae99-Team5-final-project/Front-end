@@ -8,20 +8,20 @@ const instance = axios.create({
   },
 });
 
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 instance.interceptors.request.use(function (config) {
-  const accessToken = sessionStorage.token;
-  config.headers.common["Authorization"] = `Bearer ${accessToken}`; // header에 토큰값을 넣는다 => header에 토큰값이 있어 앞으로 request를 자유자재로 할 수 있다.
+  const accessToken = localStorage.token;
+  config.headers.common["authorization"] = ` Bearer ${accessToken}`; // header에 토큰값을 넣는다 => header에 토큰값이 있어 앞으로 request를 자유자재로 할 수 있다.
   return config;
 });
 
 export const apis = {
   //---- 유저  ----//
   kakao: (authorization_code) =>
-    instance.get(`/api/user/kakao/callback?code=${authorization_code}`), //카카오로그인
+    instance.get(`/user/kakao/callback?code=${authorization_code}`), //카카오로그인
   signUp: (userInfo) => instance.post("/user/signup", userInfo),
-  Login: (userInfo) => instance.post("/api/user/login", userInfo),
+  Login: (userInfo) => instance.post("/user/login", userInfo),
   // IdCheck: (idInfo) => instance.post("/api/user/redunancy", idInfo),
 
   //----- 조회 -----//
