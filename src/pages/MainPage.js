@@ -151,8 +151,14 @@ function MainPage() {
       <button style={{ margin: "50px 50px" }}>
         <Link to="/watchpage">시계 페이지 (카테고리)</Link>
       </button>
-      <button>
+      <button style={{ margin: "50px 50px" }}>
         <Link to="/watchcodydetail/:id">시계 코디페이지 디테일</Link>
+      </button>
+      <button style={{ margin: "50px 50px" }}>
+        <Link to="/mypage">마이 페이지</Link>
+      </button>
+      <button>
+        <Link to="/watchdetail">시계 상세페이지</Link>
       </button>
     </MainPageBlock>
   );

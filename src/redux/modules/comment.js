@@ -39,7 +39,7 @@ const getCommentFB = (commentId) => {
 const addCommentFB = (commentUser, commentContent, commentId, createdAt) => {
   return function (dispatch, getState, { history }) {
     apis
-      .addComment(commentUser, commentContent, commentId, createdAt)
+      .addCommentCody(commentUser, commentContent, commentId, createdAt)
       .then((res) => {
         dispatch(
           addComment({

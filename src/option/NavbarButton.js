@@ -12,10 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function NavbarButton() {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.is_login);
+
   const is_token = localStorage.getItem("token");
 
-  console.log(is_token);
+  const signOut = () => {
+    dispatch(userActions.logOutFB());
+  };
+
 
   const signOut = () => {
     localStorage.removeItem("token");
@@ -27,21 +30,7 @@ function NavbarButton() {
   //       <img src={logo01} alt="logo01" className="logo-img img1" />
   //       <img src={logo01} alt="logo01" className="logo-img img2" />
   //       <nav className="is-mb">
-  //         <div className="nav-wrap">
-  //           <div className="logo">
-  //             <Link to="/">
-  //               <img src={logo02} alt="logoImage" />
-  //             </Link>
-  //           </div>
-  //           <ul className="title-wrap">
-  //             <li>
-  //               <GiHamburgerMenu size="30" />
-  //             </li>
-  //           </ul>
-  //         </div>
-  //       </nav>
 
-  //       <nav className="is-pc">
   //         <div className="nav-wrap">
   //           <div className="logo">
   //             <Link to="/">
@@ -147,6 +136,7 @@ function NavbarButton() {
                 LOGOUT
               </button>
             )}
+
             <NavLink
               to="/cartpage"
               activeStyle={{ color: "red", textDecoration: "underline" }}

@@ -25,7 +25,7 @@ function WatchCodyDetail(props) {
   const commentId = Params.commentId;
   const commentUser = localStorage.commentUser;
   const createdAt = moment().format("YYYY-MM-DD hh:mm:ss");
-
+  const token = localStorage.getItem("token");
   const changeComment = (e) => {
     setCommentContent(e.target.value);
     console.log(e.target.value);

@@ -8,27 +8,22 @@ import axios from "axios";
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
-
+const LIKE = "LIKE";
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
+const like = createAction(LIKE, (like) => ({
+  like,
+}));
 
 const initialState = {
   list: [],
-};
-
-const initialPost = {
-  //   title: "",
-  //   contents: "",
-  //   username: "",
-  //   personCnt: "",
-  //   watchTitle: "",
-  //   joinUntil: "",
-  imageUrl:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdOk4yqQXMe8PN7IZNSiySsODjAVU4viQnnw&usqp=CAU",
-  contents: "",
-  // createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-  // modifiedAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+  likes: [],
+  like: false,
+  post: {
+    likes: null,
+    result: {},
+  },
 };
 
 const getPostFB = () => {
@@ -76,6 +71,21 @@ const addPostFB = (
       });
   };
 };
+
+const likePostFB = (watchId) => {
+  return async (dispatch, getstate, { history }) => {
+    axios
+      .post(`http://3.35.167.81:8080/api/like/create/${watchId}`)
+
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("Error response:");
+      });
+  };
+};
+
 ///리듀서
 export default handleActions(
   {
@@ -87,7 +97,12 @@ export default handleActions(
     [SET_POST]: (state, action) => produce(state, (draft) => {}),
 
     [ADD_POST]: (state, aciton) => produce(state, (draft) => {}),
+    [LIKE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.like = action.payload.like;
+      }),
   },
+
   initialState
 );
 
@@ -97,6 +112,8 @@ const actionCreators = {
   getPost,
   getPostFB,
   addPostFB,
+  likePostFB,
+  like,
 };
 
 export { actionCreators };
