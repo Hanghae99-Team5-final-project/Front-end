@@ -1,9 +1,7 @@
 import React from "react";
 import { Text, Input, Button } from "../elements";
 import styled from "styled-components";
-
 import Kakaologin from "../components/Kakaologin";
-
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { deleteCookie, getCookie, setCookie } from "../Cookie";
@@ -15,7 +13,6 @@ const LoginWrap = styled.div`
 `;
 const Login = (props) => {
   const dispatch = useDispatch();
-
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const login = () => {
@@ -27,7 +24,6 @@ const Login = (props) => {
     // const password = "asdf1234";
     dispatch(userActions.loginFB({ username, password }));
   };
-
   return (
     <React.Fragment>
       <Kakaologin />
@@ -35,7 +31,6 @@ const Login = (props) => {
         <Text size="32px" bold>
           로그인
         </Text>
-
         <Input
           label="아이디"
           placeholder="아이디를 입력해주세요."
@@ -45,7 +40,6 @@ const Login = (props) => {
             setUsername(e.target.value);
           }}
         />
-
         <Input
           label="패스워드"
           value={password}
@@ -55,7 +49,6 @@ const Login = (props) => {
             setPassword(e.target.value);
           }}
         />
-
         <Button
           text="로그인하기"
           _onClick={() => {
@@ -66,5 +59,4 @@ const Login = (props) => {
     </React.Fragment>
   );
 };
-
 export default Login;
