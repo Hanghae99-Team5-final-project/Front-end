@@ -36,9 +36,7 @@ const loginFB = (username, password) => {
           localStorage.setItem("token", res.headers.authorization);
           console.log(res.headers.authorization);
         }
-
         dispatch(setUser(res.data));
-
         history.replace("/");
       })
       .catch((err) => {
@@ -78,7 +76,6 @@ const loginFB = (username, password) => {
 const logOutFB = () => {
   return function (dispatch, getState, { history }) {
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
     dispatch(logOut());
     history.replace("/");
   };

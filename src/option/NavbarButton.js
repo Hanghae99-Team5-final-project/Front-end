@@ -12,83 +12,84 @@ import { useDispatch, useSelector } from "react-redux";
 
 function NavbarButton() {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.is_login);
-  const is_token = localStorage.getItem("token") ? true : false;
+  const is_token = localStorage.getItem("token");
 
-  console.log(is_token);
+  const signOut = () => {
+    dispatch(userActions.logOutFB());
+  };
 
-  if (is_login && is_token) {
-    return (
-      <Navbar>
-        <img src={logo01} alt="logo01" className="logo-img img1" />
-        <img src={logo01} alt="logo01" className="logo-img img2" />
-        <nav className="is-mb">
-          <div className="nav-wrap">
-            <div className="logo">
-              <Link to="/">
-                <img src={logo02} alt="logoImage" />
-              </Link>
-            </div>
-            <ul className="title-wrap">
-              <li>
-                <GiHamburgerMenu size="30" />
-              </li>
-            </ul>
-          </div>
-        </nav>
+  // if (is_login && is_token) {
+  //   return (
+  //     <Navbar>
+  //       <img src={logo01} alt="logo01" className="logo-img img1" />
+  //       <img src={logo01} alt="logo01" className="logo-img img2" />
+  //       <nav className="is-mb">
+  //         <div className="nav-wrap">
+  //           <div className="logo">
+  //             <Link to="/">
+  //               <img src={logo02} alt="logoImage" />
+  //             </Link>
+  //           </div>
+  //           <ul className="title-wrap">
+  //             <li>
+  //               <GiHamburgerMenu size="30" />
+  //             </li>
+  //           </ul>
+  //         </div>
+  //       </nav>
 
-        <nav className="is-pc">
-          <div className="nav-wrap">
-            <div className="logo">
-              <Link to="/">
-                <img src={logo02} alt="logoImage" />
-              </Link>
-            </div>
+  //       <nav className="is-pc">
+  //         <div className="nav-wrap">
+  //           <div className="logo">
+  //             <Link to="/">
+  //               <img src={logo02} alt="logoImage" />
+  //             </Link>
+  //           </div>
 
-            <ul className="title-wrap">
-              <NavLink
-                to="/watchpage"
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                WATCH
-              </NavLink>
-              <NavLink
-                to="/watchcodymainpage"
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                STYLE
-              </NavLink>
-              {is_token && (
-                <NavLink
-                  _onClick={() => {
-                    dispatch(userActions.logOut({}));
-                  }}
-                  activeStyle={{ color: "red", textDecoration: "underline" }}
-                >
-                  LOGOUT
-                </NavLink>
-              )}
-              <NavLink
-                to="/cartpage"
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                CART
-              </NavLink>
-              <NavLink
-                to="/mypage"
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                MY PAGE
-              </NavLink>
-              <li>
-                <GiHamburgerMenu size="30" />
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </Navbar>
-    );
-  }
+  //           <ul className="title-wrap">
+  //             <NavLink
+  //               to="/watchpage"
+  //               activeStyle={{ color: "red", textDecoration: "underline" }}
+  //             >
+  //               WATCH
+  //             </NavLink>
+  //             <NavLink
+  //               to="/watchcodymainpage"
+  //               activeStyle={{ color: "red", textDecoration: "underline" }}
+  //             >
+  //               STYLE
+  //             </NavLink>
+  //             {is_token && (
+  //               <NavLink
+  //                 _onClick={() => {
+  //                   dispatch(userActions.logOut({}));
+  //                 }}
+  //                 activeStyle={{ color: "red", textDecoration: "underline" }}
+  //               >
+  //                 LOGOUT
+  //               </NavLink>
+  //             )}
+  //             <NavLink
+  //               to="/cartpage"
+  //               activeStyle={{ color: "red", textDecoration: "underline" }}
+  //             >
+  //               CART
+  //             </NavLink>
+  //             <NavLink
+  //               to="/mypage"
+  //               activeStyle={{ color: "red", textDecoration: "underline" }}
+  //             >
+  //               MY PAGE
+  //             </NavLink>
+  //             <li>
+  //               <GiHamburgerMenu size="30" />
+  //             </li>
+  //           </ul>
+  //         </div>
+  //       </nav>
+  //     </Navbar>
+  //   );
+  // }
 
   return (
     <Navbar>
@@ -130,7 +131,7 @@ function NavbarButton() {
             >
               STYLE
             </NavLink>
-            {!is_token && (
+            {!localStorage.getItem("token") && (
               <NavLink
                 to="/login"
                 activeStyle={{ color: "red", textDecoration: "underline" }}
@@ -138,6 +139,12 @@ function NavbarButton() {
                 LOGIN
               </NavLink>
             )}
+            {localStorage.getItem("token") && (
+              <button type="button" onClick={signOut}>
+                LOGOUT
+              </button>
+            )}
+
             <NavLink
               to="/cartpage"
               activeStyle={{ color: "red", textDecoration: "underline" }}
@@ -258,6 +265,10 @@ const Navbar = styled.div`
         > a {
           padding: 3%;
           color: #fff;
+
+          &:hover {
+            text-decoration: underline;
+          }
 
           .menu {
           }
