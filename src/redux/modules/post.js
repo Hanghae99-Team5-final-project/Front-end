@@ -5,6 +5,7 @@ import moment from "moment";
 
 import axios from "axios";
 
+const token = localStorage.getItem("token");
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -75,7 +76,9 @@ const addPostFB = (
 const likePostFB = (watchId) => {
   return async (dispatch, getstate, { history }) => {
     axios
-      .post(`http://3.35.167.81:8080/api/like/create/${watchId}`)
+      .post(`http://3.35.167.81:8080/api/like/create/${watchId}`, {
+        headers: { Authorization: token },
+      })
 
       .then((res) => {
         console.log(res.data);

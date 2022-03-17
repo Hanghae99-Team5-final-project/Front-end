@@ -12,10 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 function NavbarButton() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const is_token = localStorage.getItem("token");
 
   const signOut = () => {
     dispatch(userActions.logOutFB());
+    history.replace("/");
   };
 
   // if (is_login && is_token) {

@@ -7,11 +7,27 @@ import { setCookie } from "../Cookie";
 // import logo_design from "../design/스프링워치-로고1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MainPageBlock = styled.div`
-  .Carousel.Item,
+  /* .Carousel.Item,
   img {
     height: 350px;
+  } */
+  .title1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .title2 {
+    display: flex;
+    justify-content: center;
+  }
+  .title3 {
+    display: flex;
+    justify-content: center;
   }
   .position_logo {
     margin-right: 100px;
@@ -20,12 +36,13 @@ const MainPageBlock = styled.div`
   .flex-item {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 80%;
     height: 60vh;
     margin-top: 50px;
     align-items: center;
-
-    line-height: 5;
+    justify-content: space-around;
+    line-height: 1;
+    margin: auto;
   }
 `;
 
@@ -42,37 +59,16 @@ function MainPage() {
   const MainList = useSelector(({ mainpage }) => mainpage.bestList);
 
   React.useEffect(() => {
-    dispatch(MainlistActions.getBestListFB);
+    dispatch(MainlistActions.getBestListFB());
   }, []);
-  const [List, setList] = useState([
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCRrMkXn0CxbzQ6vx8JgcLMjsFv_XEiuXb2A&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "16억",
-      category: "digital",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCRrMkXn0CxbzQ6vx8JgcLMjsFv_XEiuXb2A&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "16억",
-      category: "digital",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCRrMkXn0CxbzQ6vx8JgcLMjsFv_XEiuXb2A&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "16억",
-      category: "digital",
-    },
-  ]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <MainPageBlock>
       <Carousel fade>
@@ -116,23 +112,56 @@ function MainPage() {
         </Carousel.Item>
       </Carousel>
 
-      <Logo className="position_logo">
-        <div className="flex-item">
-          {List.map((list, idx) => {
-            return (
-              <div className="flex_box" key={idx}>
-                <div className="box_hover">
-                  <img size="15%" src={list.watchImage} />
-                </div>
-                <p className="artist_name">{list.watchBrand}</p>
-                <p className="artist_name">{list.watchModel}</p>
-                <p className="artist_name">{list.lowestPrice}</p>
-                <p className="artist_name">{list.category}</p>
-              </div>
-            );
-          })}
-        </div>
-      </Logo>
+      {/* <Logo className="position_logo"> */}
+
+      <h1 className="title1">인기 상품</h1>
+      <div className="flex-item">
+        {MainList?.bestList?.map((list, idx) => {
+          return (
+            <div className="flex_box" key={idx}>
+              <img size="15%" src={list.watchImageUrl} />
+
+              {/* <p className="artist_name">{list.watchBrand}</p> */}
+              <p className="artist_name">{list.watchModel}</p>
+              <p className="artist_name">{list.lowestPrice}</p>
+              <p className="artist_name">{list.category}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <h1 className="title2"> 커플 </h1>
+      <div className="flex-item">
+        {MainList?.coupleList?.map((list, idx) => {
+          return (
+            <div className="flex_box" key={idx}>
+              <img size="15%" src={list.watchImageUrl} />
+
+              {/* <p className="artist_name">{list.watchBrand}</p> */}
+              <p className="artist_name">{list.watchModel}</p>
+              <p className="artist_name">{list.lowestPrice}</p>
+              <p className="artist_name">{list.category}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <h1 className="title3">시계 코디</h1>
+      <div className="flex-item">
+        {MainList?.codyList?.map((list, idx) => {
+          return (
+            <div className="flex_box" key={idx}>
+              <img size="15%" src={list.watchImageUrl} />
+
+              {/* <p className="artist_name">{list.watchBrand}</p> */}
+              <p className="artist_name">{list.watchModel}</p>
+              <p className="artist_name">{list.lowestPrice}</p>
+              <p className="artist_name">{list.category}</p>
+            </div>
+          );
+        })}
+      </div>
+      {/* </Logo> */}
       <button style={{ margin: "50px 50px" }}>
         <Link to="/login">로그인 페이지</Link>
       </button>
