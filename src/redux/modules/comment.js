@@ -36,7 +36,39 @@ const getCommentFB = (commentId) => {
   };
 };
 
-const addCommentFB = (commentUser, commentContent, commentId, createdAt) => {
+const addCommentCodyFB = (
+  commentUser,
+  commentContent,
+  commentId,
+  createdAt
+) => {
+  console.log(commentId);
+  return function (dispatch, getState, { history }) {
+    apis
+      .addCommentCody(commentUser, commentContent, commentId, createdAt)
+      .then((res) => {
+        dispatch(
+          addComment({
+            commentUser,
+            commentContent,
+            commentId: res.data.commentId,
+            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const addCommentWatchFB = (
+  commentUser,
+  commentContent,
+  commentId,
+  createdAt
+) => {
+  console.log(commentId);
   return function (dispatch, getState, { history }) {
     apis
       .addCommentCody(commentUser, commentContent, commentId, createdAt)
@@ -89,8 +121,8 @@ export default handleActions(
 );
 
 const actionCreators = {
-  addCommentFB,
-  getCommentFB,
+  addCommentCodyFB,
+  addCommentWatchFB,
   getComment,
   addComment,
   deleteComment,

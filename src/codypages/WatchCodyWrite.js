@@ -118,7 +118,7 @@ const WatchCodyWrite = (props) => {
               <Form.Control type="file" />
             </Form.Group>
             <div className="lb-star">
-              <h5 className="lb-text">평점 </h5>
+              <h5 className="lb-text">평점</h5>
               <StarRating />
             </div>
             <Button className="lb-button" variant="light">

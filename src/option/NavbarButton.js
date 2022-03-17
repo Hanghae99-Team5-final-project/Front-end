@@ -17,6 +17,7 @@ function NavbarButton() {
 
   const signOut = () => {
     dispatch(userActions.logOutFB());
+    history.replace("/");
   };
 
 

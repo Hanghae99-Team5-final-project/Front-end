@@ -6,35 +6,54 @@ import emptyLike from "../images/empty-like.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
-import WatchCodyDetail from "./WatchCodyDetail";
+import { actionCreators as commentActions } from "../redux/modules/post";
 
-function WatchDetail() {
+import WatchCodyDetail from "./WatchCodyDetail";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
+import moment from "moment";
+function WatchDetail(props) {
   const dispatch = useDispatch();
-  const params = useParams();
-  const watchId = params.watchId;
   const comment = React.useRef();
   const like_state = useSelector((state) => state.post.like);
   const [like, setLike] = React.useState(like_state); // 좋아요
   const like_list = useSelector((state) => state.post.likes);
 
+  const [detail, setDetail] = useState({});
   const toggleLike = () => {
     dispatch(postActions.likePostFB(watchId));
     setLike(!like);
     dispatch(postActions.like(like));
   };
+  const watchId = props.match.params.watchId;
+
   React.useEffect(() => {
     if (like_list[watchId] === true) {
       setLike(true);
     }
+    axios
+      .get(`http://3.35.167.81:8080/api/detail/${watchId}`)
+      .then((res) => {
+        if (res.data.success) {
+          console.log("res.data", res.data);
+          setDetail(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log("Error response:");
+      });
   }, []);
   return (
     <>
       <WatchDetailBlock>
-        {!like ? (
-          <img src={emptyLike} alt="emptyLike" onClick={toggleLike} />
-        ) : (
-          <img src={Like} alt="Like" onClick={toggleLike} />
-        )}
+        <div style={{ width: "100%", padding: "3rem 4rem" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {!like ? (
+              <img src={emptyLike} alt="emptyLike" onClick={toggleLike} />
+            ) : (
+              <img src={Like} alt="Like" onClick={toggleLike} />
+            )}
+          </div>
+        </div>
         <WatchCodyDetail />
       </WatchDetailBlock>
     </>

@@ -1,93 +1,50 @@
 import React, { useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { actionsCreators as CategorylistActions } from "../redux/modules/category";
+import { Link, useParams } from "react-router-dom";
+const WatchPage = () => {
+  const dispatch = useDispatch();
+  const CategoryList = useSelector(({ category }) => category.categoryList);
 
-const CartPage = () => {
-  const [Cart, setCart] = useState([
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-    {
-      watchId: 1,
-      watchImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPUlxPhjm8A114PfCox_xcpJFih66Yvc1_w&usqp=CAU",
-      watchBrand: "문페이즈",
-      watchModel: "G-shock250",
-      lowestPrice: "1,060,300",
-    },
-  ]);
+  React.useEffect(() => {
+    dispatch(CategorylistActions.getCategoryListFB());
+  }, []);
+
   return (
     <CartPageBlock>
       <div className="flex-item">
-        {Cart.map((menu, idx) => {
+        {CategoryList?.coupleList?.map((menu, idx) => {
+          return (
+            <div
+              className="flex_box"
+              onClick={() => {
+                console.log(menu.watchId);
+              }}
+              key={idx}
+            >
+              <Link to={`/watchdetail/${menu.watchId}`}>
+                <img size="15%" src={menu.watchImageUrl} />
+              </Link>
+              <div className="box_name">
+                {/* <p style={{}}>{menu.watchBrand}</p> */}
+                <p style={{}}>{menu.category}</p>
+                <p style={{ color: "red" }}>{menu.lowestPrice}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex-item">
+        {CategoryList?.digitalList?.map((menu, idx) => {
           return (
             <div className="flex_box" key={idx}>
-              <img size="15%" src={menu.watchImage} />
-
+              <Link to={`/watchdetail/${menu.watchId}`}>
+                <img size="15%" src={menu.watchImageUrl} />
+              </Link>
               <div className="box_name">
-                <p style={{ fontSize: "20px" }}>{menu.watchBrand}</p>
-                <p style={{ fontSize: "15px" }}>{menu.watchModel}</p>
+                {/* <p style={{}}>{menu.watchBrand}</p> */}
+                <p style={{}}>{menu.category}</p>
                 <p style={{ color: "red" }}>{menu.lowestPrice}</p>
               </div>
             </div>
@@ -125,4 +82,4 @@ const CartPageBlock = styled.div`
     line-height: 10px;
   }
 `;
-export default CartPage;
+export default WatchPage;
