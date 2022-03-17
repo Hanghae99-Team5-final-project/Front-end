@@ -12,12 +12,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 function NavbarButton() {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const is_token = localStorage.getItem("token");
 
   const signOut = () => {
     dispatch(userActions.logOutFB());
     history.replace("/");
+  };
+
+
+  const signOut = () => {
+    localStorage.removeItem("token");
   };
 
   // if (is_login && is_token) {
@@ -26,21 +31,7 @@ function NavbarButton() {
   //       <img src={logo01} alt="logo01" className="logo-img img1" />
   //       <img src={logo01} alt="logo01" className="logo-img img2" />
   //       <nav className="is-mb">
-  //         <div className="nav-wrap">
-  //           <div className="logo">
-  //             <Link to="/">
-  //               <img src={logo02} alt="logoImage" />
-  //             </Link>
-  //           </div>
-  //           <ul className="title-wrap">
-  //             <li>
-  //               <GiHamburgerMenu size="30" />
-  //             </li>
-  //           </ul>
-  //         </div>
-  //       </nav>
 
-  //       <nav className="is-pc">
   //         <div className="nav-wrap">
   //           <div className="logo">
   //             <Link to="/">
