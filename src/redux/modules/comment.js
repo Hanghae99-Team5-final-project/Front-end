@@ -24,8 +24,8 @@ const initialState = {
 };
 
 const getCommentFB = (commentId) => {
-  return function (dispatch, getState, { history }) {
-    apis
+  return async function (dispatch, getState, { history }) {
+    await apis
       .getComment(commentId)
       .then((res) => {
         dispatch(getComment(res.data.comment));
@@ -43,9 +43,10 @@ const addCommentCodyFB = (
   createdAt
 ) => {
   console.log(commentId);
-  return function (dispatch, getState, { history }) {
-    apis
+  return async function (dispatch, getState, { history }) {
+    await apis
       .addCommentCody(commentUser, commentContent, commentId, createdAt)
+
       .then((res) => {
         dispatch(
           addComment({
@@ -69,9 +70,9 @@ const addCommentWatchFB = (
   createdAt
 ) => {
   console.log(commentId);
-  return function (dispatch, getState, { history }) {
-    apis
-      .addCommentCody(commentUser, commentContent, commentId, createdAt)
+  return async function (dispatch, getState, { history }) {
+    await apis
+      .addCommentWatch(commentUser, commentContent, commentId, createdAt)
       .then((res) => {
         dispatch(
           addComment({
@@ -89,8 +90,8 @@ const addCommentWatchFB = (
 };
 
 const deleteCommentFB = (commentId) => {
-  return function (dispatch, getState, { history }) {
-    apis.deleteComment(commentId).then((res) => {
+  return async function (dispatch, getState, { history }) {
+    await apis.deleteComment(commentId).then((res) => {
       dispatch(deleteComment(commentId));
       console.log(res);
       // window.alert("삭제가 완료되었습니다.");
@@ -127,6 +128,7 @@ const actionCreators = {
   addComment,
   deleteComment,
   deleteCommentFB,
+  getCommentFB,
 };
 
 export { actionCreators };

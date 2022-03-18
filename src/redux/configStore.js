@@ -8,6 +8,7 @@ import Post from "./modules/post";
 import Comment from "./modules/comment";
 import Mainpage from "./modules/mainpage";
 import Category from "./modules/category";
+import Cartpage from "./modules/cartpage";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   comment: Comment,
   mainpage: Mainpage,
   category: Category,
+  cartpage: Cartpage,
   router: connectRouter(history),
 });
 

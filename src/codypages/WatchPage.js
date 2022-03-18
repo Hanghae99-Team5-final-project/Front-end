@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { actionsCreators as CategorylistActions } from "../redux/modules/category";
 import { Link, useParams } from "react-router-dom";
+import { history } from "../redux/configStore";
 const WatchPage = () => {
   const dispatch = useDispatch();
   const CategoryList = useSelector(({ category }) => category.categoryList);
@@ -15,17 +16,18 @@ const WatchPage = () => {
     <CartPageBlock>
       <div className="flex-item">
         {CategoryList?.coupleList?.map((menu, idx) => {
+          console.log(menu);
           return (
             <div
               className="flex_box"
               onClick={() => {
-                console.log(menu.watchId);
+                console.log(menu.id);
               }}
               key={idx}
             >
-              <Link to={`/watchdetail/${menu.watchId}`}>
+              <div onClick={() => history.push(`/watchdetail/${menu.id}`)}>
                 <img size="15%" src={menu.watchImageUrl} />
-              </Link>
+              </div>
               <div className="box_name">
                 {/* <p style={{}}>{menu.watchBrand}</p> */}
                 <p style={{}}>{menu.category}</p>

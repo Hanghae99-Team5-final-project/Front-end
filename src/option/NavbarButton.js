@@ -17,12 +17,6 @@ function NavbarButton() {
 
   const signOut = () => {
     dispatch(userActions.logOutFB());
-    history.replace("/");
-  };
-
-
-  const signOut = () => {
-    localStorage.removeItem("token");
   };
 
   // if (is_login && is_token) {

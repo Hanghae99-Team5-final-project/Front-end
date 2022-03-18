@@ -20,9 +20,10 @@ const WatchCodyDetailBlock = styled.div`
 function WatchCodyDetail(props) {
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = useState("");
-
+  // const CartpageList = useSelector(({ cartpage }) => cartpage.cartpageList);
   const { id } = useParams();
-  const commentId = id;
+  const codyId = id;
+  console.log(id);
   const commentUser = localStorage.commentUser;
   const createdAt = moment().format("YYYY-MM-DD hh:mm:ss");
   const token = localStorage.getItem("token");
@@ -31,12 +32,12 @@ function WatchCodyDetail(props) {
     console.log(e.target.value);
   };
   const writeComment = () => {
-    console.log(commentId);
+    console.log(codyId);
     dispatch(
       commentActions.addCommentCodyFB(
         commentUser,
         commentContent,
-        commentId,
+        codyId,
         createdAt
       )
     );
