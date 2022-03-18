@@ -41,15 +41,11 @@ export const apis = {
   addCommentCody: (commentUser, commentContent, codyId, createdAt) =>
     instance.post(`/comment/write/cody/${codyId}`, {
       commentContent: commentContent,
-      codyId: 2,
-      createdAt: createdAt,
     }),
 
   addCommentWatch: (commentUser, commentContent, watchId, createdAt) =>
     instance.post(`/comment/write/watch/${watchId}`, {
       commentContent: commentContent,
-      watchId: 2,
-      createdAt: createdAt,
     }),
   deleteComment: (commentId) => instance.delete(`/comment/delete/${commentId}`),
 };

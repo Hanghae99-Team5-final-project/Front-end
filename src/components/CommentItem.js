@@ -29,15 +29,15 @@ const CommentItem = (props) => {
         <Text size="16px" margin="5px 10px" padding="0">
           {createdAt}
         </Text>
-        {commentUser === IdName && (
-          <DeleteBtn
-            onClick={() => {
-              dispatch(commentActions.deleteCommentFB(commentId));
-            }}
-          >
-            <FaTrashAlt role="button" tabIndex="0" />
-          </DeleteBtn>
-        )}
+        {/* {commentUser === IdName && ( */}
+        <DeleteBtn
+          onClick={() => {
+            dispatch(commentActions.deleteCommentFB(commentId));
+          }}
+        >
+          <FaTrashAlt role="button" tabIndex="0" />
+        </DeleteBtn>
+        {/* )} */}
       </Box>
     </React.Fragment>
   );

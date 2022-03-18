@@ -8,12 +8,14 @@ import apis from "../../api/apis";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
+const EDIT_EMAIL = "EDIT_EMAIL";
 
 // action creators
 // const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
+const editEmail = createAction(EDIT_EMAIL, (user) => ({ user }));
 
 const token = localStorage.getItem("token");
 // initialState
@@ -108,10 +110,38 @@ const signupFB = (id, password, email) => {
   };
 };
 
+const editEmailFB = (email) => {
+  return function (dispatch, getState, { history }) {
+    const token = sessionStorage.getItem("token");
+    axios
+      .put(
+        "http://3.35.167.81:8080/api/user/change",
+        {
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(editEmail(email));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
 // reducer
 export default handleActions(
   {
     [SET_USER]: (state, action) =>
+      produce(state, (draft) => {
+        draft.user = action.payload.user;
+        draft.is_login = true;
+      }),
+    [EDIT_EMAIL]: (state, action) =>
       produce(state, (draft) => {
         draft.user = action.payload.user;
         draft.is_login = true;
@@ -134,6 +164,8 @@ const actionCreators = {
   loginFB,
   signupFB,
   setUser,
+  editEmail,
+  editEmailFB,
   // loginCheckFB,
 };
 
