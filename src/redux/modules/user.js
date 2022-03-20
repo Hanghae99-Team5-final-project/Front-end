@@ -40,6 +40,7 @@ const loginFB = (username, password) => {
           console.log(res.headers.authorization);
         }
         dispatch(setUser(res.data));
+        console.log(res.data);
         history.replace("/");
       })
       .catch((err) => {
@@ -93,7 +94,7 @@ const logOutFB = () => {
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
     axios
-      .post("http://3.35.167.81:8080/user/signup", {
+      .post("http://13.124.237.131:8080/user/signup", {
         username: id,
         password: password,
         email: email,
@@ -115,7 +116,7 @@ const editEmailFB = (email) => {
     const token = sessionStorage.getItem("token");
     axios
       .put(
-        "http://3.35.167.81:8080/api/user/change",
+        "http://13.124.237.131:8080/api/user/change",
         {
           email: email,
         },

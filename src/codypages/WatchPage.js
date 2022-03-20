@@ -21,11 +21,11 @@ const WatchPage = () => {
             <div
               className="flex_box"
               onClick={() => {
-                console.log(menu.id);
+                console.log(menu.watchId);
               }}
               key={idx}
             >
-              <div onClick={() => history.push(`/watchdetail/${menu.id}`)}>
+              <div onClick={() => history.push(`/watchdetail/${menu.watchId}`)}>
                 <img size="15%" src={menu.watchImageUrl} />
               </div>
               <div className="box_name">

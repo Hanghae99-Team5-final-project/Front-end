@@ -71,7 +71,7 @@ function MainPage() {
   };
   return (
     <MainPageBlock>
-      <Carousel fade>
+      {/* <Carousel fade>
         <Carousel.Item className="slide">
           <img
             className="d-block w-100"
@@ -110,7 +110,7 @@ function MainPage() {
             </p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>
+      </Carousel> */}
 
       {/* <Logo className="position_logo"> */}
 

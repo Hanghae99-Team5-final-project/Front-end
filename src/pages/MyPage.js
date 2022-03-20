@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-// import { actionsCreators as editEmailActions } from "../redux/modules/user";
+// import { actionsCreators as editemailActions } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 
 function MyPage(props) {
@@ -10,7 +10,7 @@ function MyPage(props) {
   const [update, setUpdate] = useState("");
   const [is_edit, setIsEdit] = useState(false);
   const [editValue, setEditValue] = useState("");
-  const editEmail = useSelector(({ user }) => user.user);
+  const editemail = useSelector(({ user }) => user.user);
   const changeUpdate = (e) => {
     setUpdate(e.target.value);
     console.log(e.target.value);
@@ -21,7 +21,7 @@ function MyPage(props) {
       window.alert("댓글을 입력해주세요!");
       return;
     }
-    // dispatch(editEmailActions.editEmailFB(props.email, editValue));
+    // dispatch(editemailActions.editEmailFB(props.email, editValue));
     setEditValue("");
     setIsEdit(false);
   };

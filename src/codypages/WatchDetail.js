@@ -16,7 +16,8 @@ function WatchDetail(props) {
   const like_list = useSelector((state) => state.post.likes);
 
   const [detail, setDetail] = useState({});
-  const toggleLike = () => {
+  const toggleLike = (type) => {
+    console.log(type);
     dispatch(postActions.likePostFB(watchId));
     setLike(!like);
     dispatch(postActions.like(like));
@@ -28,7 +29,7 @@ function WatchDetail(props) {
       setLike(true);
     }
     axios
-      .get(`http://3.35.167.81:8080/api/detail/${watchId}`)
+      .get(`http://13.124.237.131:8080/api/detail/${watchId}`)
       .then((res) => {
         if (res.data.success) {
           console.log("res.data", res.data);
@@ -45,9 +46,21 @@ function WatchDetail(props) {
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             {!like ? (
-              <img src={emptyLike} alt="emptyLike" onClick={toggleLike} />
+              <img
+                src={emptyLike}
+                alt="emptyLike"
+                onClick={() => {
+                  toggleLike(false);
+                }}
+              />
             ) : (
-              <img src={Like} alt="Like" onClick={toggleLike} />
+              <img
+                src={Like}
+                alt="Like"
+                onClick={() => {
+                  toggleLike(true);
+                }}
+              />
             )}
           </div>
         </div>
