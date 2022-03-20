@@ -15,7 +15,7 @@ const getCategoryListFB = () => {
     try {
       console.log("도착2");
       const res = await axios.get(
-        "http://3.35.167.81:8080/api/watch/category",
+        "http://13.124.237.131:8080/api/watch/category",
         {
           headers: { Authorization: token },
         }

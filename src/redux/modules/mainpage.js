@@ -10,11 +10,9 @@ const getBestList = createAction(GET_BESTLIST, (bestList) => ({
 }));
 
 const getBestListFB = () => {
-  console.log("도착1");
   return async (dispatch) => {
     try {
-      console.log("도착2");
-      const res = await axios.get("http://3.35.167.81:8080/main");
+      const res = await axios.get("http://13.124.237.131:8080/main");
       const bestList = res.data;
       console.log(bestList);
       dispatch(getBestList(bestList));
