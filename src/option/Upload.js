@@ -18,7 +18,7 @@ const Upload = (props) => {
 
     axios
       .post(
-        "http://13.124.237.131:8080/api/cody",
+        "http://13.125.107.213:8080/api/cody",
         formData,
         config,
         {},
