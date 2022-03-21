@@ -29,7 +29,7 @@ function WatchDetail(props) {
       setLike(true);
     }
     axios
-      .get(`http://13.124.237.131:8080/api/detail/${watchId}`)
+      .get(`http://13.125.107.213:8080/api/detail/${watchId}`)
       .then((res) => {
         if (res.data.success) {
           console.log("res.data", res.data);

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useParams } from "react-router-dom";
-
 import moment from "moment";
 
 const DetailComment = (props) => {

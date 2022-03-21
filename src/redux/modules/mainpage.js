@@ -12,7 +12,7 @@ const getBestList = createAction(GET_BESTLIST, (bestList) => ({
 const getBestListFB = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get("http://13.124.237.131:8080/main");
+      const res = await axios.get("http://13.125.107.213:8080/main");
       const bestList = res.data;
       console.log(bestList);
       dispatch(getBestList(bestList));

@@ -32,7 +32,7 @@ const initialState = {
 const getPostFB = () => {
   return function (dispatch, getState, { history }) {
     axios
-      .get("http://13.124.237.131:8080/api/cody")
+      .get("http://13.125.107.213:8080/api/cody")
       .then((res) => {
         console.log(res.data);
         dispatch(getPost(res.data));
@@ -53,7 +53,7 @@ const addPostFB = (
 ) => {
   return function (dispatch, getState, { history }) {
     axios
-      .post("http://13.124.237.131:8080/api/cody", {
+      .post("http://13.125.107.213:8080/api/cody", {
         userId: 1234,
         codyTitle: "제목",
         watchBrand: "문페이즈",
@@ -79,7 +79,7 @@ const likePostFB = (watchId) => {
   return async (dispatch, getstate, { history }) => {
     await axios
       .post(
-        `http://13.124.237.131:8080/api/like/create/${watchId}`,
+        `http://13.125.107.213:8080/api/like/create/${watchId}`,
         {},
         {
           headers: { Authorization: token },
