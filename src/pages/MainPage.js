@@ -11,49 +11,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const MainPageBlock = styled.div`
-  /* .Carousel.Item,
-  img {
-    height: 350px;
-  } */
-  .title1 {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-  }
-  .title2 {
-    display: flex;
-    justify-content: center;
-  }
-  .title3 {
-    display: flex;
-    justify-content: center;
-  }
-  .position_logo {
-    margin-right: 100px;
-    z-index: 0;
-  }
-  .flex-item {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    height: 60vh;
-    margin-top: 50px;
-    align-items: center;
-    justify-content: space-around;
-    line-height: 1;
-    margin: auto;
-  }
-`;
-
-const Logo = styled.div`
-  background-size: cover;
-  border-radius: 10px;
-
-  width: 300px;
-  height: 250px;
-`;
-
 function MainPage() {
   const dispatch = useDispatch();
   const MainList = useSelector(({ mainpage }) => mainpage.bestList);
@@ -71,48 +28,7 @@ function MainPage() {
   };
   return (
     <MainPageBlock>
-      {/* <Carousel fade>
-        <Carousel.Item className="slide">
-          <img
-            className="d-block w-100"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa8VZmJdXyTaI07iT54o65wD5HBJ0rWEtjzA&usqp=CAU"
-            size="150px"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS1Xi7Kx557AO08VDIJg583D6SnAovlkAj6Q&usqp=CAU"
-            alt="Second slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1HxQuKGawlxROpDKeR6ngYSmcT-tIlzWHKg&usqp=CAU"
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel> */}
-
-      {/* <Logo className="position_logo"> */}
+      <div className="banner"></div>
 
       <h1 className="title1">인기 상품</h1>
       <div className="flex-item">
@@ -193,4 +109,48 @@ function MainPage() {
   );
 }
 
+const MainPageBlock = styled.div`
+  .banner {
+    background-color: grey;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+  }
+  .title1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .title2 {
+    display: flex;
+    justify-content: center;
+  }
+  .title3 {
+    display: flex;
+    justify-content: center;
+  }
+  .position_logo {
+    margin-right: 100px;
+    z-index: 0;
+  }
+  .flex-item {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 60vh;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 1;
+    margin: auto;
+  }
+`;
+
+const Logo = styled.div`
+  background-size: cover;
+  border-radius: 10px;
+
+  width: 300px;
+  height: 250px;
+`;
 export default MainPage;
