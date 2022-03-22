@@ -14,12 +14,7 @@ const getCategoryListFB = () => {
   return async (dispatch, getState) => {
     try {
       console.log("도착2");
-      const res = await axios.get(
-        "http://13.125.107.213:8080/api/watch/category",
-        {
-          headers: { Authorization: token },
-        }
-      );
+      const res = await apis.categoryPage();
       const categoryList = res.data;
       console.log(categoryList);
       dispatch(getCategoryList(categoryList));

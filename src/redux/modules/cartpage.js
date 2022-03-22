@@ -14,9 +14,7 @@ const getCartpageListFB = () => {
   return async (dispatch, getState) => {
     try {
       console.log("도착2");
-      const res = await axios.get("http://13.125.107.213:8080/api/user/like", {
-        headers: { Authorization: token },
-      });
+      const res = await apis.cartPage();
       const cartpageList = res.data;
       console.log(cartpageList);
       dispatch(getCartpageList(cartpageList));

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postActions } from "../redux/modules/post";
+// import { actionCreators as codyDetailActions } from "../redux/modules/codydetail";
 const WatchCodyMainPageBlock = styled.div`
   .container {
     display: flex;
@@ -59,7 +59,7 @@ const WatchCodyMainPage = () => {
 
   React.useEffect(() => {
     if (post_list.length < 3) {
-      dispatch(postActions.getPostFB());
+      // dispatch(codyDetailActions.getCodyDetail());
     }
   }, []);
 
@@ -113,7 +113,7 @@ const WatchCodyMainPage = () => {
   return (
     <WatchCodyMainPageBlock>
       <div className="flex-item">
-        {Items.map((menu, idx) => {
+        {Items?.allCodyList?.map((menu, idx) => {
           return (
             <div className="flex_box" key={idx}>
               <div className="box_hover">

@@ -92,8 +92,8 @@ const logOutFB = () => {
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
-    axios
-      .post("http://13.125.107.213:8080/user/signup", {
+    await apis
+      .signUp({
         username: id,
         password: password,
         email: email,
@@ -115,7 +115,7 @@ const editEmailFB = (email) => {
     const token = sessionStorage.getItem("token");
     axios
       .put(
-        "http://13.125.107.213:8080/api/user/change",
+        "http://3.34.2.113:8080/api/user/change",
         {
           email: email,
         },

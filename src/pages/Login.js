@@ -50,6 +50,7 @@ const Login = (props) => {
           }}
         />
         <Button
+          style={{ marginTop: "20px" }}
           text="로그인하기"
           _onClick={() => {
             login();

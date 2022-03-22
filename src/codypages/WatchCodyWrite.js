@@ -10,13 +10,15 @@ import { GiConsoleController } from "react-icons/gi";
 import Upload from "../option/Upload";
 import { useHistory } from "react-router-dom";
 const WatchCodyWrite = (props) => {
+  const token = localStorage.getItem("token");
   const history = useHistory();
 
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [content, setContent] = useState("");
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
+  const [Value, setValue] = useState(0);
 
   const changetitle = (e) => {
     setTitle(e.target.value);
@@ -38,42 +40,40 @@ const WatchCodyWrite = (props) => {
     console.log(e.target.value);
   };
 
-  const updateImages = (newImages) => {
-    setImages(newImages);
-  };
+  // const updateImages = (newImages) => {
+  //   setImages(newImages);
+  // };
 
+  const changeValue = () => {
+    setValue();
+  };
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!title || !brand || !model || !content || !images) {
-      return alert("모든 값을 넣어주셔야 합니다.");
-    }
+    // if (!title || !brand || !model || !content || !Value) {
+    //   return alert("모든 값을 넣어주셔야 합니다.");
+    // }
 
-    axios
-      .post("http://13.125.107.213:8080/api/cody", {
-        userId: 1,
+    axios({
+      method: "post",
+      url: "http://3.34.2.113:8080/api/cody",
+      data: {
         codyTitle: title,
         watchBrand: brand,
         watchModel: model,
         codyContent: content,
-        imageUrl: images,
-        star: "3.5",
-      })
-      .then((res) => {
-        if (res.data.success) {
-          alert("상품 업로드에 성공 했습니다.");
-          history.push("/watchcodymainpage");
-        } else {
-          alert("상품 업로드에 실패 했습니다.");
-        }
-      });
+        // imageUrl: images,
+        star: Value,
+      },
+      headers: { Authorization: localStorage.getItem("token") },
+    });
   };
   return (
     <div>
       <WatchCodyWriteBlock>
         <div className="container">
           <div className="flex-box">
-            <Upload refreshFunction={updateImages} />
+            {/* <Upload refreshFunction={updateImages} /> */}
 
             <InputGroup className="mb-3" style={{ height: "50px" }}>
               <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>
@@ -123,9 +123,13 @@ const WatchCodyWrite = (props) => {
 
             <div className="lb-star">
               <h5 className="lb-text">평점</h5>
-              <StarRating />
+              <StarRating onChange={changeValue} value={Value} />
             </div>
-            <Button className="lb-button" variant="light">
+            <Button
+              onClick={submitHandler}
+              className="lb-button"
+              variant="light"
+            >
               등록하기
             </Button>
           </div>

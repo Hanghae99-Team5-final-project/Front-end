@@ -18,11 +18,13 @@ import WatchDetail from "./codypages/WatchDetail";
 import WatchPage from "./codypages/WatchPage";
 import Header from "./components/Header";
 import NavbarButton from "./option/NavbarButton";
-
+import Footer from "./option/Footer";
+import Logo from "./option/Logo";
 function App() {
   return (
     <>
       {/* <Header /> */}
+      <Logo />
       <NavbarButton />
       <ContentWrap>
         <Route path="/login" exact component={Login} />
@@ -50,6 +52,7 @@ function App() {
         <Route path="/" exact component={MainPage} />
         <Redirect from="*" to="/" />
       </ContentWrap>
+      <Footer />
     </>
   );
 }

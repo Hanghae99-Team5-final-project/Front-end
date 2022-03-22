@@ -4,6 +4,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import logo01 from "../images/logo01.png";
 import logo02 from "../images/logo02.png";
+import Logo from "../images/logo3.jpg";
+
 import "../App.css";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -156,6 +158,13 @@ function NavbarButton() {
 export default NavbarButton;
 
 const Navbar = styled.div`
+  .Main-logo {
+    position: flex;
+    justify-content: center;
+
+    width: 235px;
+    height: 100px;
+  }
   .is-pc {
     display: none;
   }
@@ -211,9 +220,9 @@ const Navbar = styled.div`
   nav {
     background: #2b334d;
     width: 100%;
-    position: fixed;
+    /* position: fixed;
     top: 0;
-    z-index: 99;
+    z-index: 99; */
 
     .nav-wrap {
       display: flex;
