@@ -2,8 +2,10 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/apis";
 import moment from "moment";
+import axios from "axios";
 const GET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
+const EDIT_COMMENT = "EDIT_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 
 const LOADING = "LOADING";
@@ -13,6 +15,10 @@ const getComment = createAction(GET_COMMENT, (comments) => ({
 }));
 const addComment = createAction(ADD_COMMENT, (comment_data) => ({
   comment_data,
+}));
+
+const editComment = createAction(EDIT_COMMENT, (commentId) => ({
+  commentId,
 }));
 
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
@@ -40,12 +46,19 @@ const addCommentCodyFB = (
   commentUser,
   commentContent,
   commentId,
-  createdAt
+  createdAt,
+  watchId
 ) => {
   console.log(commentId);
   return async function (dispatch, getState, { history }) {
     await apis
-      .addCommentCody(commentUser, commentContent, commentId, createdAt)
+      .addCommentCody(
+        commentUser,
+        commentContent,
+        commentId,
+        createdAt,
+        watchId
+      )
 
       .then((res) => {
         dispatch(
@@ -89,6 +102,27 @@ const addCommentWatchFB = (
   };
 };
 
+const editCommentDB = (commentId) => {
+  return async function (dispatch, getState) {
+    const token = localStorage.getItem("token");
+
+    try {
+      axios.put(
+        `http://yuseon.shop/community/comment/${commentId}`,
+        {},
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      dispatch(editComment(commentId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 const deleteCommentFB = (commentId) => {
   return async function (dispatch, getState, { history }) {
     await apis.deleteComment(commentId).then((res) => {
@@ -129,6 +163,7 @@ const actionCreators = {
   deleteComment,
   deleteCommentFB,
   getCommentFB,
+  editCommentDB,
 };
 
 export { actionCreators };

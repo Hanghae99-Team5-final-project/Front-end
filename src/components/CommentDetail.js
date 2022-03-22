@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import CommentList from "./CommentList";
 
 const DetailComment = (props) => {
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = React.useState("");
-
-  const params = useParams().id;
-  const commentId = params.watchId;
 
   const commentUser = localStorage.commentUser;
   const createdAt = moment().format("YYYY-MM-DD hh:mm:ss");
@@ -21,13 +19,13 @@ const DetailComment = (props) => {
   const token = localStorage.getItem("token");
 
   const writeComment = () => {
-    console.log(commentId);
+    console.log();
 
     dispatch(
       commentActions.addCommentWatchFB(
         commentUser,
         commentContent,
-        commentId,
+        props.watchId,
         createdAt
       )
     );
@@ -45,6 +43,7 @@ const DetailComment = (props) => {
         />
         <Button onClick={writeComment}>제발 좀 되라</Button>
       </Wrap>
+      <CommentList watchId={props.watchId} />
     </React.Fragment>
   );
 };

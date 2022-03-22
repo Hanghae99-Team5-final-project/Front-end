@@ -49,32 +49,32 @@ const loginFB = (username, password) => {
   };
 };
 
-// const loginCheckFB = () => {
-//   const token = localStorage.getItem("token");
-//   return function (dispatch, getState, { history }) {
-//     axios({
-//       method: "get",
-//       url: "http://3.35.167.81:8080/user/login",
-//       headers: {
-//         "content-type": "application/json;charset=UTF-8",
-//         accept: "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//       .then((res) => {
-//         console.log(res);
+const loginCheckFB = () => {
+  const token = localStorage.getItem("token");
+  return function (dispatch, getState, { history }) {
+    axios({
+      method: "get",
+      url: "http://3.35.167.81:8080/user/login",
+      headers: {
+        "content-type": "application/json;charset=UTF-8",
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
 
-//         dispatch(
-//           setUser({
-//             userId: res.data.username,
-//           })
-//         );
-//       })
-//       .catch((err) => {
-//         console.log("로그인 확인 실패", err);
-//       });
-//   };
-// };
+        dispatch(
+          setUser({
+            userId: res.data.username,
+          })
+        );
+      })
+      .catch((err) => {
+        console.log("로그인 확인 실패", err);
+      });
+  };
+};
 
 const logOutFB = () => {
   return function (dispatch, getState, { history }) {
@@ -82,13 +82,6 @@ const logOutFB = () => {
     dispatch(logOut());
   };
 };
-// const loginAction = (user) => {
-//   return function (dispatch, getState, { history }) {
-//     console.log(history);
-//     dispatch(logIn(user));
-//     history.push("/");
-//   };
-// };
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
