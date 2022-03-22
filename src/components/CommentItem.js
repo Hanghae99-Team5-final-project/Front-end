@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { Text, Input } from "../elements";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { Text } from "../elements";
+
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import CommentList from "./CommentList";
 const CommentItem = (props) => {
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
   const IdName = localStorage.getItem("commentUser");
+  const [edit_comment, setEditComment] = useState(props.content);
+  const [open_edit, setOpenEdit] = useState(false);
+  const [comment, setComment] = useState("");
+  const token = localStorage.getItem("token");
+  const changeEditComment = (e) => {
+    setEditComment(e.target.value);
+  };
 
+  const clickEditComment = () => {
+    dispatch(commentActions.editCommentDB(props.commentId, edit_comment));
+    setOpenEdit(false);
+  };
   return (
     <React.Fragment>
       <Box>
@@ -29,15 +41,37 @@ const CommentItem = (props) => {
         <Text size="16px" margin="5px 10px" padding="0">
           {createdAt}
         </Text>
-        {/* {commentUser === IdName && ( */}
-        <DeleteBtn
-          onClick={() => {
-            dispatch(commentActions.deleteCommentFB(commentId));
-          }}
-        >
-          <FaTrashAlt role="button" tabIndex="0" />
-        </DeleteBtn>
-        {/* )} */}
+        <Text size="16px" margin="5px 10px" padding="0">
+          {commentId}
+        </Text>
+
+        {open_edit ? (
+          <div mTop="8px">
+            <Input
+              type="text"
+              placeholder="댓글을 입력해주세요"
+              onChange={changeEditComment}
+              value={edit_comment}
+            />
+            <FaPencilAlt onClick={clickEditComment}>수정</FaPencilAlt>
+            <FaPencilAlt
+              onClick={() => {
+                setOpenEdit(false);
+                setComment("");
+              }}
+            >
+              취소
+            </FaPencilAlt>
+          </div>
+        ) : (
+          <DeleteBtn
+            onClick={() => {
+              dispatch(commentActions.deleteCommentFB(props.commentId));
+            }}
+          >
+            <FaTrashAlt role="button" tabIndex="0" />
+          </DeleteBtn>
+        )}
       </Box>
     </React.Fragment>
   );

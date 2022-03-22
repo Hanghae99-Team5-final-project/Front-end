@@ -29,7 +29,7 @@ const WatchPage = () => {
                 <img size="15%" src={menu.watchImageUrl} />
               </div>
               <div className="box_name">
-                {/* <p style={{}}>{menu.watchBrand}</p> */}
+                <p style={{}}>{menu.watchBrand}</p>
                 <p style={{}}>{menu.category}</p>
                 <p style={{ color: "red" }}>{menu.lowestPrice}</p>
               </div>
@@ -45,7 +45,7 @@ const WatchPage = () => {
                 <img size="15%" src={menu.watchImageUrl} />
               </Link>
               <div className="box_name">
-                {/* <p style={{}}>{menu.watchBrand}</p> */}
+                <p style={{}}>{menu.watchBrand}</p>
                 <p style={{}}>{menu.category}</p>
                 <p style={{ color: "red" }}>{menu.lowestPrice}</p>
               </div>

@@ -3,17 +3,12 @@ import styled from "styled-components";
 import CommentItem from "./CommentItem";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
-
+import { actionCreators as postActions } from "../redux/modules/post";
 const CommentList = (props) => {
   const dispatch = useDispatch();
   const commentData = useSelector((state) => state.comment.list);
-  const { post_id } = props;
+  const { watchId } = props;
 
-  useEffect(() => {
-    if (!commentData[post_id]) {
-      dispatch(commentActions.getCommentFB(post_id));
-    }
-  }, []);
   return (
     <React.Fragment>
       <Wrap>

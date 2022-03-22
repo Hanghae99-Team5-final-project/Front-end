@@ -1,9 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import apis from "../../api/apis";
-
 import axios from "axios";
-
+import { actionCreators as commentActions } from "./comment";
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
@@ -19,7 +18,7 @@ const like = createAction(LIKE, (like) => ({
 const likeId = createAction(LIKE_ID, (likeId) => ({ likeId }));
 
 const initialState = {
-  list: [],
+  postdetail: {},
   likes: [],
   like: false,
   likeId: 0,
@@ -29,25 +28,20 @@ const initialState = {
   },
 };
 
-const getPostFB = () => {
+const getPostFB = (watchId) => {
   return async (dispatch, getState, { history }) => {
-    const response = await axios.get("http://3.34.2.113:8080/api/cody");
+    const response = await axios.get(
+      `http://3.34.2.113:8080/api/detail/${watchId}`
+    );
     console.log(response.data);
     dispatch(getPost(response.data));
+    dispatch(commentActions.getComment(response.data.commentResponseDtoList));
   };
 };
 
-const addPostFB = (
-  userId,
-  codyTitle,
-  watchBrand,
-  watchModel,
-  codyContent,
-  star
-) => {
+const addPostFB = (codyTitle, watchBrand, watchModel, codyContent, star) => {
   return async (dispatch, getState, { history }) => {
     const response = await apis.post(
-      userId,
       codyTitle,
       watchBrand,
       watchModel,
@@ -97,7 +91,7 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.post_list = action.payload.post_list;
+        draft.postdetail = action.payload.post_list;
       }),
 
     [SET_POST]: (state, action) => produce(state, (draft) => {}),

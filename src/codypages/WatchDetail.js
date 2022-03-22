@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import CommentDetail from "../components/CommentDetail";
+import { actionsCreators as watchDetailListActions } from "../redux/modules/watchdetail";
 import { Card } from "react-bootstrap";
 import apis from "../api/apis";
 
@@ -15,13 +16,29 @@ function WatchDetail(props) {
     dispatch(postActions.getDetail(watchId));
     dispatch(postActions.getLike(watchId));
   }, []);
+  const WatchDetailList = useSelector(
+    ({ watchdetail }) => watchdetail.watchDetailList
+  );
+
+  React.useEffect(() => {
+    dispatch(watchDetailListActions.getwatchDetailFB());
+  }, []);
 
   const watchId = useParams().id;
   const dispatch = useDispatch();
   const like_state = useSelector((state) => state.post.like);
   console.log(like_state);
   const likeId = useSelector((state) => state.post.likeId);
+  const postData = useSelector((state) => state.post.postdetail);
   console.log("likeId" + likeId);
+
+  React.useEffect(() => {
+    console.log("되라 제발");
+    console.log(postData);
+
+    console.log("에러에러에러");
+    dispatch(postActions.getPostFB(watchId));
+  }, []);
 
   const sendLike = () => {
     dispatch(postActions.likePostFB(watchId));
@@ -35,23 +52,25 @@ function WatchDetail(props) {
 
   console.log(props);
 
-  // return (
-  //   <Card style={{ width: "18rem" }}>
-  //     <Card.Img variant="top" src="holder.js/100px180" />
-  //     <Card.Body>
-  //       <Card.Title></Card.Title>
-  //       <Card.Text>
-  //         Some quick example text to build on the card title and make up the
-  //         bulk of the card's content.
-  //       </Card.Text>
-  //     </Card.Body>
-  //   </Card>
-  // );
-
   return (
     <>
       <WatchDetailBlock>
         {/* {renderCards} */}
+
+        <div className="flex-item">
+          {WatchDetailList?.watchDetailList?.map((list, idx) => {
+            return (
+              <div className="flex_box" key={idx}>
+                <img size="15%" src={list.watchImage} />
+
+                {/* <p className="artist_name">{list.watchBrand}</p> */}
+                <p className="artist_name">{list.watchModel}</p>
+                <p className="artist_name">{list.lowestPrice}</p>
+                <p className="artist_name">{list.category}</p>
+              </div>
+            );
+          })}
+        </div>
 
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -75,7 +94,7 @@ function WatchDetail(props) {
             )}
           </div>
         </div>
-        <CommentDetail />
+        <CommentDetail watchId={watchId} />
       </WatchDetailBlock>
     </>
   );
@@ -86,6 +105,18 @@ const WatchDetailBlock = styled.div`
     display: flex;
     justify-content: space-around;
   }
+  .flex-item {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 60vh;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 1;
+    margin: auto;
+  }
+
   .flex-item1 {
     width: 500px;
     height: 500px;

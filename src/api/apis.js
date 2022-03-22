@@ -29,6 +29,7 @@ export const apis = {
   //----- 조회 -----//
   mainPage: () => instance.get("/main"),
   categoryPage: () => instance.get("/api/watch/category"),
+  watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
   // getPostapi: () => instance.get("/api/cody"),
 
@@ -49,16 +50,25 @@ export const apis = {
       star: star,
     }),
   //----- 댓글 ------///
-  // getComment: (userId) => instance.get(`api/detail/${userId}`),
+  getComment: (watchId) => instance.get(`/watch/${watchId}`),
 
   addCommentCody: (commentUser, commentContent, codyId, createdAt) =>
     instance.post(`/comment/write/cody/${codyId}`, {
       commentContent: commentContent,
     }),
 
-  addCommentWatch: (commentUser, commentContent, watchId, createdAt) =>
+  addCommentWatch: (
+    commentUser,
+    commentContent,
+    watchId,
+    createdAt,
+    commentId
+  ) =>
     instance.post(`/comment/write/watch/${watchId}`, {
+      commentUser: commentUser,
       commentContent: commentContent,
+      commentId: commentId,
+      createdAt: createdAt,
     }),
   deleteComment: (commentId) => instance.delete(`/comment/delete/${commentId}`),
 };
