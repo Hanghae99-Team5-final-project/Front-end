@@ -8,10 +8,9 @@ const instance = axios.create({
   },
 });
 
-const token = localStorage.getItem("token");
-
 instance.interceptors.request.use(function (config) {
-  config.headers.common["authorization"] = `${token}`; // header에 토큰값을 넣는다 => header에 토큰값이 있어 앞으로 request를 자유자재로 할 수 있다.
+  const token = localStorage.getItem("token");
+  config.headers.common["Authorization"] = `${token}`; // header에 토큰값을 넣는다 => header에 토큰값이 있어 앞으로 request를 자유자재로 할 수 있다.
   return config;
 });
 
@@ -25,7 +24,7 @@ export const apis = {
   // IdCheck: (idInfo) => instance.post("/api/user/redunancy", idInfo),
 
   // ------좋아요 -------
-  LikeButton: (watchId) => instance.post(`/api/like/create/${watchId}`),
+  LikeButton: (likesId) => instance.post(`/api/like/create/${likesId}`),
 
   //----- 조회 -----//
   mainPage: () => instance.get("/main"),
@@ -35,7 +34,9 @@ export const apis = {
 
   // -----상세페이지 조회-----
   detailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
-  detailButtonPage: (watchId) => instance.get(`/api/detail/like/${watchId}`),
+  detailButtonPage: (watchId) => instance.get(`/api/like/${watchId}`),
+  sendLike: (watchId) => instance.post(`/api/like/create/${watchId}`),
+  deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
   codyDetail: () => instance.get("/api/cody"),
   //  -------포스트-----
   addPost: (userId, codyTitle, watchBrand, watchModel, codyContent, star) =>

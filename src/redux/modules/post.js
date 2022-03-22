@@ -1,28 +1,28 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import apis from "../../api/apis";
-import moment from "moment";
 
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
-const token = localStorage.getItem("token");
 
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
 const LIKE = "LIKE";
+const LIKE_ID = "LIKE_ID";
+
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
 const like = createAction(LIKE, (like) => ({
   like,
 }));
+const likeId = createAction(LIKE_ID, (likeId) => ({ likeId }));
 
 const initialState = {
   list: [],
   likes: [],
   like: false,
+  likeId: 0,
   post: {
     likes: null,
     result: {},
@@ -30,16 +30,10 @@ const initialState = {
 };
 
 const getPostFB = () => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .get("http://3.34.2.113:8080/api/cody")
-      .then((res) => {
-        console.log(res.data);
-        dispatch(getPost(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  return async (dispatch, getState, { history }) => {
+    const response = await axios.get("http://3.34.2.113:8080/api/cody");
+    console.log(response.data);
+    dispatch(getPost(response.data));
   };
 };
 
@@ -51,47 +45,50 @@ const addPostFB = (
   codyContent,
   star
 ) => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .post("http://3.34.2.113:8080/api/cody", {
-        userId: 1234,
-        codyTitle: "제목",
-        watchBrand: "문페이즈",
-        watchModel: "G-shock250",
-        codyContent: "16억개",
-        imageUrl: "사진",
-        star: 5,
-      })
-
-      .then((res) => {
-        console.log(res.data);
-        dispatch(addPost({ userId: res.data.userId }));
-        history.replace("/");
-      })
-      .catch((err) => {
-        window.alert("포스트 작성에 문제가 있어요!");
-        console.log("포스트 작성실패", err);
-      });
+  return async (dispatch, getState, { history }) => {
+    const response = await apis.post(
+      userId,
+      codyTitle,
+      watchBrand,
+      watchModel,
+      codyContent,
+      star
+    );
+    console.log(response);
   };
 };
 
 const likePostFB = (watchId) => {
   return async (dispatch, getstate, { history }) => {
-    await axios
-      .post(
-        `http://3.34.2.113:8080/api/like/create/${watchId}`,
-        {},
-        {
-          headers: { Authorization: token },
-        }
-      )
+    dispatch(like(true));
+    const response = await apis.sendLike(watchId);
+    console.log(response);
+    dispatch(getLike(watchId));
+  };
+};
 
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log("Error response:");
-      });
+const deleteDB = (data) => {
+  return async (dispatch, getstate, { history }) => {
+    dispatch(like(false));
+    const response = await apis.deleteLike(data);
+    console.log(response);
+  };
+};
+
+const getDetail = (watchId) => {
+  return async (dispatch, getstate, { history }) => {
+    const response = await apis.detailPage(watchId);
+    console.log(response);
+  };
+};
+
+const getLike = (watchId) => {
+  return async (dispatch, getstate, { history }) => {
+    const response = await apis.detailButtonPage(watchId);
+    console.log(response);
+
+    dispatch(like(response.data.existLikes));
+    dispatch(likeId(response.data.likeId));
   };
 };
 
@@ -108,7 +105,13 @@ export default handleActions(
     [ADD_POST]: (state, aciton) => produce(state, (draft) => {}),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload);
         draft.like = action.payload.like;
+      }),
+    [LIKE_ID]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("change)");
+        draft.likeId = action.payload.likeId;
       }),
   },
 
@@ -122,7 +125,11 @@ const actionCreators = {
   getPostFB,
   addPostFB,
   likePostFB,
+  deleteDB,
+  getDetail,
   like,
+  likeId,
+  getLike,
 };
 
 export { actionCreators };

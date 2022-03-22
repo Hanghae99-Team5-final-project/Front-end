@@ -79,7 +79,7 @@ const loginFB = (username, password) => {
 const logOutFB = () => {
   return function (dispatch, getState, { history }) {
     localStorage.removeItem("token");
-    history.replace("/");
+    dispatch(logOut());
   };
 };
 // const loginAction = (user) => {

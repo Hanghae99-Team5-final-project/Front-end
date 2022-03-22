@@ -11,51 +11,29 @@ import { Card } from "react-bootstrap";
 import apis from "../api/apis";
 
 function WatchDetail(props) {
-  const token = localStorage.getItem("token");
+  React.useEffect(() => {
+    dispatch(postActions.getDetail(watchId));
+    dispatch(postActions.getLike(watchId));
+  }, []);
+
   const watchId = useParams().id;
-  console.log(watchId);
   const dispatch = useDispatch();
   const like_state = useSelector((state) => state.post.like);
-  const [like, setLike] = React.useState(like_state); // 좋아요
-  const like_list = useSelector((state) => state.post.likes);
+  console.log(like_state);
+  const likeId = useSelector((state) => state.post.likeId);
+  console.log("likeId" + likeId);
 
-  const [detail, setDetail] = useState({});
-
-  const toggleLike = (type) => {
-    console.log(type);
+  const sendLike = () => {
     dispatch(postActions.likePostFB(watchId));
-    setLike(!like);
-    dispatch(postActions.like(like));
+    console.log("sendlike끝");
   };
+
+  const deleteLike = () => {
+    console.log(likeId);
+    dispatch(postActions.deleteDB(likeId));
+  };
+
   console.log(props);
-
-  React.useEffect(() => {
-    if (like_list[watchId] === true) {
-      setLike(true);
-    }
-    axios
-      .get(`http://3.34.2.113:8080/api/detail/${watchId}`)
-      .then((res) => {
-        if (res.data.success) {
-          console.log("res.data", res.data);
-          setDetail(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log("Error response:");
-      });
-
-    apis
-      .detailButtonPage(watchId)
-      .then((res) => {
-        if (res.data.success) {
-          console.log("res.data", res.data);
-        }
-      })
-      .catch((err) => {
-        console.log("에러에러에러");
-      });
-  }, []);
 
   // return (
   //   <Card style={{ width: "18rem" }}>
@@ -77,20 +55,21 @@ function WatchDetail(props) {
 
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            {!like ? (
+            {!like_state && (
               <img
                 src={emptyLike}
                 alt="emptyLike"
                 onClick={() => {
-                  toggleLike(false);
+                  sendLike();
                 }}
               />
-            ) : (
+            )}
+            {like_state && (
               <img
                 src={Like}
                 alt="Like"
                 onClick={() => {
-                  toggleLike(true);
+                  deleteLike();
                 }}
               />
             )}

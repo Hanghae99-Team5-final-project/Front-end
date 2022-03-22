@@ -15,10 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 function NavbarButton() {
   const dispatch = useDispatch();
 
-  const is_token = localStorage.getItem("token");
+  let isLogin = useSelector((state) => state.user.is_login);
+  console.log(isLogin);
 
   const signOut = () => {
-    dispatch(userActions.logOutFB());
+    dispatch(userActions.logOut());
   };
 
   // if (is_login && is_token) {
@@ -120,7 +121,7 @@ function NavbarButton() {
             >
               STYLE
             </NavLink>
-            {!localStorage.getItem("token") && (
+            {!isLogin && (
               <NavLink
                 to="/login"
                 activeStyle={{ color: "red", textDecoration: "underline" }}
@@ -128,7 +129,7 @@ function NavbarButton() {
                 LOGIN
               </NavLink>
             )}
-            {localStorage.getItem("token") && (
+            {isLogin && (
               <button type="button" onClick={signOut}>
                 LOGOUT
               </button>
