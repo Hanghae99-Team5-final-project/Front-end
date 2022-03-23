@@ -112,7 +112,7 @@ const editCommentDB = (commentId, watchId, edit_content) => {
         parseInt(watchId),
         edit_content
       );
-      dispatch(editComment(commentId, data));
+      dispatch(editComment(commentId, edit_content));
       console.log(data);
     } catch (err) {
       console.log(err);
@@ -142,19 +142,15 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list.push(action.payload.comment_data);
       }),
-    [EDIT_COMMENT]: (state, action) => {
-      const data = action.payload.comment;
-      return {
-        ...state,
-        list: state.list.map((comment, index) => {
-          if (comment.commentId === data.commentId) {
-            return (state.list[index] = data);
-          } else {
-            return comment;
+    [EDIT_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.map((a) => {
+          if (a.commentId === action.payload.commentId) {
+            a.commentContent = action.payload.comment;
           }
-        }),
-      };
-    },
+          return a;
+        });
+      }),
 
     [DELETE_COMMENT]: (state, action) =>
       produce(state, (draft) => {

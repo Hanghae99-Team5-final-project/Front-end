@@ -29,24 +29,26 @@ const initialState = {
 
 const getPostFB = (watchId) => {
   return async (dispatch, getState, { history }) => {
-    const response = await axios.get(
-      `http://3.34.2.113:8080/api/detail/${watchId}`
-    );
-    console.log(response.data);
-    dispatch(getPost(response.data));
-    dispatch(commentActions.getComment(response.data.commentResponseDtoList));
+    try {
+      const response = await apis.getPostComment(watchId);
+      console.log(response.data);
+      dispatch(getPost(response.data));
+      dispatch(commentActions.getComment(response.data.commentResponseDtoList));
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 };
 
 const addPostFB = (title, brand, model, content, Value) => {
   return async (dispatch, getState, { history }) => {
-    const response = await apis.addPostData({
-      codyTitle: title,
-      watchBrand: brand,
-      watchModel: model,
-      codyContent: content,
-      star: Value,
-    });
+    const response = await apis.addPostData(
+      title,
+      brand,
+      model,
+      content,
+      Value
+    );
     dispatch(addPost(response));
     console.log(response);
   };
