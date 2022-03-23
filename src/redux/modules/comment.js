@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../api/apis";
 import moment from "moment";
-import axios from "axios";
+
 const GET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 const EDIT_COMMENT = "EDIT_COMMENT";
@@ -31,14 +31,12 @@ const initialState = {
 
 const getCommentFB = (commentId) => {
   return async function (dispatch, getState, { history }) {
-    await apis
-      .getComment(commentId)
-      .then((res) => {
-        dispatch(getComment(res.data.comment));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await apis.getComment(commentId);
+      dispatch(getComment(res.data.comment));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -51,28 +49,26 @@ const addCommentCodyFB = (
 ) => {
   console.log(commentId);
   return async function (dispatch, getState, { history }) {
-    await apis
-      .addCommentCody(
+    try {
+      const res = await apis.addCommentCody(
         commentUser,
         commentContent,
         commentId,
         createdAt,
         watchId
-      )
+      );
 
-      .then((res) => {
-        dispatch(
-          addComment({
-            commentUser,
-            commentContent,
-            commentId: res.data.commentId,
-            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      dispatch(
+        addComment({
+          commentUser,
+          commentContent,
+          commentId: res.data.commentId,
+          createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
@@ -84,45 +80,39 @@ const addCommentWatchFB = (
 ) => {
   console.log(commentId);
   return async function (dispatch, getState, { history }) {
-    await apis
-      .addCommentWatch(commentUser, commentContent, commentId, createdAt)
-      .then((res) => {
-        dispatch(
-          addComment({
-            commentUser,
-            commentContent,
-            commentId: res.data.commentId,
-            createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await apis.addCommentWatch(
+        commentUser,
+        commentContent,
+        commentId,
+        createdAt
+      );
+
+      dispatch(
+        addComment({
+          commentUser,
+          commentContent,
+          commentId: res.data.commentId,
+          createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
-const editCommentDB = (commentId) => {
+const editCommentDB = (commentId, codyId) => {
   return async function (dispatch, getState) {
-    const token = localStorage.getItem("token");
-
     try {
-      axios.put(
-        `http://yuseon.shop/community/comment/${commentId}`,
-        {},
-        {
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
-      );
-
+      await apis.UpdateComment(codyId);
       dispatch(editComment(commentId));
     } catch (err) {
       console.log(err);
     }
   };
 };
+
 const deleteCommentFB = (commentId) => {
   return async function (dispatch, getState, { history }) {
     await apis.deleteComment(commentId).then((res) => {

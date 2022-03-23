@@ -23,13 +23,18 @@ export const apis = {
   Login: (userInfo) => instance.post("/user/login", userInfo),
   // IdCheck: (idInfo) => instance.post("/api/user/redunancy", idInfo),
 
+  UpdateEmail: (email) =>
+    instance.put("/api/user/change", {
+      email: email,
+    }),
+
   // ------좋아요 -------
   LikeButton: (likesId) => instance.post(`/api/like/create/${likesId}`),
 
   //----- 조회 -----//
   mainPage: () => instance.get("/main"),
   categoryPage: () => instance.get("/api/watch/category"),
-  watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
+  // watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
   // getPostapi: () => instance.get("/api/cody"),
 
@@ -70,6 +75,14 @@ export const apis = {
       commentId: commentId,
       createdAt: createdAt,
     }),
+
+  // ------수정-------
+  UpdateComment: (commentId, codyId, commentContent) =>
+    instance.put(`/comment/update/${commentId}`, {
+      codyId: codyId,
+      commentContent: commentContent,
+    }),
+
   deleteComment: (commentId) => instance.delete(`/comment/delete/${commentId}`),
 };
 

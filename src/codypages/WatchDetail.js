@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Like from "../images/like.png";
 import emptyLike from "../images/empty-like.png";
@@ -7,21 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import CommentDetail from "../components/CommentDetail";
-import { actionsCreators as watchDetailListActions } from "../redux/modules/watchdetail";
-import { Card } from "react-bootstrap";
-import apis from "../api/apis";
 
 function WatchDetail(props) {
   React.useEffect(() => {
     dispatch(postActions.getDetail(watchId));
     dispatch(postActions.getLike(watchId));
-  }, []);
-  const WatchDetailList = useSelector(
-    ({ watchdetail }) => watchdetail.watchDetailList
-  );
-
-  React.useEffect(() => {
-    dispatch(watchDetailListActions.getwatchDetailFB());
   }, []);
 
   const watchId = useParams().id;
@@ -30,6 +20,10 @@ function WatchDetail(props) {
   console.log(like_state);
   const likeId = useSelector((state) => state.post.likeId);
   const postData = useSelector((state) => state.post.postdetail);
+  const WatchImage = useSelector((state) => state.post.postdetail.watchImage);
+  const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
+
+  console.log(WatchImage);
   console.log("likeId" + likeId);
 
   React.useEffect(() => {
@@ -55,23 +49,10 @@ function WatchDetail(props) {
   return (
     <>
       <WatchDetailBlock>
-        {/* {renderCards} */}
-
-        <div className="flex-item">
-          {WatchDetailList?.watchDetailList?.map((list, idx) => {
-            return (
-              <div className="flex_box" key={idx}>
-                <img size="15%" src={list.watchImage} />
-
-                {/* <p className="artist_name">{list.watchBrand}</p> */}
-                <p className="artist_name">{list.watchModel}</p>
-                <p className="artist_name">{list.lowestPrice}</p>
-                <p className="artist_name">{list.category}</p>
-              </div>
-            );
-          })}
+        <div className="detailImage">
+          <img src={WatchImage} alt={WatchImage} height="400px" width="400px" />
+          <div className="flex-box">{WatchBrand}</div>
         </div>
-
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             {!like_state && (
@@ -104,6 +85,10 @@ const WatchDetailBlock = styled.div`
     margin-top: 100px;
     display: flex;
     justify-content: space-around;
+  }
+  .detailImage {
+    width: 200px;
+    height: 100px;
   }
   .flex-item {
     display: flex;
