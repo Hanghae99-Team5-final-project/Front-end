@@ -10,7 +10,7 @@ import Mainpage from "./modules/mainpage";
 import Category from "./modules/category";
 import Cartpage from "./modules/cartpage";
 import Codydetail from "./modules/codydetail";
-import Watchdetail from "./modules/watchdetail";
+
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   category: Category,
   cartpage: Cartpage,
   codydetail: Codydetail,
-  watchdetail: Watchdetail,
+
   router: connectRouter(history),
 });
 

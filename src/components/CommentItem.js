@@ -6,7 +6,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
 import { actionCreators as commentActions } from "../redux/modules/comment";
-import CommentList from "./CommentList";
+
 const CommentItem = (props) => {
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
@@ -45,33 +45,34 @@ const CommentItem = (props) => {
           {commentId}
         </Text>
 
-        {open_edit ? (
-          <div mTop="8px">
-            <Input
-              type="text"
-              placeholder="댓글을 입력해주세요"
-              onChange={changeEditComment}
-              value={edit_comment}
-            />
-            <FaPencilAlt onClick={clickEditComment}>수정</FaPencilAlt>
-            <FaPencilAlt
-              onClick={() => {
-                setOpenEdit(false);
-                setComment("");
-              }}
-            >
-              취소
-            </FaPencilAlt>
-          </div>
-        ) : (
-          <DeleteBtn
+        {/* <div mTop="8px">
+          <Input
+            type="text"
+            placeholder="댓글을 입력해주세요"
+            onChange={changeEditComment}
+            value={edit_comment}
+          />
+          <FaPencilAlt role="button" onClick={clickEditComment}>
+            수정
+          </FaPencilAlt>
+          <FaPencilAlt
+            role="button"
             onClick={() => {
-              dispatch(commentActions.deleteCommentFB(props.commentId));
+              setOpenEdit(false);
+              setComment("");
             }}
           >
-            <FaTrashAlt role="button" tabIndex="0" />
-          </DeleteBtn>
-        )}
+            취소
+          </FaPencilAlt>
+        </div> */}
+
+        <DeleteBtn
+          onClick={() => {
+            dispatch(commentActions.deleteCommentFB(props.commentId));
+          }}
+        >
+          <FaTrashAlt role="button" tabIndex="0" />
+        </DeleteBtn>
       </Box>
     </React.Fragment>
   );

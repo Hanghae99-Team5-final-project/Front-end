@@ -27,54 +27,52 @@ const initialState = {
 // middleware actions
 const loginFB = (username, password) => {
   return async function (dispatch, getState, { history }) {
-    await apis
-      .Login(username, password, {
+    try {
+      const res = await apis.Login(username, password, {
         username: username,
         password: password,
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.headers.authorization) {
-          localStorage.setItem("token", res.headers.authorization);
-          console.log(res.headers.authorization);
-        }
-        dispatch(setUser(res.data));
-        console.log(res.data);
-        history.replace("/");
-      })
-      .catch((err) => {
-        alert(err.response);
-        console.log(err.response);
       });
+
+      if (res.headers.authorization) {
+        localStorage.setItem("token", res.headers.authorization);
+        console.log(res.headers.authorization);
+      }
+      dispatch(setUser(res.data));
+      console.log(res.data);
+      history.replace("/");
+    } catch (err) {
+      alert(err.response);
+      console.log(err.response);
+    }
   };
 };
 
-const loginCheckFB = () => {
-  const token = localStorage.getItem("token");
-  return function (dispatch, getState, { history }) {
-    axios({
-      method: "get",
-      url: "http://3.35.167.81:8080/user/login",
-      headers: {
-        "content-type": "application/json;charset=UTF-8",
-        accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        console.log(res);
+// const loginCheckFB = () => {
+//   const token = localStorage.getItem("token");
+//   return function (dispatch, getState, { history }) {
+//     axios({
+//       method: "get",
+//       url: "http://3.35.167.81:8080/user/login",
+//       headers: {
+//         "content-type": "application/json;charset=UTF-8",
+//         accept: "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     })
+//       .then((res) => {
+//         console.log(res);
 
-        dispatch(
-          setUser({
-            userId: res.data.username,
-          })
-        );
-      })
-      .catch((err) => {
-        console.log("로그인 확인 실패", err);
-      });
-  };
-};
+//         dispatch(
+//           setUser({
+//             userId: res.data.username,
+//           })
+//         );
+//       })
+//       .catch((err) => {
+//         console.log("로그인 확인 실패", err);
+//       });
+//   };
+// };
 
 const logOutFB = () => {
   return function (dispatch, getState, { history }) {
@@ -85,45 +83,33 @@ const logOutFB = () => {
 
 const signupFB = (id, password, email) => {
   return async function (dispatch, getState, { history }) {
-    await apis
-      .signUp({
+    try {
+      const res = await apis.signUp({
         username: id,
         password: password,
         email: email,
-      })
-
-      .then((res) => {
-        window.alert(res.data);
-        history.push("/login");
-        return;
-      })
-      .catch((error) => {
-        console.log(error);
       });
+      window.alert(res.data);
+      history.push("/login");
+      return;
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
 const editEmailFB = (email) => {
-  return function (dispatch, getState, { history }) {
-    const token = sessionStorage.getItem("token");
-    axios
-      .put(
-        "http://3.34.2.113:8080/api/user/change",
-        {
-          email: email,
-        },
-        {
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        dispatch(editEmail(email));
-      })
-      .catch((error) => {
-        console.log(error);
+  return async function (dispatch, getState, { history }) {
+    try {
+      const res = await apis.UpdateEmail({
+        email: email,
       });
+      const editEmail = res.data;
+      console.log(editEmail);
+      dispatch(editEmail(email));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 // reducer
