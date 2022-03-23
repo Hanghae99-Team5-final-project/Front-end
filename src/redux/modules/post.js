@@ -9,7 +9,6 @@ const ADD_POST = "ADD_POST";
 const LIKE = "LIKE";
 const LIKE_ID = "LIKE_ID";
 
-const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
 const like = createAction(LIKE, (like) => ({
@@ -39,15 +38,16 @@ const getPostFB = (watchId) => {
   };
 };
 
-const addPostFB = (codyTitle, watchBrand, watchModel, codyContent, star) => {
+const addPostFB = (title, brand, model, content, Value) => {
   return async (dispatch, getState, { history }) => {
-    const response = await apis.post(
-      codyTitle,
-      watchBrand,
-      watchModel,
-      codyContent,
-      star
-    );
+    const response = await apis.addPostData({
+      codyTitle: title,
+      watchBrand: brand,
+      watchModel: model,
+      codyContent: content,
+      star: Value,
+    });
+    dispatch(addPost(response));
     console.log(response);
   };
 };
@@ -93,10 +93,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.postdetail = action.payload.post_list;
       }),
-
-    [SET_POST]: (state, action) => produce(state, (draft) => {}),
-
-    [ADD_POST]: (state, aciton) => produce(state, (draft) => {}),
+    [ADD_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.unshift(action.payload.post);
+      }),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
@@ -113,7 +113,6 @@ export default handleActions(
 );
 
 const actionCreators = {
-  setPost,
   addPost,
   getPost,
   getPostFB,
