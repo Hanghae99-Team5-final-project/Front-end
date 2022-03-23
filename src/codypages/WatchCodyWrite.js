@@ -3,16 +3,13 @@ import styled from "styled-components";
 import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../option/StarRating";
-import { actionCreators as commentActions } from "../redux/modules/comment";
-import axios from "axios";
-import star from "react-rating-stars-component/dist/star";
-import { GiConsoleController } from "react-icons/gi";
+import { actionCreators as postActions } from "../redux/modules/post";
 import Upload from "../option/Upload";
 import { useHistory } from "react-router-dom";
 const WatchCodyWrite = (props) => {
   const token = localStorage.getItem("token");
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -45,28 +42,16 @@ const WatchCodyWrite = (props) => {
   // };
 
   const changeValue = () => {
-    setValue();
+    setValue("");
   };
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // if (!title || !brand || !model || !content || !Value) {
-    //   return alert("모든 값을 넣어주셔야 합니다.");
-    // }
-
-    axios({
-      method: "post",
-      url: "http://3.34.2.113:8080/api/cody",
-      data: {
-        codyTitle: title,
-        watchBrand: brand,
-        watchModel: model,
-        codyContent: content,
-        // imageUrl: images,
-        star: Value,
-      },
-      headers: { Authorization: localStorage.getItem("token") },
-    });
+    if (!title || !brand || !model || !content || !Value) {
+      return alert("모든 값을 넣어주셔야 합니다.");
+    }
+    console.log(Value);
+    dispatch(postActions.addPostFB(title, brand, model, content, Value));
   };
   return (
     <div>
@@ -123,7 +108,7 @@ const WatchCodyWrite = (props) => {
 
             <div className="lb-star">
               <h5 className="lb-text">평점</h5>
-              <StarRating onChange={changeValue} value={Value} />
+              <StarRating value={Value} changeValue={setValue} />
             </div>
             <Button
               onClick={submitHandler}

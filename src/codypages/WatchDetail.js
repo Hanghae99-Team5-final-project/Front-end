@@ -22,6 +22,7 @@ function WatchDetail(props) {
   const postData = useSelector((state) => state.post.postdetail);
   const WatchImage = useSelector((state) => state.post.postdetail.watchImage);
   const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
+  const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
 
   console.log(WatchImage);
   console.log("likeId" + likeId);
@@ -52,6 +53,7 @@ function WatchDetail(props) {
         <div className="detailImage">
           <img src={WatchImage} alt={WatchImage} height="400px" width="400px" />
           <div className="flex-box">{WatchBrand}</div>
+          <div className="flex-box">{LowestPrice}</div>
         </div>
         <div style={{ width: "100%", padding: "3rem 4rem" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>

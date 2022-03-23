@@ -17,8 +17,9 @@ const addComment = createAction(ADD_COMMENT, (comment_data) => ({
   comment_data,
 }));
 
-const editComment = createAction(EDIT_COMMENT, (commentId) => ({
+const editComment = createAction(EDIT_COMMENT, (commentId, comment) => ({
   commentId,
+  comment,
 }));
 
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
@@ -102,11 +103,17 @@ const addCommentWatchFB = (
   };
 };
 
-const editCommentDB = (commentId, codyId) => {
+const editCommentDB = (commentId, watchId, edit_content) => {
   return async function (dispatch, getState) {
     try {
-      await apis.UpdateComment(codyId);
-      dispatch(editComment(commentId));
+      console.log(commentId, watchId);
+      const { data } = await apis.UpdateComment(
+        commentId,
+        parseInt(watchId),
+        edit_content
+      );
+      dispatch(editComment(commentId, data));
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -135,6 +142,20 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list.push(action.payload.comment_data);
       }),
+    [EDIT_COMMENT]: (state, action) => {
+      const data = action.payload.comment;
+      return {
+        ...state,
+        list: state.list.map((comment, index) => {
+          if (comment.commentId === data.commentId) {
+            return (state.list[index] = data);
+          } else {
+            return comment;
+          }
+        }),
+      };
+    },
+
     [DELETE_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         draft.list = draft.list.filter(

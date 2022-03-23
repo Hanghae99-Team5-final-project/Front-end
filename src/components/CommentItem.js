@@ -6,21 +6,27 @@ import { FaPencilAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 
 import { actionCreators as commentActions } from "../redux/modules/comment";
+import { useParams } from "react-router-dom";
 
 const CommentItem = (props) => {
+  const watchId = useParams().id;
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
   const IdName = localStorage.getItem("commentUser");
-  const [edit_comment, setEditComment] = useState(props.content);
+  const [edit_comment, setEditComment] = useState("");
   const [open_edit, setOpenEdit] = useState(false);
   const [comment, setComment] = useState("");
   const token = localStorage.getItem("token");
   const changeEditComment = (e) => {
     setEditComment(e.target.value);
+    console.log(e.target.value);
   };
-
+  console.log(props.content);
   const clickEditComment = () => {
-    dispatch(commentActions.editCommentDB(props.commentId, edit_comment));
+    console.log(edit_comment);
+    dispatch(
+      commentActions.editCommentDB(props.commentId, watchId, edit_comment)
+    );
     setOpenEdit(false);
   };
   return (
@@ -45,11 +51,11 @@ const CommentItem = (props) => {
           {commentId}
         </Text>
 
-        {/* <div mTop="8px">
+        <div mTop="8px">
           <Input
             type="text"
             placeholder="댓글을 입력해주세요"
-            onChange={changeEditComment}
+            _onChange={changeEditComment}
             value={edit_comment}
           />
           <FaPencilAlt role="button" onClick={clickEditComment}>
@@ -64,7 +70,7 @@ const CommentItem = (props) => {
           >
             취소
           </FaPencilAlt>
-        </div> */}
+        </div>
 
         <DeleteBtn
           onClick={() => {

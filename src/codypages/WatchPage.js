@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { actionsCreators as CategorylistActions } from "../redux/modules/category";
 import { Link, useParams } from "react-router-dom";
 import { history } from "../redux/configStore";
+
 const WatchPage = () => {
   const dispatch = useDispatch();
   const CategoryList = useSelector(({ category }) => category.categoryList);

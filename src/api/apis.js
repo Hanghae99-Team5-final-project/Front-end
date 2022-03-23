@@ -45,9 +45,8 @@ export const apis = {
   deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
   codyDetail: () => instance.get("/api/cody"),
   //  -------포스트-----
-  addPost: (userId, codyTitle, watchBrand, watchModel, codyContent, star) =>
+  addPostData: (codyTitle, watchBrand, watchModel, codyContent, star) =>
     instance.post("/api/cody", {
-      userId: userId,
       codyTitle: codyTitle,
       watchBrand: watchBrand,
       watchModel: watchModel,
@@ -77,9 +76,8 @@ export const apis = {
     }),
 
   // ------수정-------
-  UpdateComment: (commentId, codyId, commentContent) =>
+  UpdateComment: (commentId, watchId, commentContent) =>
     instance.put(`/comment/update/${commentId}`, {
-      codyId: codyId,
       commentContent: commentContent,
     }),
 

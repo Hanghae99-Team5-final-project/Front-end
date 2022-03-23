@@ -57,11 +57,11 @@ const WatchCodyMainPage = () => {
 
   console.log(post_list);
 
-  React.useEffect(() => {
-    if (post_list.length < 3) {
-      // dispatch(codyDetailActions.getCodyDetail());
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (post_list.length < 3) {
+  //     dispatch(codyDetailActions.getCodyDetail());
+  //   }
+  // }, []);
 
   const [Items, setItem] = useState([
     {
