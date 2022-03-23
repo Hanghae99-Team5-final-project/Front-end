@@ -37,7 +37,7 @@ export const apis = {
   // watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
   // getPostapi: () => instance.get("/api/cody"),
-
+  getPostComment: (watchId) => instance.get(`/api/detail/${watchId}`),
   // -----상세페이지 조회-----
   detailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   detailButtonPage: (watchId) => instance.get(`/api/like/${watchId}`),
@@ -45,13 +45,23 @@ export const apis = {
   deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
   codyDetail: () => instance.get("/api/cody"),
   //  -------포스트-----
+
   addPostData: (codyTitle, watchBrand, watchModel, codyContent, star) =>
-    instance.post("/api/cody", {
-      codyTitle: codyTitle,
-      watchBrand: watchBrand,
-      watchModel: watchModel,
-      codyContent: codyContent,
-      star: star,
+    instance({
+      method: "post",
+      url: "/api/cody",
+      data: {
+        codyTitle: codyTitle,
+        watchBrand: watchBrand,
+        watchModel: watchModel,
+        codyContent: codyContent,
+        imageUrl: "imageUrl",
+        star: star,
+      },
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
     }),
   //----- 댓글 ------///
   getComment: (watchId) => instance.get(`/watch/${watchId}`),

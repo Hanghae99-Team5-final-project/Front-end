@@ -4,9 +4,7 @@ import CommentItem from "./CommentItem";
 import { useDispatch, useSelector } from "react-redux";
 
 const CommentList = (props) => {
-  const dispatch = useDispatch();
   const commentData = useSelector((state) => state.comment.list);
-  const { watchId } = props;
 
   return (
     <React.Fragment>
