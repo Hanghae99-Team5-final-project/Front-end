@@ -40,13 +40,14 @@ const getPostFB = (watchId) => {
   };
 };
 
-const addPostFB = (title, brand, model, content, Value) => {
+const addPostFB = (title, brand, model, content, images, Value) => {
   return async (dispatch, getState, { history }) => {
     const response = await apis.addPostData(
       title,
       brand,
       model,
       content,
+      images,
       Value
     );
     dispatch(addPost(response));
