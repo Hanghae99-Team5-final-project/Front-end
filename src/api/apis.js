@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://3.34.2.113:8080",
+  baseURL: "http://13.124.217.167:8080",
   headers: {
     "content-type": "application/json;charset=UTF-8", // 자바스크립트는 json형태로 받아와야 한다.
     accept: "application/json",
@@ -46,7 +46,14 @@ export const apis = {
   codyDetail: () => instance.get("/api/cody"),
   //  -------포스트-----
 
-  addPostData: (codyTitle, watchBrand, watchModel, codyContent, star) =>
+  addPostData: (
+    codyTitle,
+    watchBrand,
+    watchModel,
+    codyContent,
+    imageUrl,
+    star
+  ) =>
     instance({
       method: "post",
       url: "/api/cody",
@@ -55,7 +62,7 @@ export const apis = {
         watchBrand: watchBrand,
         watchModel: watchModel,
         codyContent: codyContent,
-        imageUrl: "imageUrl",
+        imageUrl: imageUrl,
         star: star,
       },
       headers: {

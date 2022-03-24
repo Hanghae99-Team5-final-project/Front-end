@@ -1,99 +1,100 @@
-// import React, { useState } from "react";
-// import Dropzone from "react-dropzone";
-// import styled from "styled-components";
-// import { FiUpload } from "react-icons/fi";
-// import axios from "axios";
+import React, { useState } from "react";
+import Dropzone from "react-dropzone";
+import styled from "styled-components";
+import { FiUpload } from "react-icons/fi";
+import axios from "axios";
 
-// const token = localStorage.getItem("token");
-// const Upload = (props) => {
-//   const [images, setImages] = useState([]);
+const token = localStorage.getItem("token");
+const Upload = (props) => {
+  const [images, setImages] = useState([]);
 
-//   const dropHandler = (files) => {
-//     let formData = new FormData();
+  const dropHandler = (files) => {
+    let formData = new FormData();
 
-//     // const config = {
-//     //   //   headers: {  },
-//     // };
-//     // formData.append("file", files[0]);
+    const config = {
+      //   headers: {  },
+    };
+    formData.append("file", files[0]);
 
-//     // axios
-//       //   .post(
-//       //     "http://13.125.107.213:8080/api/cody",
-//       //     formData,
-//       //     config,
-//       //     {},
-//       //     {
-//       //       headers: {
-//       //         Authorization: token,
-//       //         "content-type": "multipart/form-data",
-//       //       },
-//       //     }
-//       //   )
+    axios
+      .post(
+        "http://13.125.107.213:8080/api/cody",
+        formData,
 
-// //       .then((res) => {
-// //         if (res.data.success) {
-// //           console.log(res.data);
-// //           setImages([...images, res.data.filePath]);
-// //           props.refreshFunction(...images, res.data.filePath);
-// //         } else {
-// //           alert("파일을 저장하는데 실패했습니다.");
-// //         }
-// //       });
-// //   };
+        {},
+        {
+          headers: {
+            Authorization: token,
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
 
-//   const deleteHandler = (image) => {
-//     const currentIndex = images.indexOf(image);
+      .then((res) => {
+        if (res.data.success) {
+          console.log(res.data);
+          setImages([...images, res.data.filePath]);
+          props.refreshFunction(...images, res.data.filePath);
+          props.history.replace("/");
+        } else {
+          alert("파일을 저장하는데 실패했습니다.");
+        }
+      });
+  };
 
-//     let newImages = [...images];
-//     newImages.splice(currentIndex, 1);
-//     setImages(newImages);
-//     props.refreshFunction(newImages);
-//   };
+  const deleteHandler = (image) => {
+    const currentIndex = images.indexOf(image);
 
-//   return (
-//     <UploadBlock>
-//       <Dropzone onDrop={dropHandler}>
-//         {({ getRootProps, getInputProps }) => (
-//           <div className="Upload">
-//             <div {...getRootProps()}>
-//               <input {...getInputProps()} />
+    let newImages = [...images];
+    newImages.splice(currentIndex, 1);
+    setImages(newImages);
+    props.refreshFunction(newImages);
+  };
 
-//               <FiUpload />
-//             </div>
-//           </div>
-//         )}
-//       </Dropzone>
+  return (
+    <UploadBlock>
+      <Dropzone onDrop={dropHandler}>
+        {({ getRootProps, getInputProps }) => (
+          <div className="Upload">
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
 
-//       {/* <div
-//         style={{
-//           display: "flex",
-//           width: "350px",
-//           height: "240px",
-//           overflow: "scroll",
-//         }}
-//       ></div> */}
-//       {images.map((image, index) => {
-//         <div onClick={() => deleteHandler(image)} key={index}>
-//           <img
-//             style={{ minWidth: "300px", width: "300px", height: "240px" }}
-//             src={`http://localhost:3000/${image}`}
-//           />
-//         </div>;
-//       })}
-//     </UploadBlock>
-//   );
-// };
+              <FiUpload />
+            </div>
+          </div>
+        )}
+      </Dropzone>
 
-// const UploadBlock = styled.div`
-//   .Upload {
-//     width: 300px;
-//     height: 240px;
-//     border: 1px solid lightgray;
-//     margin: 50px 0;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     font-size: 3rem;
-//   }
-// `;
-// export default Upload;
+      <div
+        style={{
+          display: "flex",
+          width: "350px",
+          height: "240px",
+          overflow: "scroll",
+        }}
+      ></div>
+      {images.map((image, index) => {
+        <div onClick={() => deleteHandler(image)} key={index}>
+          <img
+            style={{ minWidth: "300px", width: "300px", height: "240px" }}
+            src={`http://localhost:3000/${image}`}
+          />
+        </div>;
+      })}
+    </UploadBlock>
+  );
+};
+
+const UploadBlock = styled.div`
+  .Upload {
+    width: 300px;
+    height: 240px;
+    border: 1px solid lightgray;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+`;
+export default Upload;

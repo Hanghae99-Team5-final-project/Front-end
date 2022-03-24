@@ -14,8 +14,10 @@ const WatchCodyWrite = (props) => {
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [content, setContent] = useState("");
-  // const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]);
   const [Value, setValue] = useState(0);
+
+  const formData = new FormData();
 
   const changetitle = (e) => {
     setTitle(e.target.value);
@@ -37,9 +39,9 @@ const WatchCodyWrite = (props) => {
     console.log(e.target.value);
   };
 
-  // const updateImages = (newImages) => {
-  //   setImages(newImages);
-  // };
+  const updateImages = (newImages) => {
+    setImages(newImages);
+  };
 
   const changeValue = () => {
     setValue("");
@@ -47,18 +49,28 @@ const WatchCodyWrite = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!title || !brand || !model || !content || !Value) {
+    if (!title || !brand || !model || !content || !images || !Value) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
+
+    formData.append("title", title);
+    formData.append("brand", brand);
+    formData.append("model", model);
+    formData.append("content", content);
+    formData.append("images", images);
+    formData.append("Value", Value);
+
     console.log(Value);
-    dispatch(postActions.addPostFB(title, brand, model, content, Value));
+    // dispatch(
+    //   postActions.addPostFB(title, brand, model, content, images, Value)
+    // );
   };
   return (
     <div>
       <WatchCodyWriteBlock>
         <div className="container">
           <div className="flex-box">
-            {/* <Upload refreshFunction={updateImages} /> */}
+            <Upload refreshFunction={updateImages} />
 
             <InputGroup className="mb-3" style={{ height: "50px" }}>
               <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>
