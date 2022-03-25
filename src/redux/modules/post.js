@@ -16,6 +16,8 @@ const like = createAction(LIKE, (like) => ({
 }));
 const likeId = createAction(LIKE_ID, (likeId) => ({ likeId }));
 
+const token = localStorage.getItem("token");
+
 const initialState = {
   postdetail: {},
   likes: [],
@@ -40,18 +42,33 @@ const getPostFB = (watchId) => {
   };
 };
 
-const addPostFB = (title, brand, model, content, images, Value) => {
+const addPostFB = (title, brand, model, content, files, Value) => {
   return async (dispatch, getState, { history }) => {
-    const response = await apis.addPostData(
-      title,
-      brand,
-      model,
-      content,
-      images,
-      Value
-    );
-    dispatch(addPost(response));
-    console.log(response);
+    console.log(files);
+    let formData = new FormData();
+
+    formData.append("codyTitle", title);
+    formData.append("watchBrand", brand);
+    formData.append("watchModel", model);
+    formData.append("codyContent", content);
+    formData.append("multipartFile", files);
+    formData.append("star", Value);
+    console.log(formData);
+    axios
+      .post(
+        "http://13.124.217.167:8080/api/cody",
+        formData,
+
+        {
+          headers: {
+            Authorization: token,
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        dispatch(addPost(res.data));
+      });
   };
 };
 
@@ -98,7 +115,7 @@ export default handleActions(
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.post);
+        draft.list = action.payload.post;
       }),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {

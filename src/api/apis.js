@@ -46,30 +46,37 @@ export const apis = {
   codyDetail: () => instance.get("/api/cody"),
   //  -------포스트-----
 
-  addPostData: (
-    codyTitle,
-    watchBrand,
-    watchModel,
-    codyContent,
-    imageUrl,
-    star
-  ) =>
-    instance({
-      method: "post",
-      url: "/api/cody",
-      data: {
-        codyTitle: codyTitle,
-        watchBrand: watchBrand,
-        watchModel: watchModel,
-        codyContent: codyContent,
-        imageUrl: imageUrl,
-        star: star,
-      },
-      headers: {
-        Authorization: localStorage.getItem("token"),
-        "Content-Type": "multipart/form-data",
-      },
-    }),
+  // addPostData: (
+  //   codyTitle,
+  //   watchBrand,
+  //   watchModel,
+  //   codyContent,
+  //   imageUrl,
+  //   star
+  // ) =>
+  // method: "post",
+  // url: "http://13.124.217.167:8080/api/cody",
+  // formData,
+  // headers: {
+  //   Authorization: token,
+  //   "Content-Type": "multipart/form-data",
+  // },
+  // instance({
+  //   method: "post",
+  //   url: "/api/cody",
+  //   data: {
+  //     codyTitle: codyTitle,
+  //     watchBrand: watchBrand,
+  //     watchModel: watchModel,
+  //     codyContent: codyContent,
+  //     imageUrl: imageUrl,
+  //     star: star,
+  //   },
+  //   headers: {
+  //     Authorization: localStorage.getItem("token"),
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // }),
   //----- 댓글 ------///
   getComment: (watchId) => instance.get(`/watch/${watchId}`),
 

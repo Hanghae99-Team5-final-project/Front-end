@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { setCookie } from "../Cookie";
+import { Text, Input, Button } from "../elements";
 // import logo_design from "../design/스프링워치-로고1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
@@ -105,6 +106,7 @@ function MainPage() {
       <button>
         <Link to="/watchdetail">시계 상세페이지</Link>
       </button>
+      <Input />
     </MainPageBlock>
   );
 }

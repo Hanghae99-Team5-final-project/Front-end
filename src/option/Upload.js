@@ -1,100 +1,32 @@
-import React, { useState } from "react";
-import Dropzone from "react-dropzone";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { FiUpload } from "react-icons/fi";
-import axios from "axios";
 
-const token = localStorage.getItem("token");
-const Upload = (props) => {
+function Upload(props) {
   const [images, setImages] = useState([]);
+  const [imageURL, setImageURL] = useState([]);
 
-  const dropHandler = (files) => {
-    let formData = new FormData();
-
-    const config = {
-      //   headers: {  },
-    };
-    formData.append("file", files[0]);
-
-    axios
-      .post(
-        "http://13.125.107.213:8080/api/cody",
-        formData,
-
-        {},
-        {
-          headers: {
-            Authorization: token,
-            "content-type": "multipart/form-data",
-          },
-        }
-      )
-
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data);
-          setImages([...images, res.data.filePath]);
-          props.refreshFunction(...images, res.data.filePath);
-          props.history.replace("/");
-        } else {
-          alert("파일을 저장하는데 실패했습니다.");
-        }
-      });
-  };
-
-  const deleteHandler = (image) => {
-    const currentIndex = images.indexOf(image);
-
-    let newImages = [...images];
-    newImages.splice(currentIndex, 1);
-    setImages(newImages);
-    props.refreshFunction(newImages);
+  useEffect(
+    (files) => {
+      if (images.length < 1) return;
+      const newImageUrl = [];
+      images.forEach((image) => newImageUrl.push(URL.createObjectURL(image)));
+      setImageURL(newImageUrl);
+    },
+    [images]
+  );
+  const onChange = (e) => {
+    setImages([...e.target.files]);
   };
 
   return (
     <UploadBlock>
-      <Dropzone onDrop={dropHandler}>
-        {({ getRootProps, getInputProps }) => (
-          <div className="Upload">
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-
-              <FiUpload />
-            </div>
-          </div>
-        )}
-      </Dropzone>
-
-      <div
-        style={{
-          display: "flex",
-          width: "350px",
-          height: "240px",
-          overflow: "scroll",
-        }}
-      ></div>
-      {images.map((image, index) => {
-        <div onClick={() => deleteHandler(image)} key={index}>
-          <img
-            style={{ minWidth: "300px", width: "300px", height: "240px" }}
-            src={`http://localhost:3000/${image}`}
-          />
-        </div>;
-      })}
+      <input type="file" multiple accept="image/*" onChange={onChange} />
+      {imageURL.map((imageSrc, idx) => (
+        <img src={imageSrc} alt="imageSrc" key={idx} />
+      ))}
     </UploadBlock>
   );
-};
-
-const UploadBlock = styled.div`
-  .Upload {
-    width: 300px;
-    height: 240px;
-    border: 1px solid lightgray;
-    margin: 50px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-  }
-`;
+}
+const UploadBlock = styled.div``;
 export default Upload;
