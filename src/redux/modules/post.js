@@ -56,7 +56,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
     console.log(formData);
     axios
       .post(
-        "http://13.124.217.167:8080/api/cody",
+        "http://3.34.134.143:8080/api/cody",
         formData,
 
         {
