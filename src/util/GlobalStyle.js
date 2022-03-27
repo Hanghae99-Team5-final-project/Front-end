@@ -28,9 +28,18 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-size: 1.4px;
+        font-size: 1.4rem;
         background-color: #fff;
         color: #000;
+        line-height: 2rem;
+    }
+
+    button {
+        border: 1px solid #000;
+    }
+
+    span, label {
+        display: block;
     }
 `;
 
