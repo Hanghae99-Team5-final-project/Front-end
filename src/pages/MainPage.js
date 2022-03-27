@@ -11,6 +11,7 @@ import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Footer from "../components/Footer";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -27,88 +28,90 @@ function MainPage() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  return (
-    <MainPageBlock>
-      <div className="banner"></div>
 
-      <h1 className="title1">인기 상품</h1>
-      <div className="flex-item">
-        {MainList?.bestList?.map((list, idx) => {
-          return (
-            <div className="flex_box" key={idx}>
-              <img size="15%" src={list.watchImageUrl} />
+  return <Footer />;
+  // return (
+  //   <MainPageBlock>
+  //     <div className="banner"></div>
 
-              {/* <p className="artist_name">{list.watchBrand}</p> */}
-              <p className="artist_name">{list.watchModel}</p>
-              <p className="artist_name">{list.lowestPrice}</p>
-              <p className="artist_name">{list.category}</p>
-            </div>
-          );
-        })}
-      </div>
+  //     <h1 className="title1">인기 상품</h1>
+  //     <div className="flex-item">
+  //       {MainList?.bestList?.map((list, idx) => {
+  //         return (
+  //           <div className="flex_box" key={idx}>
+  //             <img size="15%" src={list.watchImageUrl} />
 
-      <h1 className="title2"> 커플 </h1>
-      <div className="flex-item">
-        {MainList?.coupleList?.map((list, idx) => {
-          return (
-            <div className="flex_box" key={idx}>
-              <img size="15%" src={list.watchImageUrl} />
+  //             {/* <p className="artist_name">{list.watchBrand}</p> */}
+  //             <p className="artist_name">{list.watchModel}</p>
+  //             <p className="artist_name">{list.lowestPrice}</p>
+  //             <p className="artist_name">{list.category}</p>
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
 
-              {/* <p className="artist_name">{list.watchBrand}</p> */}
-              <p className="artist_name">{list.watchModel}</p>
-              <p className="artist_name">{list.lowestPrice}</p>
-              <p className="artist_name">{list.category}</p>
-            </div>
-          );
-        })}
-      </div>
+  //     <h1 className="title2"> 커플 </h1>
+  //     <div className="flex-item">
+  //       {MainList?.coupleList?.map((list, idx) => {
+  //         return (
+  //           <div className="flex_box" key={idx}>
+  //             <img size="15%" src={list.watchImageUrl} />
 
-      <h1 className="title3">시계 코디</h1>
-      <div className="flex-item">
-        {MainList?.codyList?.map((list, idx) => {
-          return (
-            <div className="flex_box" key={idx}>
-              <img size="15%" src={list.watchImageUrl} />
+  //             {/* <p className="artist_name">{list.watchBrand}</p> */}
+  //             <p className="artist_name">{list.watchModel}</p>
+  //             <p className="artist_name">{list.lowestPrice}</p>
+  //             <p className="artist_name">{list.category}</p>
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
 
-              {/* <p className="artist_name">{list.watchBrand}</p> */}
-              <p className="artist_name">{list.watchModel}</p>
-              <p className="artist_name">{list.lowestPrice}</p>
-              <p className="artist_name">{list.category}</p>
-            </div>
-          );
-        })}
-      </div>
-      {/* </Logo> */}
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/login">로그인 페이지</Link>
-      </button>
+  //     <h1 className="title3">시계 코디</h1>
+  //     <div className="flex-item">
+  //       {MainList?.codyList?.map((list, idx) => {
+  //         return (
+  //           <div className="flex_box" key={idx}>
+  //             <img size="15%" src={list.watchImageUrl} />
 
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/signup">회원가입 페이지</Link>
-      </button>
+  //             {/* <p className="artist_name">{list.watchBrand}</p> */}
+  //             <p className="artist_name">{list.watchModel}</p>
+  //             <p className="artist_name">{list.lowestPrice}</p>
+  //             <p className="artist_name">{list.category}</p>
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
+  //     {/* </Logo> */}
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/login">로그인 페이지</Link>
+  //     </button>
 
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/watchcodymainpage">시계 코디 메인 페이지</Link>
-      </button>
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/signup">회원가입 페이지</Link>
+  //     </button>
 
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/watchcodywrite">시계 코디 글쓰기</Link>
-      </button>
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/watchpage">시계 페이지 (카테고리)</Link>
-      </button>
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/watchcodydetail/:id">시계 코디페이지 디테일</Link>
-      </button>
-      <button style={{ margin: "50px 50px" }}>
-        <Link to="/mypage">마이 페이지</Link>
-      </button>
-      <button>
-        <Link to="/watchdetail">시계 상세페이지</Link>
-      </button>
-      <Input />
-    </MainPageBlock>
-  );
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/watchcodymainpage">시계 코디 메인 페이지</Link>
+  //     </button>
+
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/watchcodywrite">시계 코디 글쓰기</Link>
+  //     </button>
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/watchpage">시계 페이지 (카테고리)</Link>
+  //     </button>
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/watchcodydetail/:id">시계 코디페이지 디테일</Link>
+  //     </button>
+  //     <button style={{ margin: "50px 50px" }}>
+  //       <Link to="/mypage">마이 페이지</Link>
+  //     </button>
+  //     <button>
+  //       <Link to="/watchdetail">시계 상세페이지</Link>
+  //     </button>
+  //     <Input />
+  //   </MainPageBlock>
+  // );
 }
 
 const MainPageBlock = styled.div`
