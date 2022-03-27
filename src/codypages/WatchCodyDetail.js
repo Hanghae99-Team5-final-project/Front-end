@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { setCookie } from "../Cookie";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { actionCreators as commentActions } from "../redux/modules/comment";
+import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
-import CommentItem from "../components/CommentItem";
-import moment from "moment";
+
+import CommentDetail from "../components/CommentDetail";
 const WatchCodyDetailBlock = styled.div`
   .lb-review {
   }
@@ -19,30 +19,20 @@ const WatchCodyDetailBlock = styled.div`
 `;
 function WatchCodyDetail(props) {
   const dispatch = useDispatch();
-  const [commentContent, setCommentContent] = useState("");
-  // const CartpageList = useSelector(({ cartpage }) => cartpage.cartpageList);
+
   const { id } = useParams();
   const codyId = id;
   console.log(id);
-  const commentUser = localStorage.commentUser;
-  const createdAt = moment().format("YYYY-MM-DD hh:mm:ss");
+
   const token = localStorage.getItem("token");
-  const changeComment = (e) => {
-    setCommentContent(e.target.value);
-    console.log(e.target.value);
-  };
-  const writeComment = () => {
-    console.log(codyId);
-    dispatch(
-      commentActions.addCommentCodyFB(
-        commentUser,
-        commentContent,
-        codyId,
-        createdAt
-      )
-    );
-    setCommentContent("");
-  };
+
+  React.useEffect(() => {
+    console.log("되라 제발");
+
+    console.log("에러에러에러");
+    dispatch(postActions.getPostFB(codyId));
+  }, []);
+
   return (
     <div>
       <WatchCodyDetailBlock>
@@ -73,20 +63,7 @@ function WatchCodyDetail(props) {
           />
         </InputGroup>
 
-        <InputGroup className="mb-3" style={{ height: "50px" }}>
-          <FormControl
-            variant="outlined"
-            placeholder="댓글 내용"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            onChange={changeComment}
-            value={commentContent}
-          />
-          <Button onClick={writeComment} variant="primary">
-            좀 되라
-          </Button>
-        </InputGroup>
-        <CommentItem />
+        <CommentDetail watchId={codyId} />
       </WatchCodyDetailBlock>
     </div>
   );
