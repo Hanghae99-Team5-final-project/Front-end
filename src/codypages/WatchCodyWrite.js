@@ -4,7 +4,7 @@ import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
-import Upload from "../option/Upload";
+
 import { useHistory } from "react-router-dom";
 const WatchCodyWrite = (props) => {
   const token = localStorage.getItem("token");
@@ -14,9 +14,10 @@ const WatchCodyWrite = (props) => {
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [content, setContent] = useState("");
-  const [files, setImages] = useState([]);
+  // const [files, setImages] = useState([]);
   const [Value, setValue] = useState(0);
-
+  const [images, setImages] = useState();
+  const [imageURL, setImageURL] = useState([]);
   const formData = new FormData();
 
   const changetitle = (e) => {
@@ -39,17 +40,13 @@ const WatchCodyWrite = (props) => {
     console.log(e.target.value);
   };
 
-  const updateImages = (newImages) => {
-    setImages(newImages);
-  };
-
   const changeValue = () => {
     setValue("");
   };
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!title || !brand || !model || !content || !files || !Value) {
+    if (!title || !brand || !model || !content || !images || !Value) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
 
@@ -57,18 +54,41 @@ const WatchCodyWrite = (props) => {
     formData.append("brand", brand);
     formData.append("model", model);
     formData.append("content", content);
-    formData.append("multipartFile", files);
+    formData.append("multipartFile", images);
     formData.append("Value", Value);
 
     console.log(Value);
-    dispatch(postActions.addPostFB(title, brand, model, content, files, Value));
+    dispatch(
+      postActions.addPostFB(title, brand, model, content, images, Value)
+    );
   };
+
+  // useEffect(
+  //   (files) => {
+  //     if (images.length < 1) return;
+  //     const newImageUrl = [];
+  //     images.forEach((image) => newImageUrl.push(URL.createObjectURL(image)));
+  //     setImageURL(newImageUrl);
+
+  //   },
+  //   [images]
+  // );
+
+  const onChange = (e) => {
+    if (e.target.files) {
+      setImages(e.target.files[0]);
+    }
+  };
+
   return (
     <div>
       <WatchCodyWriteBlock>
         <div className="container">
           <div className="flex-box">
-            <Upload />
+            <input type="file" multiple accept="image/*" onChange={onChange} />
+            {imageURL.map((imageSrc, idx) => (
+              <img src={imageSrc} alt="imageSrc" key={idx} />
+            ))}
 
             <InputGroup className="mb-3" style={{ height: "50px" }}>
               <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://3.34.134.143:8080",
+  baseURL: "http://52.79.228.154:8080",
   headers: {
     "content-type": "application/json;charset=UTF-8", // 자바스크립트는 json형태로 받아와야 한다.
     accept: "application/json",
