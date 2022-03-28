@@ -56,7 +56,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
     console.log(formData);
     axios
       .post(
-        "http://3.34.134.143:8080/api/cody",
+        "http://52.79.228.154:8080/api/cody",
         formData,
 
         {
@@ -67,6 +67,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
         }
       )
       .then((res) => {
+        console.log(res.data);
         dispatch(addPost(res.data));
       });
   };
