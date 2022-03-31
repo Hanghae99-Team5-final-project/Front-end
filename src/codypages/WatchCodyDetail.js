@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { setCookie } from "../Cookie";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CommentDetail from "../components/CommentDetail";
 const WatchCodyDetailBlock = styled.div`
@@ -19,12 +19,15 @@ const WatchCodyDetailBlock = styled.div`
 `;
 function WatchCodyDetail(props) {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const { id } = useParams();
   const codyId = id;
   console.log(id);
 
   const token = localStorage.getItem("token");
+  const _codydetails = useSelector((state) => state.codydetail.codyDetail);
+  const codydetails = _codydetails?.find((a) => a.codyId === +codyId);
+  console.log(codydetails);
 
   React.useEffect(() => {
     console.log("되라 제발");
@@ -37,33 +40,20 @@ function WatchCodyDetail(props) {
     <div>
       <WatchCodyDetailBlock>
         <div className="lb-icons">
-          <Link to="/watchcodyupdate/:id"></Link>
+          <div onClick={() => history.push(`/watchcodyupdate/${codyId}`)}>
+            {codydetails.codyTitle}
+            <img
+              src={codydetails.imageUrl}
+              alt={codydetails.imageUrl}
+              height="400px"
+              width="400px"
+            />
+
+            {codydetails.codyContent}
+
+            <CommentDetail watchId={codyId} />
+          </div>
         </div>
-        <InputGroup className="mb-3" style={{ height: "50px" }}>
-          <FormControl
-            placeholder="1.제목"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-
-        <InputGroup className="mb-3" style={{ height: "200px" }}>
-          <FormControl
-            placeholder="1.시계 코디 이미지"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-
-        <InputGroup className="mb-3" style={{ height: "160px" }}>
-          <FormControl
-            placeholder="1.코디 내용"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-
-        <CommentDetail watchId={codyId} />
       </WatchCodyDetailBlock>
     </div>
   );

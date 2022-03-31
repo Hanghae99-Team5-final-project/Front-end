@@ -10,9 +10,12 @@ const getCodyDetail = createAction(GET_CODYDETAIL, (codyDetail) => ({
 }));
 
 const getCodyDetailFB = () => {
+  console.log("도착1");
   return async (dispatch) => {
     try {
-      const res = await apis.mainPage();
+      console.log("도착2");
+      const res = await apis.codymainPage();
+      console.log(res);
       const codyDetail = res.data;
       console.log(codyDetail);
       dispatch(getCodyDetail(codyDetail));
