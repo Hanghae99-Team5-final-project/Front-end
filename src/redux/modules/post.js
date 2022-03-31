@@ -3,14 +3,21 @@ import { produce } from "immer";
 import apis from "../../api/apis";
 import axios from "axios";
 import { actionCreators as commentActions } from "./comment";
+
 const GET_POST = "GET_POST";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
+const DELETE_POST = "DELETE_POST";
+const EDIT_POST = "EDIT_POST";
+
 const LIKE = "LIKE";
 const LIKE_ID = "LIKE_ID";
 
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
+const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
+const editPost = createAction(EDIT_POST, (post, postId) => ({ post, postId }));
+
 const like = createAction(LIKE, (like) => ({
   like,
 }));
@@ -56,7 +63,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
     console.log(formData);
     axios
       .post(
-        "http://52.79.228.154:8080/api/cody",
+        "http://3.35.220.13:8080/api/cody",
         formData,
 
         {
@@ -70,6 +77,48 @@ const addPostFB = (title, brand, model, content, files, Value) => {
         console.log(res.data);
         dispatch(addPost(res.data));
       });
+  };
+};
+
+const editPostDB = (title, brand, model, content, files, Value, codyId) => {
+  return async (dispatch, getState, { history }) => {
+    let formData = new FormData();
+
+    formData.append("codyTitle", title);
+    formData.append("watchBrand", brand);
+    formData.append("watchModel", model);
+    formData.append("codyContent", content);
+    formData.append("multipartFile", files);
+    formData.append("star", Value);
+    console.log(formData);
+    axios
+      .put(
+        `http://3.35.220.13:8080/api/cody/${codyId}`,
+        formData,
+
+        {
+          headers: {
+            Authorization: token,
+            "content-type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch(editPost(res.data));
+      });
+  };
+};
+
+const deletePostDB = (postId) => {
+  return async function (dispatch, getState, { history }) {
+    await apis.deletePost(postId).then((res) => {
+      dispatch(deletePost(postId));
+      console.log(res);
+      // window.alert("삭제가 완료되었습니다.");
+
+      // window.location.reload();
+    });
   };
 };
 
@@ -118,6 +167,26 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.post;
       }),
+    [EDIT_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list.find((a) => {
+          if (a.postId === action.payload.postId) {
+            a.title = action.payload.post;
+            a.brand = action.payload.post;
+            a.model = action.payload.post;
+            a.content = action.payload.post;
+            a.files = action.payload.post;
+            a.Value = action.payload.post;
+          }
+          return a;
+        });
+      }),
+    [DELETE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list = draft.list.filter(
+          (c) => c.postId !== action.payload.postId
+        );
+      }),
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload);
@@ -138,12 +207,16 @@ const actionCreators = {
   getPost,
   getPostFB,
   addPostFB,
+  editPostDB,
   likePostFB,
   deleteDB,
   getDetail,
   like,
   likeId,
   getLike,
+  deletePostDB,
+  deletePost,
+  editPost,
 };
 
 export { actionCreators };

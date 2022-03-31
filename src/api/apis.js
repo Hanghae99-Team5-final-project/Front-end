@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://52.79.228.154:8080",
+  baseURL: "http://3.35.220.13:8080",
   headers: {
     "content-type": "application/json;charset=UTF-8", // 자바스크립트는 json형태로 받아와야 한다.
     accept: "application/json",
@@ -43,7 +43,9 @@ export const apis = {
   detailButtonPage: (watchId) => instance.get(`/api/like/${watchId}`),
   sendLike: (watchId) => instance.post(`/api/like/create/${watchId}`),
   deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
-  codyDetail: () => instance.get("/api/cody"),
+  // codyDetail: () => instance.get("/api/cody"),
+  codymainPage: () => instance.get("/api/cody?page=0&size=5"),
+
   //  -------포스트-----
 
   // addPostData: (
@@ -77,7 +79,10 @@ export const apis = {
   //     "Content-Type": "multipart/form-data",
   //   },
   // }),
-  //----- 댓글 ------///
+
+  deletePost: (codyId) => instance.delete(`/api/cody/${codyId}`),
+  // ----- 댓글 ------///
+
   getComment: (watchId) => instance.get(`/watch/${watchId}`),
 
   addCommentCody: (commentUser, commentContent, codyId, createdAt) =>

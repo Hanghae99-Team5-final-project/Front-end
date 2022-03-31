@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import { actionCreators as codyDetailActions } from "../redux/modules/codydetail";
+import { actionsCreators as codyDetailActions } from "../redux/modules/codydetail";
 const WatchCodyMainPageBlock = styled.div`
   .container {
     display: flex;
@@ -50,76 +50,44 @@ const WatchCodyMainPageBlock = styled.div`
     background-color: lightgrey;
     border-radius: 100px;
   }
+  .flex-imgbox {
+    width: 300px;
+    height: 300px;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 const WatchCodyMainPage = () => {
   const dispatch = useDispatch();
-  const post_list = useSelector((state) => state.post.list);
+  const codydetails = useSelector((state) => state.codydetail.codyDetail);
+  // const WatchImage = useSelector((state) => state.codydetail.watchImage);
+  // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
+  // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
+  const history = useHistory();
+  console.log(codydetails);
 
-  console.log(post_list);
+  React.useEffect(() => {
+    dispatch(codyDetailActions.getCodyDetailFB());
+  }, []);
 
-  // React.useEffect(() => {
-  //   if (post_list.length < 3) {
-  //     dispatch(codyDetailActions.getCodyDetail());
-  //   }
-  // }, []);
-
-  const [Items, setItem] = useState([
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-    {
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJFk0TzJ_yq_0nU4JXX4Oig3bfBPSgJiORg&usqp=CAU",
-      codyContent: "벨앤로스 BR 01 사이버 스컬",
-    },
-  ]);
   return (
     <WatchCodyMainPageBlock>
       <div className="flex-item">
-        {Items?.allCodyList?.map((menu, idx) => {
+        {/* <img src={WatchImage} alt={WatchImage} height="400px" width="400px" /> */}
+        {codydetails?.map((menu, idx) => {
           return (
             <div className="flex_box" key={idx}>
               <div className="box_hover">
-                <Link to="watchcodydetail/:id">
+                <div
+                  className="flex-imgbox"
+                  onClick={() =>
+                    history.push(`/watchcodydetail/${menu.codyId}`)
+                  }
+                >
                   <img size="15%" src={menu.imageUrl} />
-                </Link>
+                </div>
               </div>
               <p className="artist_name">{menu.codyContent}</p>
             </div>

@@ -63,19 +63,20 @@ const WatchCodyWrite = (props) => {
     );
   };
 
-  // useEffect(
-  //   (files) => {
-  //     if (images.length < 1) return;
-  //     const newImageUrl = [];
-  //     images.forEach((image) => newImageUrl.push(URL.createObjectURL(image)));
-  //     setImageURL(newImageUrl);
-
-  //   },
-  //   [images]
-  // );
-
   const onChange = (e) => {
     if (e.target.files) {
+      // useEffect(
+      //   (files) => {
+      //     if (images.length < 1) return;
+      //     const newImageUrl = [];
+      //     images.forEach((image) =>
+      //       newImageUrl.push(URL.createObjectURL(image))
+      //     );
+      //     setImageURL(newImageUrl);
+      //   },
+      //   [images]
+      // );
+
       setImages(e.target.files[0]);
     }
   };

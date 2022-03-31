@@ -91,7 +91,7 @@ const CartPage = () => {
         {CartpageList?.myLikeList?.map((menu, idx) => {
           return (
             <div className="flex_box" key={idx}>
-              <img size="15%" src={menu.watchImageUrl} />
+              <img size="15%" src={menu.watchImage} />
 
               <div className="box_name">
                 <p style={{ fontSize: "20px" }}>{menu.watchBrand}</p>

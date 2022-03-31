@@ -26,9 +26,7 @@ function App() {
       <Route path="/adminsignup" component={AdminSignup} />
       {/* ///////////////////// */}
       <Route path="/mywatchcodywrite" component={MyWatchCodyWrite} />
-
       <Route path="/watchcodydetail/:id" component={WatchCodyDetail} />
-      <Route path="/watchcodymainpage/:id" component={WatchCodyMainPage} />
       <Route path="/watchcodymainpage" component={WatchCodyMainPage} />
       <Route path="/watchcodyupdate/:id" component={WatchCodyUpdate} />
       <Route path="/watchcodywrite" component={WatchCodyWrite} />
