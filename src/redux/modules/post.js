@@ -17,6 +17,7 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
 const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
 const editPost = createAction(EDIT_POST, (post, postId) => ({ post, postId }));
+const getcodyPost = createAction(GET_POST, (post_list) => ({ post_list }));
 
 const like = createAction(LIKE, (like) => ({
   like,
@@ -43,6 +44,21 @@ const getPostFB = (watchId) => {
       console.log(response.data);
       dispatch(getPost(response.data));
       dispatch(commentActions.getComment(response.data.commentResponseDtoList));
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+};
+
+const getCodyPostFB = (codyId) => {
+  return async (dispatch, getState, { history }) => {
+    try {
+      const response = await apis.getcodyPostComment(codyId);
+      console.log(response.data);
+      dispatch(getcodyPost(response.data));
+      dispatch(
+        commentActions.getcodyComment(response.data.commentResponseDtoList)
+      );
     } catch (err) {
       console.log(err.response);
     }
@@ -105,7 +121,8 @@ const editPostDB = (title, brand, model, content, files, Value, codyId) => {
       )
       .then((res) => {
         console.log(res.data);
-        dispatch(editPost(res.data));
+        dispatch(editPost(res.data, codyId));
+        console.log(res.data);
       });
   };
 };
@@ -169,18 +186,12 @@ export default handleActions(
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.find((a) => {
-          if (a.postId === action.payload.postId) {
-            a.title = action.payload.post;
-            a.brand = action.payload.post;
-            a.model = action.payload.post;
-            a.content = action.payload.post;
-            a.files = action.payload.post;
-            a.Value = action.payload.post;
-          }
-          return a;
-        });
+        const edit_post = draft.postdetail.find(
+          (a) => a.codyId === action.payload.postId
+        );
+        edit_post.postdetail = action.payload.post;
       }),
+
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list = draft.list.filter(
@@ -217,6 +228,7 @@ const actionCreators = {
   deletePostDB,
   deletePost,
   editPost,
+  getCodyPostFB,
 };
 
 export { actionCreators };

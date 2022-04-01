@@ -34,10 +34,11 @@ export const apis = {
   //----- 조회 -----//
   mainPage: () => instance.get("/main"),
   categoryPage: () => instance.get("/api/watch/category"),
-  // watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
+  watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
   // getPostapi: () => instance.get("/api/cody"),
   getPostComment: (watchId) => instance.get(`/api/detail/${watchId}`),
+  getcodyPostComment: (codyId) => instance.get(`/api/detail/${codyId}`),
   // -----상세페이지 조회-----
   detailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   detailButtonPage: (watchId) => instance.get(`/api/like/${watchId}`),

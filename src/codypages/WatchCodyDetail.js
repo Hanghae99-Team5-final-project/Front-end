@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { setCookie } from "../Cookie";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
-
-import CommentDetail from "../components/CommentDetail";
+import { history } from "../redux/configStore";
+import CommentCodyDetail from "../components/CommentCodyDetail";
 const WatchCodyDetailBlock = styled.div`
   .lb-review {
   }
@@ -16,10 +16,14 @@ const WatchCodyDetailBlock = styled.div`
     color: steelblue;
     cursor: pointer;
   }
+  .cody-box {
+    width: 100%;
+    height: 100px;
+  }
 `;
 function WatchCodyDetail(props) {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const { id } = useParams();
   const codyId = id;
   console.log(id);
@@ -33,27 +37,25 @@ function WatchCodyDetail(props) {
     console.log("되라 제발");
 
     console.log("에러에러에러");
-    dispatch(postActions.getPostFB(codyId));
+    dispatch(postActions.getCodyPostFB(codyId));
   }, []);
 
   return (
     <div>
       <WatchCodyDetailBlock>
         <div className="lb-icons">
+          <div className="cody-box">{codydetails?.codyTitle}</div>
           <div onClick={() => history.push(`/watchcodyupdate/${codyId}`)}>
-            {codydetails.codyTitle}
             <img
-              src={codydetails.imageUrl}
-              alt={codydetails.imageUrl}
-              height="400px"
-              width="400px"
+              src={codydetails?.imageUrl}
+              alt={codydetails?.imageUrl}
+              height="300px"
+              width="300px"
             />
-
-            {codydetails.codyContent}
-
-            <CommentDetail watchId={codyId} />
           </div>
+          <div className="cody-box"> {codydetails?.codyContent}</div>
         </div>
+        <CommentCodyDetail codyId={codyId} />
       </WatchCodyDetailBlock>
     </div>
   );

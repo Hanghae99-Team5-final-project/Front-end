@@ -13,6 +13,10 @@ const LOADING = "LOADING";
 const getComment = createAction(GET_COMMENT, (comments) => ({
   comments,
 }));
+
+const getcodyComment = createAction(GET_COMMENT, (comments) => ({
+  comments,
+}));
 const addComment = createAction(ADD_COMMENT, (comment_data) => ({
   comment_data,
 }));
@@ -46,7 +50,7 @@ const addCommentCodyFB = (
   commentContent,
   commentId,
   createdAt,
-  watchId
+  codyId
 ) => {
   console.log(commentId);
   return async function (dispatch, getState, { history }) {
@@ -56,7 +60,7 @@ const addCommentCodyFB = (
         commentContent,
         commentId,
         createdAt,
-        watchId
+        codyId
       );
 
       dispatch(
@@ -171,6 +175,7 @@ const actionCreators = {
   deleteCommentFB,
   getCommentFB,
   editCommentDB,
+  getcodyComment,
 };
 
 export { actionCreators };

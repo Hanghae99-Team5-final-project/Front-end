@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionsCreators as codyDetailActions } from "../redux/modules/codydetail";
+import { history } from "../redux/configStore";
 const WatchCodyMainPageBlock = styled.div`
   .container {
     display: flex;
@@ -65,7 +66,7 @@ const WatchCodyMainPage = () => {
   // const WatchImage = useSelector((state) => state.codydetail.watchImage);
   // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
-  const history = useHistory();
+
   console.log(codydetails);
 
   React.useEffect(() => {
