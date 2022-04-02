@@ -6,6 +6,7 @@ import { idCheck, emailCheck, pwdCheck } from "../common";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import "../App.css";
 
 const Signup = () => {
   const [id, setId] = useState("");
@@ -61,6 +62,7 @@ const Signup = () => {
   };
 
   return (
+
     <SignupWrap className="lm-media">
       <Text margin="20px 0px 8px 0px">아이디</Text>
       <div className="flex-box">
@@ -114,24 +116,91 @@ const Signup = () => {
         value={email}
       />
 
-      <Button
-        _onClick={() => {
-          signup();
-        }}
-      >
-        회원가입
-      </Button>
-    </SignupWrap>
+    <div className="wrap">
+      <div className="center">
+        <SignupWrap>
+          <div className="title">SIGN UP</div>
+          <div className="description">
+            <span className="top">Spring Watch에 오신것을 환영합니다. </span>
+            <span>
+              회원가입하신 후 Spring Watch의다양한 서비스를 이용해보세요.
+            </span>
+          </div>
+          <div className="input-wrap">
+            <span>*</span>
+            <label className="input-title">아이디</label>
+            <input type="text" />
+          </div>
+          <div className="input-wrap">
+            <span>*</span>
+            <label className="input-title">비밀번호</label>
+            <input type="password" />
+          </div>
+          <div className="input-wrap">
+            <span>*</span>
+            <label className="input-title">이메일</label>
+            <input type="text" />
+          </div>
+
+
+          <div className="btn-wrap">
+            <button className="long-btn" type="button">
+              회원가입
+            </button>
+          </div>
+        </SignupWrap>
+      </div>
+    </div>
   );
 };
 
 export default Signup;
 
 const SignupWrap = styled.div`
-  margin: 0 auto;
-  transition: 0.5s;
-  text-align: center;
-  width: 50%;
+  margin: auto;
+  max-width: 70rem;
+  padding: 3rem;
+
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    color: #353535;
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+  }
+
+  .description {
+    margin: 9rem 0;
+    .top {
+      font-size: 2rem;
+      font-weight: bold;
+      padding-bottom: 2rem;
+    }
+
+    span {
+      font-size: 1.8rem;
+    }
+  }
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    height: 11rem;
+
+    span {
+      color: #ff0000;
+      margin-right: 3rem;
+    }
+
+    .input-title {
+      width: 10rem;
+      margin: 0;
+    }
+  }
+
+  .btn-wrap {
+    margin-top: 4rem;
+  }
 
   @media (min-width: 992px) {
     .lm-media {

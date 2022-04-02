@@ -26,8 +26,8 @@ export default function WatchCard(props) {
           <img src={watchImageUrl} alt="watchImg" />
         </div>
         <div className="content-area">
-          <label className="title">{watchBrand}</label>
-          <span className="price">{lowestPrice}</span>
+          <label className="title">userName</label>
+          <span className="price">comment</span>
         </div>
       </CardWrap>
     </>
@@ -35,13 +35,14 @@ export default function WatchCard(props) {
 }
 
 const CardWrap = styled.div`
-  max-width: 30rem;
+  max-width: 26rem;
   text-align: left;
+  margin-right: 3rem;
 
   .img-area {
     margin-top: 2rem;
     width: 100%;
-    height: 30rem;
+    height: 24rem;
 
     img {
       width: 100%;
@@ -50,7 +51,8 @@ const CardWrap = styled.div`
   }
 
   .content-area {
-    padding: 4rem 4.3rem;
+    padding-top: 3rem;
+    padding-left: 1rem;
 
     .title {
     }
@@ -65,6 +67,7 @@ const CardWrap = styled.div`
       font-size: 1.8rem;
       line-height: 2.6rem;
       letter-spacing: 0.1em;
+      margin-bottom: 6rem;
     }
   }
 `;

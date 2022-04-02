@@ -7,6 +7,7 @@ import MoreButton from "../components/button/MoreButton";
 import ScrollTopButton from "../components/button/ScrollTopButton";
 import WatchCard from "../components/WatchCard";
 import { Link } from "react-router-dom";
+import topBanner from "../images/topBanner.png";
 
 export default function MainPage() {
   React.useEffect(() => {
@@ -25,6 +26,7 @@ export default function MainPage() {
 
   return (
     <div className="wrap">
+      <TopImg src={topBanner} alt="탑배너" />
       <div className="center">
         <MoreButton bg />
         <ScrollTopButton />
@@ -39,7 +41,7 @@ export default function MainPage() {
             {bestList &&
               bestList.slice(0, 4).map((data, i) => {
                 return (
-                  <Link to="/" key={i}>
+                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
                   </Link>
                 );
@@ -57,8 +59,9 @@ export default function MainPage() {
           <Card>
             {coupleList &&
               coupleList.slice(0, 4).map((data, i) => {
+                console.log(data);
                 return (
-                  <Link to="/" key={i}>
+                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
                   </Link>
                 );
@@ -72,6 +75,10 @@ export default function MainPage() {
     </div>
   );
 }
+
+const TopImg = styled.img`
+  width: 100%;
+`;
 
 const WatchCardWrap = styled.div`
   width: 100%;

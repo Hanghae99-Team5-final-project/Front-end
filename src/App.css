@@ -1,3 +1,4 @@
+/* Tag */
 * {
   margin: 0;
   padding: 0;
@@ -17,15 +18,60 @@ li {
   list-style: none;
 }
 
+input {
+  width: 100%;
+  height: 5rem;
+  border: 1px solid #000;
+}
+
+button {
+  background: transparent;
+}
+
+/* className */
+
 .wrap {
   width: 100%;
+  color: #353535;
 }
 
 .center {
   max-width: 1200px;
+  padding: 0 3rem;
   margin: auto;
 }
 
 .bg-color {
   background-color: #2b334d;
+}
+
+.input-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.long-btn {
+  width: 100%;
+  height: 8rem;
+  background: #555c79;
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.short-btn {
+  width: 20rem;
+  height: 5rem;
+  font-size: 1.6rem;
+  color: #000;
+  border-radius: 1rem;
+}
+
+.detail-btn {
+  width: 18rem;
+  height: 6rem;
+  font-size: 2.2rem;
+  background-color: #fff;
 }

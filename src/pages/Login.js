@@ -5,12 +5,8 @@ import Kakaologin from "../components/Kakaologin";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { deleteCookie, getCookie, setCookie } from "../Cookie";
-const LoginWrap = styled.div`
-  max-width: 1200px;
-  margin: auto;
-  text-align: center;
-  transition: 0.5s;
-`;
+import "../App.css";
+
 const Login = (props) => {
   const dispatch = useDispatch();
   const [username, setUsername] = React.useState("");
@@ -26,37 +22,56 @@ const Login = (props) => {
   };
   return (
     <React.Fragment>
-      <Kakaologin />
-      <LoginWrap>
-        <Text size="32px" bold>
-          로그인
-        </Text>
-        <Input
-          label="아이디"
-          placeholder="아이디를 입력해주세요."
-          value={username}
-          type="text"
-          _onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <Input
-          label="패스워드"
-          value={password}
-          placeholder="패스워드 입력해주세요."
-          type="password"
-          _onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <Button
-          text="로그인하기"
-          _onClick={() => {
-            login();
-          }}
-        ></Button>
-      </LoginWrap>
+      <div className="wrap">
+        <div className="center">
+          <LoginWrap>
+            <div className="title">LOGIN</div>
+            <div className="input-wrap">
+              <label className="input-title">아이디</label>
+              <input type="text" />
+            </div>
+            <div className="input-wrap">
+              <label className="input-title">비밀번호</label>
+              <input type="password" />
+            </div>
+
+            <div className="btn-wrap">
+              <button type="button" className="long-btn">
+                로그인
+              </button>
+              <button type="button" className="long-btn">
+                회원가입
+              </button>
+            </div>
+          </LoginWrap>
+        </div>
+      </div>
     </React.Fragment>
   );
 };
+
+const LoginWrap = styled.div`
+  max-width: 60rem;
+  margin: auto;
+  padding: 3rem;
+  padding-bottom: 30rem;
+
+  .title {
+    text-align: center;
+    font-size: 3rem;
+    color: #353535;
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+  }
+
+  .input-wrap {
+    color: #353535;
+    margin-bottom: 3rem;
+  }
+
+  .btn-wrap {
+    padding-top: 3rem;
+  }
+`;
+
 export default Login;
