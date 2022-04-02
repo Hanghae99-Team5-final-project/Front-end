@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { actionsCreators as codyDetailActions } from "../redux/modules/codydetail";
+import { actionCreators as codyDetailActions } from "../redux/modules/post";
 import { history } from "../redux/configStore";
 const WatchCodyMainPageBlock = styled.div`
   .container {
@@ -62,7 +62,7 @@ const WatchCodyMainPageBlock = styled.div`
 `;
 const WatchCodyMainPage = () => {
   const dispatch = useDispatch();
-  const codydetails = useSelector((state) => state.codydetail.codyDetail);
+  const codydetails = useSelector((state) => state.codydetail.codyMain);
   // const WatchImage = useSelector((state) => state.codydetail.watchImage);
   // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
@@ -70,7 +70,7 @@ const WatchCodyMainPage = () => {
   console.log(codydetails);
 
   React.useEffect(() => {
-    dispatch(codyDetailActions.getCodyDetailFB());
+    dispatch(codyDetailActions.getCodyMainFB());
   }, []);
 
   return (

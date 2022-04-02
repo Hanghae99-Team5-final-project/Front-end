@@ -15,17 +15,21 @@ const Signup = () => {
   const [idDup, setidDup] = useState(false);
   const dispatch = useDispatch();
   const checkId = (id) => {
-    // axios
-    //   .post("http://3.35.167.81:8080/user/redunancy", {
-    //     username: id,
-    //   })
-    //   .then((res) => {
-    //     setidDup(true);
-    //     alert("사용가능한 아이디 입니다.");
-    //   })
-    //   .catch((err) => {
-    //     alert(err.response.data.errorMessage);
-    //   });
+    axios
+      .post("http://3.35.220.13:8080/user/redunancy", {
+        username: id,
+      })
+      .then((res) => {
+        if (res.data) {
+          setidDup(true);
+          alert("사용가능한 아이디 입니다.");
+        } else {
+          alert("이미 사용중인 아이디 입니다.");
+        }
+      })
+      .catch((err) => {
+        alert(err.response.data.errorMessage);
+      });
   };
 
   const signup = () => {
@@ -37,10 +41,10 @@ const Signup = () => {
       window.alert("아이디 형식이 맞지 않습니다!");
       return;
     }
-    // if (idDup === false) {
-    //   alert("아이디 중복확인을 해주세요.");
-    //   return false;
-    // }
+    if (idDup === false) {
+      alert("아이디 중복확인을 해주세요.");
+      return false;
+    }
     if (!emailCheck(email)) {
       window.alert("이메일 형식이 맞지 않습니다!");
       return;
@@ -67,7 +71,7 @@ const Signup = () => {
           placeholder=""
           value={id}
         />
-        {/* <button
+        <button
           className="checkid"
           onClick={() => {
             if (!idCheck(id)) {
@@ -78,7 +82,7 @@ const Signup = () => {
           }}
         >
           중복 확인
-        </button> */}
+        </button>
       </div>
       <Text margin="0px 0px 8px 0px ">비밀번호</Text>
       <UserInput
