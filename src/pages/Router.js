@@ -32,9 +32,8 @@ function App() {
       <Route path="/watchcodymainpage" component={WatchCodyMainPage} />
       <Route path="/watchcodyupdate/:id" component={WatchCodyUpdate} />
       <Route path="/watchcodywrite" component={WatchCodyWrite} />
-      <Route path="/watchdetail" component={WatchDetail} />
       <Route path="/watchdetail/:id" component={WatchDetail} />
-      <Route path="/watchpage" component={WatchPage} />
+      <Route path="/watchdetail" component={WatchPage} />
       <Route path="/" component={MainPage} />
       <Redirect from="*" to="/" />
     </Switch>

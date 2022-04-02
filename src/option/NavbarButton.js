@@ -87,30 +87,18 @@ function NavbarButton() {
       <img src={logo01} alt="logo01" className="logo-img img2" />
       <nav className="is-mb">
         <div className="nav-wrap">
-          <div className="logo">
-            <Link to="/">
-              <img src={logo02} alt="logoImage" />
-            </Link>
-          </div>
-          <ul className="title-wrap">
-            <li>
-              <GiHamburgerMenu size="30" />
-            </li>
-          </ul>
+          <GiHamburgerMenu size="30" className="hamburger" />
+          <ul className="title-wrap"></ul>
         </div>
       </nav>
 
       <nav className="is-pc">
         <div className="nav-wrap">
-          <div className="logo">
-            <Link to="/">
-              <img src={logo02} alt="logoImage" />
-            </Link>
-          </div>
+          <GiHamburgerMenu size="30" className="hamburger" />
 
           <ul className="title-wrap">
             <NavLink
-              to="/watchpage"
+              to="/watchdetail"
               activeStyle={{ color: "red", textDecoration: "underline" }}
             >
               WATCH
@@ -121,35 +109,6 @@ function NavbarButton() {
             >
               STYLE
             </NavLink>
-            {!isLogin && (
-              <NavLink
-                to="/login"
-                activeStyle={{ color: "red", textDecoration: "underline" }}
-              >
-                LOGIN
-              </NavLink>
-            )}
-            {isLogin && (
-              <button type="button" onClick={signOut}>
-                LOGOUT
-              </button>
-            )}
-
-            <NavLink
-              to="/cartpage"
-              activeStyle={{ color: "red", textDecoration: "underline" }}
-            >
-              CART
-            </NavLink>
-            <NavLink
-              to="/signup"
-              activeStyle={{ color: "red", textDecoration: "underline" }}
-            >
-              SIGN_UP
-            </NavLink>
-            <li>
-              <GiHamburgerMenu size="30" />
-            </li>
           </ul>
         </div>
       </nav>
@@ -234,21 +193,9 @@ const Navbar = styled.div`
       position: relative;
       width: 100%;
 
-      .logo {
-        color: white;
-        width: 100px;
-        height: 60px;
-        cursor: pointer;
-        color: white;
-        font-size: 30px;
-        line-height: 1;
-        font-weight: bold;
+      .hamburger {
         position: absolute;
-        left: 20px;
-
-        img {
-          width: 100%;
-        }
+        left: 0;
       }
 
       .title-wrap {
@@ -257,7 +204,6 @@ const Navbar = styled.div`
         padding: 0;
         margin: 0;
         position: absolute;
-        right: 20px;
 
         > a {
           padding: 3%;
@@ -275,9 +221,6 @@ const Navbar = styled.div`
   }
 
   @media (min-width: 768px) {
-    .logo-img {
-      width: 270px;
-    }
   }
 
   @media (min-width: 992px) {
