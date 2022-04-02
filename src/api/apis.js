@@ -34,16 +34,19 @@ export const apis = {
   //----- 조회 -----//
   mainPage: () => instance.get("/main"),
   categoryPage: () => instance.get("/api/watch/category"),
-  // watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
+  watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
   // getPostapi: () => instance.get("/api/cody"),
   getPostComment: (watchId) => instance.get(`/api/detail/${watchId}`),
+  getcodyPostComment: (codyId) => instance.get(`/api/detail/${codyId}`),
   // -----상세페이지 조회-----
   detailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   detailButtonPage: (watchId) => instance.get(`/api/like/${watchId}`),
   sendLike: (watchId) => instance.post(`/api/like/create/${watchId}`),
   deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
-  codyDetail: () => instance.get("/api/cody"),
+  // codyDetail: () => instance.get("/api/cody"),
+  codymainPage: () => instance.get("/api/cody?page=0&size=5"),
+
   //  -------포스트-----
 
   // addPostData: (
@@ -77,7 +80,10 @@ export const apis = {
   //     "Content-Type": "multipart/form-data",
   //   },
   // }),
-  //----- 댓글 ------///
+
+  deletePost: (codyId) => instance.delete(`/api/cody/${codyId}`),
+  // ----- 댓글 ------///
+
   getComment: (watchId) => instance.get(`/watch/${watchId}`),
 
   addCommentCody: (commentUser, commentContent, codyId, createdAt) =>
