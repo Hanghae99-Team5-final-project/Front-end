@@ -36,7 +36,7 @@ export const apis = {
   categoryPage: () => instance.get("/api/watch/category"),
   watchDetailPage: (watchId) => instance.get(`/api/detail/${watchId}`),
   cartPage: () => instance.get("/api/user/like"),
-  // getPostapi: () => instance.get("/api/cody"),
+  getPostapi: () => instance.get("/api/cody"),
   getPostComment: (watchId) => instance.get(`/api/detail/${watchId}`),
   getcodyPostComment: (codyId) => instance.get(`/api/detail/${codyId}`),
   // -----상세페이지 조회-----
@@ -46,7 +46,7 @@ export const apis = {
   deleteLike: (likesId) => instance.delete(`/api/like/delete/${likesId}`),
   // codyDetail: () => instance.get("/api/cody"),
   codymainPage: () => instance.get("/api/cody?page=0&size=5"),
-
+  codyDetailPage: (codyId) => instance.get(`/api/cody/detail/${codyId}`),
   //  -------포스트-----
 
   // addPostData: (

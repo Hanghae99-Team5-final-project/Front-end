@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-<<<<<<< HEAD
+import { actionCreators as codyDetailActions } from "../redux/modules/post";
 import { actionsCreators as CategorylistActions } from "../redux/modules/category";
 import "../App.css";
 import CodyCard from "../components/CodyCard";
-
-=======
-import { actionsCreators as codyDetailActions } from "../redux/modules/codydetail";
 import { history } from "../redux/configStore";
 const WatchCodyMainPageBlock = styled.div`
   .container {
@@ -66,14 +63,13 @@ const WatchCodyMainPageBlock = styled.div`
     }
   }
 `;
->>>>>>> 26ca1dfebb8ddec21cc99eb8fc27cf6f34ece0e8
 const WatchCodyMainPage = () => {
   React.useEffect(() => {
     dispatch(CategorylistActions.getCategoryListFB());
   }, []);
 
   const dispatch = useDispatch();
-  const codydetails = useSelector((state) => state.codydetail.codyDetail);
+  const codydetails = useSelector((state) => state.codydetail.codyMain);
   // const WatchImage = useSelector((state) => state.codydetail.watchImage);
   // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
@@ -81,10 +77,10 @@ const WatchCodyMainPage = () => {
   console.log(codydetails);
 
   React.useEffect(() => {
-    dispatch(codyDetailActions.getCodyDetailFB());
+    dispatch(codyDetailActions.getCodyMainFB());
   }, []);
 
-<<<<<<< HEAD
+
   const CategoryList = useSelector(({ category }) => category.categoryList);
 
   return (
@@ -118,7 +114,7 @@ const WatchCodyMainPage = () => {
             </button>
           </div>
         </WatchPageWrap>
-=======
+
   return (
     <WatchCodyMainPageBlock>
       <div className="flex-item">
@@ -140,7 +136,7 @@ const WatchCodyMainPage = () => {
             </div>
           );
         })}
->>>>>>> 26ca1dfebb8ddec21cc99eb8fc27cf6f34ece0e8
+
       </div>
     </div>
   );

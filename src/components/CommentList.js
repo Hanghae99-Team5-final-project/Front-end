@@ -9,7 +9,7 @@ const CommentList = (props) => {
   return (
     <React.Fragment>
       <Wrap>
-        {commentData.map((p, i) => {
+        {commentData?.map((p, i) => {
           return <CommentItem key={i} {...p}></CommentItem>;
         })}
       </Wrap>
