@@ -51,19 +51,24 @@ const CommentItem = (props) => {
         </Text>
 
         <div mTop="8px">
-          <Input
-            type="text"
-            placeholder="댓글을 입력해주세요"
-            _onChange={changeEditComment}
-            value={edit_comment}
-          />
-          <FaPencilAlt role="button" onClick={clickEditComment}>
-            수정
-          </FaPencilAlt>
+          {open_edit && (
+            <>
+              <Input
+                type="text"
+                placeholder="댓글을 입력해주세요"
+                _onChange={changeEditComment}
+                value={edit_comment}
+              />
+              <FaPencilAlt role="button" onClick={clickEditComment}>
+                수정
+              </FaPencilAlt>
+            </>
+          )}
+
           <FaPencilAlt
             role="button"
             onClick={() => {
-              setOpenEdit(false);
+              setOpenEdit(true);
               setComment("");
             }}
           >

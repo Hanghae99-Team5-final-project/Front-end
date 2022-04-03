@@ -5,11 +5,11 @@ import axios from "axios";
 import { actionCreators as commentActions } from "./comment";
 
 const GET_POST = "GET_POST";
-const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
 const DELETE_POST = "DELETE_POST";
 const EDIT_POST = "EDIT_POST";
-
+const GET_CODYMAIN = "GET_CODYMAIN";
+const GET_CODYDETAIL = "GET_CODYDETAIL";
 const LIKE = "LIKE";
 const LIKE_ID = "LIKE_ID";
 
@@ -18,10 +18,17 @@ const getPost = createAction(GET_POST, (post_list) => ({ post_list }));
 const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
 const editPost = createAction(EDIT_POST, (post, postId) => ({ post, postId }));
 const getcodyPost = createAction(GET_POST, (post_list) => ({ post_list }));
+const getCodyMain = createAction(GET_CODYMAIN, (codyMain) => ({
+  codyMain,
+}));
+const getCodyDetail = createAction(GET_CODYDETAIL, (codyDetail) => ({
+  codyDetail,
+}));
 
 const like = createAction(LIKE, (like) => ({
   like,
 }));
+
 const likeId = createAction(LIKE_ID, (likeId) => ({ likeId }));
 
 const token = localStorage.getItem("token");
@@ -35,6 +42,8 @@ const initialState = {
     likes: null,
     result: {},
   },
+  codyMain: null,
+  codyDetail: null,
 };
 
 const getPostFB = (watchId) => {
@@ -65,9 +74,47 @@ const getCodyPostFB = (codyId) => {
   };
 };
 
+const getCodyMainFB = () => {
+  console.log("도착1");
+  return async (dispatch) => {
+    try {
+      console.log("도착2");
+      const res = await apis.codymainPage();
+      console.log();
+      const codyMain = res.data;
+      console.log(codyMain);
+      dispatch(getCodyMain(codyMain));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+const getCodyDetailFB = (codyId) => {
+  console.log("도착1");
+  return async (dispatch) => {
+    try {
+      console.log("도착2");
+      const res = await apis.codyDetailPage(codyId);
+      console.log();
+      const doc = {
+        userId: res.data.userId,
+        watchModel: res.data.watchModel,
+        codyTitle: res.data.codyTitle,
+        imageUrl: res.data.imageUrl,
+        codyContent: res.data.codyContent,
+      };
+      console.log();
+      dispatch(getCodyDetail(doc));
+      dispatch(commentActions.getComment(res.data.commentResponseDtoList));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 const addPostFB = (title, brand, model, content, files, Value) => {
   return async (dispatch, getState, { history }) => {
-    console.log(files);
     let formData = new FormData();
 
     formData.append("codyTitle", title);
@@ -132,14 +179,13 @@ const deletePostDB = (postId) => {
     await apis.deletePost(postId).then((res) => {
       dispatch(deletePost(postId));
       console.log(res);
-      // window.alert("삭제가 완료되었습니다.");
-
-      // window.location.reload();
+      history.replace("/watchcodymainpage");
     });
   };
 };
 
 const likePostFB = (watchId) => {
+  console.log(watchId);
   return async (dispatch, getstate, { history }) => {
     dispatch(like(true));
     const response = await apis.sendLike(watchId);
@@ -157,6 +203,7 @@ const deleteDB = (data) => {
 };
 
 const getDetail = (watchId) => {
+  console.log(watchId);
   return async (dispatch, getstate, { history }) => {
     const response = await apis.detailPage(watchId);
     console.log(response);
@@ -182,20 +229,22 @@ export default handleActions(
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.post;
+        draft.codyMain = [action.payload.post, ...draft.codyMain];
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {
-        const edit_post = draft.postdetail.find(
-          (a) => a.codyId === action.payload.postId
-        );
-        edit_post.postdetail = action.payload.post;
+        draft.codyMain = draft.codyMain.map((a, i) => {
+          if (a.codyId === action.payload.postId) {
+            a = action.payload.post;
+          }
+          return a;
+        });
       }),
 
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = draft.list.filter(
-          (c) => c.postId !== action.payload.postId
+        draft.codyMain = draft.codyMain.filter(
+          (c) => c.codyId !== action.payload.postId
         );
       }),
     [LIKE]: (state, action) =>
@@ -207,6 +256,14 @@ export default handleActions(
       produce(state, (draft) => {
         console.log("change)");
         draft.likeId = action.payload.likeId;
+      }),
+    [GET_CODYMAIN]: (state, action) =>
+      produce(state, (draft) => {
+        draft.codyMain = action.payload.codyMain;
+      }),
+    [GET_CODYDETAIL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.codyDetail = action.payload.codyDetail;
       }),
   },
 
@@ -229,6 +286,8 @@ const actionCreators = {
   deletePost,
   editPost,
   getCodyPostFB,
+  getCodyMainFB,
+  getCodyDetailFB,
 };
 
 export { actionCreators };

@@ -12,16 +12,12 @@ const WatchCodyMainPage = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const codydetails = useSelector((state) => state.codydetail.codyDetail);
+  const codydetails = useSelector((state) => state.codydetail.codyMain);
   // const WatchImage = useSelector((state) => state.codydetail.watchImage);
   // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
 
   console.log(codydetails);
-
-  React.useEffect(() => {
-    dispatch(CategorylistActions.getCodyDetailFB());
-  }, []);
 
   const CategoryList = useSelector(({ category }) => category.categoryList);
 

@@ -27,7 +27,7 @@ function WatchDetail(props) {
   const WatchImage = useSelector((state) => state.post.postdetail.watchImage);
   const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
-
+  console.log(watchId);
   console.log(WatchImage);
   console.log("likeId" + likeId);
 

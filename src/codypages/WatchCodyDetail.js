@@ -29,26 +29,30 @@ function WatchCodyDetail(props) {
   console.log(id);
 
   const token = localStorage.getItem("token");
-  const _codydetails = useSelector((state) => state.codydetail.codyDetail);
-  const codydetails = _codydetails?.find((a) => a.codyId === +codyId);
+  const codydetails = useSelector((state) => state.post.codyDetail);
+  // const codydetails = _codydetails?.find((a) => a.codyId === +codyId);
   console.log(codydetails);
 
   React.useEffect(() => {
-    console.log("되라 제발");
-
-    console.log("에러에러에러");
-    dispatch(postActions.getCodyPostFB(codyId));
+    dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
 
   return (
     <div>
       <WatchCodyDetailBlock>
+        <button
+          onClick={() => {
+            dispatch(postActions.deletePostDB(codyId));
+          }}
+        >
+          삭제하기
+        </button>
         <div className="lb-icons">
           <div className="cody-box">{codydetails?.codyTitle}</div>
           <div onClick={() => history.push(`/watchcodyupdate/${codyId}`)}>
             <img
               src={codydetails?.imageUrl}
-              alt={codydetails?.imageUrl}
+              alt="시계 이미지"
               height="300px"
               width="300px"
             />
