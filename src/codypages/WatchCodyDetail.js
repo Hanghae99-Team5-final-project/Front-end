@@ -50,23 +50,31 @@ function WatchCodyDetail(props) {
       <div className="center">
         <WatchCodyDetailWrap>
           <div className="description-area">
-            <label className="title">제목</label>
-            <img src="" alt="img" />
-            <label className="brand">브랜드</label>
-            <span className="model">모델</span>
-            <div className="content">내용</div>
+            <label className="title">{codydetails?.codyTitle}</label>
+            <img src={codydetails?.imageUrl} alt="시계 이미지" />
+            <label className="brand">{codydetails?.watchBrand}</label>
+            <span className="model">{codydetails?.watchModel}</span>
+            <div className="content">{codydetails?.codyContent}</div>
             <div className="btn-wrap">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => history.push(`/watchcodyupdate/${codyId}`)}
+              >
                 <img src={Edit} alt="edit" />
               </button>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(postActions.deletePostDB(codyId));
+                }}
+              >
                 <img src={Trash} alt="trash" />
               </button>
             </div>
           </div>
           <div className="content-area">
             <label className="title">댓글 작성</label>
-            <input type="text" />
+            <CommentCodyDetail codyId={codyId} />
             <div className="rating">
               <div className="star">평점</div>
               <button type="button">등록하기</button>
@@ -159,7 +167,6 @@ const WatchCodyDetailWrap = styled.div`
   }
 
   .content-area {
-
     input {
       background: #f2f2f2;
       margin-bottom: 2.4rem;
@@ -176,7 +183,7 @@ const WatchCodyDetailWrap = styled.div`
 
       button {
         font-size: 1.4rem;
-        opacity: .8;
+        opacity: 0.8;
         width: 8rem;
         height: 3rem;
       }
@@ -213,10 +220,8 @@ const WatchCodyDetailWrap = styled.div`
       .comment {
         font-size: 1.6rem;
       }
-
-      
-      
     }
+  }
 `;
 
 export default WatchCodyDetail;

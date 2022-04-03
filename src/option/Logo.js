@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MainLogo from "../images/logo3.jpg";
 import Lock from "../svg/Lock.svg";
@@ -10,15 +11,23 @@ const Logo = () => {
     <div>
       <LogoBlock>
         <div className="logo">
-          <img src={MainLogo} alt="logo3" />
+          <Link to="/">
+            <img src={MainLogo} alt="logo3" />
+          </Link>
         </div>
         <div className="flex-item">
           <img style={{ marginRight: "10px" }} src={Lock} alt="logo3" />
-          <p>LOGIN</p>
+          <Link to="/login">
+            <p>LOGIN</p>
+          </Link>
           <img style={{ marginRight: "10px" }} src={ShoppingCart} alt="logo3" />
-          <p>CART</p>
+          <Link to="/cartpage">
+            <p>CART</p>
+          </Link>
           <img style={{ marginRight: "10px" }} src={User} alt="logo3" />
-          <p>MY PAGE</p>
+          <Link to="/signup">
+            <p>SIGN UP</p>
+          </Link>
         </div>
       </LogoBlock>
     </div>

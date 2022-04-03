@@ -89,34 +89,43 @@ const WatchCodyWrite = (props) => {
         <WatchCodyWriteWrap>
           <div className="input-wrap">
             <label className="input-title">제목</label>
-            <input type="text" />
+            <input type="text" onChange={changetitle} value={title} />
           </div>
           <div className="input-wrap">
             <label className="input-title">시계 브랜드</label>
-            <input type="text" />
+            <input type="text" onChange={changebrand} value={brand} />
           </div>
           <div className="input-wrap">
             <label className="input-title">시계 모델</label>
-            <input type="text" />
+            <input type="text" onChange={changemodel} value={model} />
           </div>
 
-          <textarea></textarea>
+          <textarea
+            onChange={changeContent}
+            value={content}
+            placeholder="내용"
+          />
 
           <div className="input-wrap">
             <label className="input-title file" for="img">
               이미지 첨부
             </label>
-            <input type="file" id="img" className="file-input" />
+            <input
+              type="file"
+              id="img"
+              className="file-input"
+              onChange={onChange}
+            />
             <span class="upload">123</span>
           </div>
 
           <div className="input-wrap">
             <label className="input-title fill">평점</label>
-            <span>별</span>
+            <StarRating value={Value} changeValue={setValue} />
           </div>
 
           <div className="btn-wrap">
-            <button type="button" className="short-btn">
+            <button type="button" className="short-btn" onClick={submitHandler}>
               등록하기
             </button>
           </div>

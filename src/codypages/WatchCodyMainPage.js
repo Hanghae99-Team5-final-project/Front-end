@@ -2,49 +2,38 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { actionsCreators as CategorylistActions } from "../redux/modules/category";
+import { actionCreators as codyDetailActions } from "../redux/modules/post";
 import "../App.css";
 import CodyCard from "../components/CodyCard";
 
 const WatchCodyMainPage = () => {
-  React.useEffect(() => {
-    dispatch(CategorylistActions.getCategoryListFB());
-  }, []);
-
   const dispatch = useDispatch();
-  const codydetails = useSelector((state) => state.codydetail.codyMain);
+  const codydetails = useSelector((state) => state.post.codyMain);
   // const WatchImage = useSelector((state) => state.codydetail.watchImage);
   // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
   // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
 
   console.log(codydetails);
 
-  const CategoryList = useSelector(({ category }) => category.categoryList);
+  React.useEffect(() => {
+    dispatch(codyDetailActions.getCodyMainFB());
+  }, []);
 
   return (
     <div className="wrap">
       <div className="center">
         <WatchPageWrap>
           <div className="go-post">
-            <Link to="/">내 코디 글 쓰러가기</Link>
+            <Link to="/watchcodywrite">내 코디 글 쓰러가기</Link>
           </div>
           <Card>
-            {CategoryList &&
-              CategoryList.coupleList.map((data, i) => {
-                return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
-                    <CodyCard data={data} />
-                  </Link>
-                );
-              })}
-            {CategoryList &&
-              CategoryList.digitalList.map((data, i) => {
-                return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
-                    <CodyCard data={data} />
-                  </Link>
-                );
-              })}
+            {codydetails?.map((menu, idx) => {
+              return (
+                <Link to={`/watchcodydetail/${menu.codyId}`} key={idx}>
+                  <CodyCard data={menu} />
+                </Link>
+              );
+            })}
           </Card>
           <div className="btn-wrap">
             <button type="button" className="short-btn">
