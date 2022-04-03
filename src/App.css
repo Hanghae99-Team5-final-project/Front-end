@@ -28,6 +28,10 @@ button {
   background: transparent;
 }
 
+img {
+  display: block;
+}
+
 /* className */
 
 .wrap {

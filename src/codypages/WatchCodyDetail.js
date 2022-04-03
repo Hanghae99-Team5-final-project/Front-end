@@ -7,20 +7,10 @@ import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configStore";
 import CommentCodyDetail from "../components/CommentCodyDetail";
-const WatchCodyDetailBlock = styled.div`
-  .lb-review {
-  }
-  .lb-icons {
-    display: inline-flex;
-    font-size: 40px;
-    color: steelblue;
-    cursor: pointer;
-  }
-  .cody-box {
-    width: 100%;
-    height: 100px;
-  }
-`;
+import Trash from "../images/Trash.png";
+import Edit from "../images/Edit.png";
+import "../App.css";
+
 function WatchCodyDetail(props) {
   const dispatch = useDispatch();
 
@@ -37,32 +27,196 @@ function WatchCodyDetail(props) {
     dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
 
+  const num = [
+    {
+      name: "홍길동",
+      createdAt: "1시간전",
+      comment: "안녕하세요",
+    },
+    {
+      name: "김길동",
+      createdAt: "5시간전",
+      comment: "잘봤습니다.",
+    },
+    {
+      name: "임길동",
+      createdAt: "하루전",
+      comment: "잘봤습니다.",
+    },
+  ];
+
   return (
-    <div>
-      <WatchCodyDetailBlock>
-        <button
-          onClick={() => {
-            dispatch(postActions.deletePostDB(codyId));
-          }}
-        >
-          삭제하기
-        </button>
-        <div className="lb-icons">
-          <div className="cody-box">{codydetails?.codyTitle}</div>
-          <div onClick={() => history.push(`/watchcodyupdate/${codyId}`)}>
-            <img
-              src={codydetails?.imageUrl}
-              alt="시계 이미지"
-              height="300px"
-              width="300px"
-            />
+    <div className="warp">
+      <div className="center">
+        <WatchCodyDetailWrap>
+          <div className="description-area">
+            <label className="title">제목</label>
+            <img src="" alt="img" />
+            <label className="brand">브랜드</label>
+            <span className="model">모델</span>
+            <div className="content">내용</div>
+            <div className="btn-wrap">
+              <button type="button">
+                <img src={Edit} alt="edit" />
+              </button>
+              <button type="button">
+                <img src={Trash} alt="trash" />
+              </button>
+            </div>
           </div>
-          <div className="cody-box"> {codydetails?.codyContent}</div>
-        </div>
-        <CommentCodyDetail codyId={codyId} />
-      </WatchCodyDetailBlock>
+          <div className="content-area">
+            <label className="title">댓글 작성</label>
+            <input type="text" />
+            <div className="rating">
+              <div className="star">평점</div>
+              <button type="button">등록하기</button>
+            </div>
+          </div>
+          <div className="comment-wrap">
+            <label className="title">댓글 10개</label>
+            {num.map((item, i) => {
+              return (
+                <div className="comment-area">
+                  <div className="info">
+                    <span className="user-name">{item.name}</span>
+                    <span className="create-at">{item.createdAt}</span>
+                  </div>
+                  <div className="comment">{item.comment}</div>
+                  <div className="btn-wrap">
+                    <button type="button">
+                      <img src={Edit} alt="edit" />
+                    </button>
+                    <button type="button">
+                      <img src={Trash} alt="trash" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </WatchCodyDetailWrap>
+      </div>
     </div>
   );
 }
+
+const WatchCodyDetailWrap = styled.div`
+  max-width: 60rem;
+  margin: auto;
+  .title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 3.5rem;
+  }
+
+  .btn-wrap {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+
+    button {
+      background-color: transparent;
+      border: none;
+
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  .description-area {
+    margin-top: 18rem;
+    margin-bottom: 13.5rem;
+    position: relative;
+
+    .title {
+      padding-top: 8rem;
+    }
+
+    img {
+      width: 60rem;
+      height: 50rem;
+      margin-bottom: 4rem;
+      border-radius: 1rem;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.6rem;
+    }
+
+    .model {
+      font-size: 1.6rem;
+      margin-bottom: 4.2rem;
+    }
+
+    .content {
+      font-size: 1.6rem;
+    }
+  }
+
+  .content-area {
+
+    input {
+      background: #f2f2f2;
+      margin-bottom: 2.4rem;
+    }
+
+    .rating {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+
+      .star {
+        font-size: 1.6rem;
+      }
+
+      button {
+        font-size: 1.4rem;
+        opacity: .8;
+        width: 8rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  .comment-wrap {
+    max-width: 106rem;
+    margin: auto;
+    position: relative;
+    margin-bottom: 26rem;
+
+    .comment-area {
+      display: flex;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      padding-left: 3rem;
+      border-bottom: 1px solid #bdbdbd;
+
+      .info {
+        width: 10rem;
+        .user-name {
+          font-size: 1.6rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .create-at {
+          font-size: 1.4rem;
+          opacity: 0.6;
+        }
+      }
+
+      .comment {
+        font-size: 1.6rem;
+      }
+
+      
+      
+    }
+`;
 
 export default WatchCodyDetail;

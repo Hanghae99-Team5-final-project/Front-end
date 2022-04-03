@@ -4,8 +4,10 @@ import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
-
 import { useHistory } from "react-router-dom";
+
+import "../App.css";
+
 const WatchCodyWrite = (props) => {
   const token = localStorage.getItem("token");
   const history = useHistory();
@@ -82,116 +84,112 @@ const WatchCodyWrite = (props) => {
   };
 
   return (
-    <div>
-      <WatchCodyWriteBlock>
-        <div className="container">
-          <div className="flex-box">
-            <input type="file" multiple accept="image/*" onChange={onChange} />
-            {imageURL.map((imageSrc, idx) => (
-              <img src={imageSrc} alt="imageSrc" key={idx} />
-            ))}
-
-            <InputGroup className="mb-3" style={{ height: "50px" }}>
-              <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>
-                <span style={{ marginLeft: "11px" }}>제목</span>
-              </InputGroup.Text>
-              <FormControl
-                onChange={changetitle}
-                value={title}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3" style={{ height: "50px" }}>
-              <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>
-                <span style={{ marginLeft: "7px" }}>브랜드</span>
-              </InputGroup.Text>
-              <FormControl
-                onChange={changebrand}
-                value={brand}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3" style={{ height: "50px" }}>
-              <InputGroup.Text id="basic-addon1" style={{ width: "80px" }}>
-                <span style={{ marginLeft: "11px" }}>모델</span>
-              </InputGroup.Text>
-              <FormControl
-                onChange={changemodel}
-                value={model}
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3" style={{ height: "300px" }}>
-              <FormControl
-                onChange={changeContent}
-                value={content}
-                placeholder="내용"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
-
-            <div className="lb-star">
-              <h5 className="lb-text">평점</h5>
-              <StarRating value={Value} changeValue={setValue} />
-            </div>
-            <Button
-              onClick={submitHandler}
-              className="lb-button"
-              variant="light"
-            >
-              등록하기
-            </Button>
+    <div className="wrap">
+      <div className="center">
+        <WatchCodyWriteWrap>
+          <div className="input-wrap">
+            <label className="input-title">제목</label>
+            <input type="text" />
           </div>
-        </div>
-      </WatchCodyWriteBlock>
+          <div className="input-wrap">
+            <label className="input-title">시계 브랜드</label>
+            <input type="text" />
+          </div>
+          <div className="input-wrap">
+            <label className="input-title">시계 모델</label>
+            <input type="text" />
+          </div>
+
+          <textarea></textarea>
+
+          <div className="input-wrap">
+            <label className="input-title file" for="img">
+              이미지 첨부
+            </label>
+            <input type="file" id="img" className="file-input" />
+            <span class="upload">123</span>
+          </div>
+
+          <div className="input-wrap">
+            <label className="input-title fill">평점</label>
+            <span>별</span>
+          </div>
+
+          <div className="btn-wrap">
+            <button type="button" className="short-btn">
+              등록하기
+            </button>
+          </div>
+        </WatchCodyWriteWrap>
+      </div>
     </div>
   );
 };
 
-const WatchCodyWriteBlock = styled.div`
-  .container {
-  }
-  .flex-box {
-    display: flex;
-    width: 80%;
-    margin: auto;
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-  }
-  .lb-text {
-    display: flex;
-    font-size: 35px;
+const WatchCodyWriteWrap = styled.div`
+  width: 100%;
+  margin-top: 23rem;
 
-    padding: 10px 30px;
-    border-radius: 10px;
-    background-color: rgb(233, 236, 239);
-    margin-inline-end: auto;
+  input {
+    background: #f2f2f2;
   }
-  .lb-button {
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: #e0e0e0;
-    width: 30%;
-    height: 7vh;
-    margin-top: 50px;
-    cursor: pointer;
-    :hover {
-      opacity: 0.3;
-      transition: all 500ms;
+
+  .fill {
+    background-color: #555c79;
+    color: #fff;
+    margin-bottom: 10rem;
+  }
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    margin-bottom: 2.5rem;
+
+    .input-title {
+      width: 100%;
+      max-width: 14rem;
+      margin: 0;
+      margin-right: 3rem;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .file {
+      cursor: pointer;
+      background: #555c79;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .upload {
+      height: 5rem;
+      background: #f2f2f2;
+      width: 100%;
+      display: flex;
+      align-items: center;
     }
   }
-  .lb-star {
-    display: flex;
-    margin-inline-end: auto;
+
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 50rem;
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+    background-color: #f2f2f2;
+  }
+
+  .btn-wrap {
+    text-align: center;
+    margin-bottom: 17rem;
   }
 `;
+
 export default WatchCodyWrite;
