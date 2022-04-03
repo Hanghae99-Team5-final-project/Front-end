@@ -4597,7 +4597,7 @@ cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
 
 create-react-app@^5.0.0:
   version "5.0.0"
-  resolved "https://registry.npmjs.org/create-react-app/-/create-react-app-5.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/create-react-app/-/create-react-app-5.0.0.tgz#443bb597f7fea2235f6c4570c4fb5da4d68d502f"
   integrity sha512-r1hJymk28l9HiGNatNq92txdua5pq5z4jHsYRG4g2BME7cDtRcCiuUsZzT1tPqjapSHT0Zwpwnp0gdTaqPzyBA==
   dependencies:
     chalk "^4.1.2"
@@ -6683,7 +6683,7 @@ global-prefix@^3.0.0:
 
 global@^4.4.0:
   version "4.4.0"
-  resolved "https://registry.npmjs.org/global/-/global-4.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/global/-/global-4.4.0.tgz#3e7b105179006a323ed71aafca3e9c57a5cc6406"
   integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
   dependencies:
     min-document "^2.19.0"

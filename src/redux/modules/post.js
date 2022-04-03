@@ -139,6 +139,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
       .then((res) => {
         console.log(res.data);
         dispatch(addPost(res.data));
+        history.replace("/watchcodymainpage");
       });
   };
 };
@@ -170,6 +171,7 @@ const editPostDB = (title, brand, model, content, files, Value, codyId) => {
         console.log(res.data);
         dispatch(editPost(res.data, codyId));
         console.log(res.data);
+        history.replace("/watchcodymainpage");
       });
   };
 };

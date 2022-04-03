@@ -74,16 +74,31 @@ function WatchDetail(props) {
       <div className="center">
         <DetailWrap>
           <div className="img-wrap">
-            <img src="" alt="detailImg" />
-            <label className="description">
-              세이코 SSB065J1 / 크로노그래프 남성 메탈시계
-            </label>
-            <span className="price">10,000원</span>
+            <img src={WatchImage} alt="시계 이미지" />
+            <label className="description">{WatchBrand}</label>
+            <span className="price">{LowestPrice}</span>
 
             <div className="btn-wrap">
               <button type="button" className="detail-btn like">
                 <span>찜하기</span>
-                <img src={likeImg} alt="좋아요" />
+                {!like_state && (
+                  <img
+                    src={emptyLike}
+                    alt="emptyLike"
+                    onClick={() => {
+                      sendLike();
+                    }}
+                  />
+                )}
+                {like_state && (
+                  <img
+                    src={Like}
+                    alt="Like"
+                    onClick={() => {
+                      deleteLike();
+                    }}
+                  />
+                )}
               </button>
               <button type="button" className="detail-btn color">
                 구매하기
@@ -105,6 +120,7 @@ function WatchDetail(props) {
                     <button type="button">
                       <img src={Edit} alt="edit" />
                     </button>
+                    ㅋㅋㅋㅋ
                     <button type="button">
                       <img src={Trash} alt="trash" />
                     </button>
@@ -116,7 +132,7 @@ function WatchDetail(props) {
             <div className="review-wrap">
               <div className="review">리뷰작성</div>
 
-              <input type="text" />
+              <CommentDetail watchId={watchId} />
               <button type="button" className="send-comment">
                 등록하기
               </button>

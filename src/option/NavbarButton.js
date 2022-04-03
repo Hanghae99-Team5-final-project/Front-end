@@ -98,7 +98,7 @@ function NavbarButton() {
 
           <ul className="title-wrap">
             <NavLink
-              to="/watchdetail"
+              to="/watchpage"
               activeStyle={{ color: "red", textDecoration: "underline" }}
             >
               WATCH

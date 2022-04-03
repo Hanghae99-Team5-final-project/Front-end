@@ -8,7 +8,7 @@ function StarRating(props) {
 
   return (
     <>
-      <ReactStars size={45} isHalf={true} onChange={ratingChanged} />
+      <ReactStars size={25} onChange={ratingChanged} />
     </>
   );
 }
