@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,12 +9,6 @@ import CodyCard from "../components/CodyCard";
 const WatchCodyMainPage = () => {
   const dispatch = useDispatch();
   const codydetails = useSelector((state) => state.post.codyMain);
-  // const WatchImage = useSelector((state) => state.codydetail.watchImage);
-  // const WatchBrand = useSelector((state) => state.post.postdetail.watchBrand);
-  // const LowestPrice = useSelector((state) => state.post.postdetail.lowestPrice);
-
-  console.log(codydetails);
-
   React.useEffect(() => {
     dispatch(codyDetailActions.getCodyMainFB());
   }, []);

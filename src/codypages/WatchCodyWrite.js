@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useHistory } from "react-router-dom";
@@ -9,14 +8,11 @@ import { useHistory } from "react-router-dom";
 import "../App.css";
 
 const WatchCodyWrite = (props) => {
-  const token = localStorage.getItem("token");
-  const history = useHistory();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [content, setContent] = useState("");
-  // const [files, setImages] = useState([]);
   const [Value, setValue] = useState(0);
   const [images, setImages] = useState();
   const [imageURL, setImageURL] = useState([]);

@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Like from "../images/like.png";
 import emptyLike from "../images/empty-like.png";
@@ -7,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import CommentDetail from "../components/CommentDetail";
-import likeImg from "../images/likeimg.png";
 import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";

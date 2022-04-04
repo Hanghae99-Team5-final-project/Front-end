@@ -53,7 +53,7 @@ const loginCheckFB = () => {
     const token = localStorage.getItem("token");
     axios({
       method: "get",
-      url: "http://3.35.220.13:8080/check/user",
+      url: "https://choisw.shop/check/user",
       headers: {
         "content-type": "application/json;charset=UTF-8",
         accept: "application/json",
@@ -95,7 +95,11 @@ const signupFB = (id, password, email) => {
         password: password,
         email: email,
       });
-      window.alert(res.data);
+      if (res.data) {
+        alert("회원가입이 완료 되었습니다.");
+      } else {
+        alert("");
+      }
       history.push("/login");
       return;
     } catch (error) {

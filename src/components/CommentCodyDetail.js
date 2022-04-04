@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
-import { useParams } from "react-router-dom";
 import moment from "moment";
 import CommentList from "./CommentList";
 
@@ -16,7 +15,6 @@ const DetailCodyComment = (props) => {
   const cmtOnChange = (e) => {
     setCommentContent(e.target.value);
   };
-  const token = localStorage.getItem("token");
 
   const writeComment = () => {
     console.log();

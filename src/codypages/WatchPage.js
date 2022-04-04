@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { actionsCreators as CategorylistActions } from "../redux/modules/category";
-import { Link, useParams } from "react-router-dom";
-import { history } from "../redux/configStore";
+import { Link } from "react-router-dom";
 import WatchCard from "../components/WatchCard";
 import "../App.css";
 
