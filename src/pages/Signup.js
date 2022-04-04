@@ -16,7 +16,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const checkId = (id) => {
     axios
-      .post("http://3.35.220.13:8080/user/redunancy", {
+      .post("https://choisw.shop/user/redunancy", {
         username: id,
       })
       .then((res) => {

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { setCookie } from "../Cookie";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configStore";
@@ -11,16 +10,12 @@ import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";
 
-function WatchCodyDetail(props) {
+function WatchCodyDetail() {
   const dispatch = useDispatch();
-
   const { id } = useParams();
   const codyId = id;
   console.log(id);
-
-  const token = localStorage.getItem("token");
   const codydetails = useSelector((state) => state.post.codyDetail);
-  // const codydetails = _codydetails?.find((a) => a.codyId === +codyId);
   console.log(codydetails);
 
   React.useEffect(() => {
@@ -55,6 +50,8 @@ function WatchCodyDetail(props) {
             <label className="brand">{codydetails?.watchBrand}</label>
             <span className="model">{codydetails?.watchModel}</span>
             <div className="content">{codydetails?.codyContent}</div>
+            <div className="content"></div>
+
             <div className="btn-wrap">
               <button
                 type="button"
@@ -76,7 +73,7 @@ function WatchCodyDetail(props) {
             <label className="title">댓글 작성</label>
             <CommentCodyDetail codyId={codyId} />
             <div className="rating">
-              <div className="star">평점</div>
+              <div className="star">평점 {codydetails?.star}</div>
               <button type="button">등록하기</button>
             </div>
           </div>

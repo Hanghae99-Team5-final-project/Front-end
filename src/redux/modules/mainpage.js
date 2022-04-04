@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import apis from "../../api/apis";
-import axios from "axios";
 
 const initialState = {};
 

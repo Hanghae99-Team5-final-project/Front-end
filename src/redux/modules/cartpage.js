@@ -1,17 +1,16 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import apis from "../../api/apis";
-import axios from "axios";
 
 const GET_CARTPAGELIST = "GET_CARTPAGELIST";
-const token = localStorage.getItem("token");
+
 const getCartpageList = createAction(GET_CARTPAGELIST, (cartpageList) => ({
   cartpageList,
 }));
 
 const getCartpageListFB = () => {
   console.log("도착1");
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       console.log("도착2");
       const res = await apis.cartPage();
