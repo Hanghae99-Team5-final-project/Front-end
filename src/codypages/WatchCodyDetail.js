@@ -17,14 +17,9 @@ function WatchCodyDetail() {
   console.log(id);
   const codydetails = useSelector((state) => state.post.codyDetail);
   console.log(codydetails);
-  const is_login = useSelector((state) => state.user.is_login);
+
   const history = useHistory();
   React.useEffect(() => {
-    if (!is_login) {
-      window.alert("로그인 후 이용 가능합니다!");
-      history.replace("/login");
-      return;
-    }
     dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
 
