@@ -33,8 +33,6 @@ const Login = (props) => {
                 value={username}
                 onChange={(e) => {
                   setId(e.target.value);
-                  console.log(e.target.value);
-                  setId(e.target.value);
                 }}
               />
             </div>
@@ -61,8 +59,9 @@ const Login = (props) => {
               >
                 로그인
               </button>
+
               <Link to="/signup">
-                <button className="long-btn">회원가입</button>
+                <button className="go-signup">회원가입</button>
               </Link>
             </div>
           </LoginWrap>
@@ -93,6 +92,15 @@ const LoginWrap = styled.div`
 
   .btn-wrap {
     padding-top: 3rem;
+  }
+  .go-signup {
+    width: 540px;
+    height: 8rem;
+    background: #555c79;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2rem;
   }
 `;
 

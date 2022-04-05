@@ -9,7 +9,9 @@ import CodyCard from "../components/CodyCard";
 import WatchCard from "../components/WatchCard";
 import { Link } from "react-router-dom";
 import topBanner from "../images/topBanner.png";
-import { Button } from "react-bootstrap";
+import topBanner2 from "../images/topBanner2.png";
+import topBanner3 from "../images/topBanner3.png";
+import { Carousel } from "react-bootstrap";
 export default function MainPage() {
   React.useEffect(() => {
     dispatch(MainlistActions.getBestListFB());
@@ -27,7 +29,22 @@ export default function MainPage() {
 
   return (
     <div className="wrap">
-      <TopImg src={topBanner} alt="탑배너" />
+      <Carousel fade interval={900}>
+        <Carousel.Item>
+          <img className="d-block w-100" src={topBanner} alt="First slide" />
+          <Carousel.Caption></Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src={topBanner2} alt="Second slide" />
+
+          <Carousel.Caption></Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src={topBanner3} alt="Third slide" />
+
+          <Carousel.Caption></Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
       <div className="center">
         <WatchCardWrap>
           <div className="category">
@@ -78,7 +95,7 @@ export default function MainPage() {
               codyList.slice(0, 5).map((data, i) => {
                 console.log(data);
                 return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
+                  <Link to={`/watchcodydetail/${data.codyId}`} key={i}>
                     <CodyCard data={data} />
                   </Link>
                 );

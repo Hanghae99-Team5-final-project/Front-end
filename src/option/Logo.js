@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MainLogo from "../images/logo3.jpg";
 import Lock from "../svg/Lock.svg";
@@ -9,6 +9,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
 const Logo = () => {
   const dispatch = useDispatch();
+
   const signOut = () => {
     dispatch(userActions.logOutFB());
     window.alert("로그아웃 하시겠습니까?");
