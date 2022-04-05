@@ -12,16 +12,10 @@ import topBanner from "../images/topBanner.png";
 import topBanner2 from "../images/topBanner2.jpeg";
 import topBanner3 from "../images/topBanner3.jpeg";
 import { Carousel } from "react-bootstrap";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 export default function MainPage() {
   React.useEffect(() => {
     dispatch(MainlistActions.getBestListFB());
@@ -36,7 +30,16 @@ export default function MainPage() {
   console.log(bestList);
   console.log(codyList);
   console.log(coupleList);
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
   return (
     <div className="wrap">
       <Carousel fade interval={900}>
@@ -60,10 +63,14 @@ export default function MainPage() {
           <div className="category">
             <label className="title">Best</label>
             <span className="description">이번 주 가장 인기있는 아이템</span>
-          </div>{" "}
+          </div>
+          {/* <Slider {...settings}>
+            <div>
+              <p>
+                <div> */}
           <Card>
             {bestList &&
-              bestList?.map((data, i) => {
+              bestList.slice(0, 4).map((data, i) => {
                 return (
                   <Link to={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
@@ -71,6 +78,11 @@ export default function MainPage() {
                 );
               })}
           </Card>
+          {/* </div>
+              </p>
+            </div>
+            <div></div>
+          </Slider> */}
           <div className="btn-area"></div>
         </WatchCardWrap>
 
