@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useHistory, useParams } from "react-router-dom";
 
 import "../App.css";
 
-const WatchCodyWrite = (props) => {
+const WatchCodyUpdate = (props) => {
   const codyId = useParams().id;
   const dispatch = useDispatch();
+
+  const is_login = useSelector((state) => state.user.is_login);
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -20,6 +23,11 @@ const WatchCodyWrite = (props) => {
   const formData = new FormData();
 
   const changetitle = (e) => {
+    if (!is_login) {
+      window.alert("로그인 후 이용 가능합니다!");
+      history.replace("/login");
+      return;
+    }
     setTitle(e.target.value);
     console.log(e.target.value);
   };
@@ -72,18 +80,6 @@ const WatchCodyWrite = (props) => {
 
   const onChange = (e) => {
     if (e.target.files) {
-      // useEffect(
-      //   (files) => {
-      //     if (images.length < 1) return;
-      //     const newImageUrl = [];
-      //     images.forEach((image) =>
-      //       newImageUrl.push(URL.createObjectURL(image))
-      //     );
-      //     setImageURL(newImageUrl);
-      //   },
-      //   [images]
-      // );
-
       setImages(e.target.files[0]);
     }
   };
@@ -206,4 +202,4 @@ const WatchCodyWriteWrap = styled.div`
   }
 `;
 
-export default WatchCodyWrite;
+export default WatchCodyUpdate;

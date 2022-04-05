@@ -21,7 +21,6 @@ export const apis = {
   signUp: (id, password, email) =>
     instance.post("/user/signup", id, password, email),
   Login: (userInfo) => instance.post("/user/login", userInfo),
-  // IdCheck: (idInfo) => instance.post("/api/user/redunancy", idInfo),
 
   UpdateEmail: (email) =>
     instance.put("/api/user/change", {
@@ -48,38 +47,6 @@ export const apis = {
   codymainPage: () => instance.get("/api/cody?page=0&size=5"),
   codyDetailPage: (codyId) => instance.get(`/api/cody/detail/${codyId}`),
   //  -------포스트-----
-
-  // addPostData: (
-  //   codyTitle,
-  //   watchBrand,
-  //   watchModel,
-  //   codyContent,
-  //   imageUrl,
-  //   star
-  // ) =>
-  // method: "post",
-  // url: "http://13.124.217.167:8080/api/cody",
-  // formData,
-  // headers: {
-  //   Authorization: token,
-  //   "Content-Type": "multipart/form-data",
-  // },
-  // instance({
-  //   method: "post",
-  //   url: "/api/cody",
-  //   data: {
-  //     codyTitle: codyTitle,
-  //     watchBrand: watchBrand,
-  //     watchModel: watchModel,
-  //     codyContent: codyContent,
-  //     imageUrl: imageUrl,
-  //     star: star,
-  //   },
-  //   headers: {
-  //     Authorization: localStorage.getItem("token"),
-  //     "Content-Type": "multipart/form-data",
-  //   },
-  // }),
 
   deletePost: (codyId) => instance.delete(`/api/cody/${codyId}`),
   // ----- 댓글 ------///

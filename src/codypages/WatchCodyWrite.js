@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
-import { useHistory } from "react-router-dom";
 
 import "../App.css";
 
@@ -63,18 +62,6 @@ const WatchCodyWrite = (props) => {
 
   const onChange = (e) => {
     if (e.target.files) {
-      // useEffect(
-      //   (files) => {
-      //     if (images.length < 1) return;
-      //     const newImageUrl = [];
-      //     images.forEach((image) =>
-      //       newImageUrl.push(URL.createObjectURL(image))
-      //     );
-      //     setImageURL(newImageUrl);
-      //   },
-      //   [images]
-      // );
-
       setImages(e.target.files[0]);
     }
   };
