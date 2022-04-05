@@ -60,10 +60,11 @@ function WatchCodyDetail() {
             <div className="rating">
               <div className="star">평점 {codydetails?.star}</div>
             </div>
-            <CommentCodyDetail codyId={codyId} />
           </div>
 
-          <div className="comment-wrap"></div>
+          <div className="comment-wrap">
+            <CommentCodyDetail codyId={codyId} />
+          </div>
         </WatchCodyDetailWrap>
       </div>
     </div>
@@ -86,6 +87,7 @@ const WatchCodyDetailWrap = styled.div`
   }
 
   .btn-wrap {
+    display: flex;
     position: absolute;
     top: 0.2rem;
     right: 0;

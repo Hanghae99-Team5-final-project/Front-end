@@ -1,18 +1,12 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import MainLogo from "../images/logo3.jpg";
 import Lock from "../svg/Lock.svg";
 import ShoppingCart from "../svg/ShoppingCart.svg";
 import User from "../svg/User.svg";
-<<<<<<< HEAD
-import "../App.css";
-
-=======
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
->>>>>>> ca7364e888b2959874ab0008deb82f0d86046830
 const Logo = () => {
   const dispatch = useDispatch();
 
@@ -22,28 +16,6 @@ const Logo = () => {
     window.location.reload("");
   };
   return (
-<<<<<<< HEAD
-    <div className="wrap">
-      <div className="center">
-        <LogoBlock>
-          <img src={MainLogo} alt="logoImg" className="logo" />
-          <div className="btn-wrap">
-            <Link to="/login">
-              <img src={Lock} alt="loginImg" />
-              <button type="button">LOGIN</button>
-            </Link>
-            <Link to="/login">
-              <img src={ShoppingCart} alt="loginImg" />
-              <button type="button">CART</button>
-            </Link>
-            <Link to="/login">
-              <img src={User} alt="loginImg" />
-              <button type="button">SIGN UP</button>
-            </Link>
-          </div>
-        </LogoBlock>
-      </div>
-=======
     <div>
       <LogoBlock>
         <div className="logo">
@@ -86,7 +58,6 @@ const Logo = () => {
           </Link>
         </div>
       </LogoBlock>
->>>>>>> ca7364e888b2959874ab0008deb82f0d86046830
     </div>
   );
 };

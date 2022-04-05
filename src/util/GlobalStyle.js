@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
     html, body {
         font-size: 10px;
         font-weight: 400;
-        overflow-x : hidden;
+        /* overflow-x : hidden; */
         font-family: "Nanum Gothic", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
