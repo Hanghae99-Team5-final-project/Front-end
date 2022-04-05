@@ -112,7 +112,8 @@ const WatchCodyWrite = (props) => {
               className="file-input"
               onChange={onChange}
             />
-            <span className="upload">123</span>
+
+            <span className="upload"></span>
           </div>
 
           <div className="input-wrap">

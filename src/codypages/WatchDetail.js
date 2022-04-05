@@ -30,10 +30,6 @@ function WatchDetail(props) {
   console.log("likeId" + likeId);
 
   React.useEffect(() => {
-    console.log("되라 제발");
-    console.log(postData);
-
-    console.log("에러에러에러");
     dispatch(postActions.getPostFB(watchId));
   }, []);
 
@@ -48,6 +44,11 @@ function WatchDetail(props) {
   };
 
   const deleteLike = () => {
+    if (!is_login) {
+      window.alert("로그인 후 이용 가능합니다!");
+      history.replace("/login");
+      return;
+    }
     console.log(likeId);
     dispatch(postActions.deleteDB(likeId));
   };
@@ -118,6 +119,8 @@ const DetailWrap = styled.div`
       font-size: 2.4rem;
       font-weight: bold;
       margin-bottom: 2.7rem;
+      letter-spacing: 1px;
+      line-height: 30px;
     }
 
     .price {
