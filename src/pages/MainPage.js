@@ -9,9 +9,19 @@ import CodyCard from "../components/CodyCard";
 import WatchCard from "../components/WatchCard";
 import { Link } from "react-router-dom";
 import topBanner from "../images/topBanner.png";
-import topBanner2 from "../images/topBanner2.png";
-import topBanner3 from "../images/topBanner3.png";
+import topBanner2 from "../images/topBanner2.jpeg";
+import topBanner3 from "../images/topBanner3.jpeg";
 import { Carousel } from "react-bootstrap";
+
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 export default function MainPage() {
   React.useEffect(() => {
     dispatch(MainlistActions.getBestListFB());
@@ -50,10 +60,10 @@ export default function MainPage() {
           <div className="category">
             <label className="title">Best</label>
             <span className="description">이번 주 가장 인기있는 아이템</span>
-          </div>
+          </div>{" "}
           <Card>
             {bestList &&
-              bestList.slice(0, 4).map((data, i) => {
+              bestList?.map((data, i) => {
                 return (
                   <Link to={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
@@ -63,6 +73,7 @@ export default function MainPage() {
           </Card>
           <div className="btn-area"></div>
         </WatchCardWrap>
+
         <WatchCardWrap>
           <div className="category">
             <label className="title">Couple</label>
@@ -111,10 +122,6 @@ export default function MainPage() {
     </div>
   );
 }
-
-const TopImg = styled.img`
-  width: 100%;
-`;
 
 const WatchCardWrap = styled.div`
   width: 100%;
