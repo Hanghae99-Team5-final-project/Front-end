@@ -84,6 +84,8 @@ const InfoArea = styled.div`
     font-weight: 900;
     font-size: 2.4rem;
     margin-bottom: 5.4rem;
+    letter-spacing: 1px;
+    line-height: 25px;
   }
 
   .time {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Text, Input } from "../elements";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";
@@ -14,20 +14,21 @@ const CommentItem = (props) => {
   const watchId = useParams().id;
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
-
   const [edit_comment, setEditComment] = useState("");
   const [open_edit, setOpenEdit] = useState(false);
   const [comment, setComment] = useState("");
   const changeEditComment = (e) => {
     setEditComment(e.target.value);
-    console.log(e.target.value);
   };
   const clickEditComment = () => {
-    console.log(edit_comment);
     dispatch(
       commentActions.editCommentDB(props.commentId, watchId, edit_comment)
     );
+
     setOpenEdit(false);
+  };
+  const delComment = () => {
+    dispatch(commentActions.deleteCommentFB(props.commentId));
   };
   return (
     <React.Fragment>
@@ -43,7 +44,6 @@ const CommentItem = (props) => {
               <>
                 <Input
                   type="text"
-                  placeholder="댓글을 입력해주세요"
                   _onChange={changeEditComment}
                   value={edit_comment}
                 />
@@ -51,23 +51,20 @@ const CommentItem = (props) => {
               </>
             )}
 
-            <button
-              type="button"
-              onClick={() => {
-                setOpenEdit(true);
-                setComment("");
-              }}
-            >
-              <img src={Edit} alt="edit" />
-            </button>
+            {!open_edit && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenEdit(true);
+                  setComment("");
+                }}
+              >
+                <img src={Edit} alt="edit" />
+              </button>
+            )}
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(commentActions.deleteCommentFB(props.commentId));
-            }}
-          >
+          <button type="button" onClick={delComment}>
             <img src={Trash} alt="trash" />
           </button>
         </div>

@@ -120,7 +120,7 @@ const WatchCodyDetailWrap = styled.div`
     .brand {
       font-size: 3rem;
       font-weight: bold;
-      margin-bottom: 0.6rem;
+      margin-bottom: 2rem;
     }
 
     .model {

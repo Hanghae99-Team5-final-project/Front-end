@@ -18,6 +18,7 @@ const Login = (props) => {
 
     dispatch(userActions.loginFB({ username, password }));
   };
+
   return (
     <React.Fragment>
       <div className="wrap">
@@ -60,10 +61,9 @@ const Login = (props) => {
               >
                 로그인
               </button>
-
-              <button type="button" className="long-btn">
-                <Link to="/signup">회원가입</Link>
-              </button>
+              <Link to="/signup">
+                <button className="long-btn">회원가입</button>
+              </Link>
             </div>
           </LoginWrap>
         </div>
