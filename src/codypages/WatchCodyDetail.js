@@ -27,6 +27,7 @@ function WatchCodyDetail() {
       <div className="center">
         <WatchCodyDetailWrap>
           <div className="description-area">
+            <label className="userName">{codydetails?.userName}</label>
             <label className="title">{codydetails?.codyTitle}</label>
             <img src={codydetails?.imageUrl} alt="시계 이미지" />
             <label className="brand">{codydetails?.watchBrand}</label>
@@ -71,6 +72,12 @@ function WatchCodyDetail() {
 const WatchCodyDetailWrap = styled.div`
   max-width: 60rem;
   margin: auto;
+  .userName {
+    font-size: 4rem;
+    font-weight: bold;
+
+    color: #2196f3;
+  }
   .title {
     font-size: 4rem;
     font-weight: bold;
@@ -79,7 +86,7 @@ const WatchCodyDetailWrap = styled.div`
 
   .btn-wrap {
     position: absolute;
-    top: 0.5rem;
+    top: 0.2rem;
     right: 0;
 
     button {

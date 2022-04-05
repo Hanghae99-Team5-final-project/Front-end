@@ -9,7 +9,9 @@ export default function WatchCard(props) {
     codyId,
     imageUrl,
     codyContent,
+    userName,
   } = {
+    userName: data.userName,
     lowestPrice: data.lowestPrice,
     watchBrand: data.watchBrand,
     watchCategory: data.watchCategory,
@@ -25,7 +27,7 @@ export default function WatchCard(props) {
           <img src={imageUrl} alt="watchImg" />
         </div>
         <div className="content-area">
-          <label className="title">{codyId}</label>
+          <label className="title">{userName}</label>
           <span className="price">{codyContent}</span>
         </div>
       </CardWrap>
