@@ -48,7 +48,7 @@ const WatchPageWrap = styled.div`
 
     a {
       text-decoration: underline;
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
   }
 `;
