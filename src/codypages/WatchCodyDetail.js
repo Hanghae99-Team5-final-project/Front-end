@@ -22,24 +22,6 @@ function WatchCodyDetail() {
     dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
 
-  const num = [
-    {
-      name: "홍길동",
-      createdAt: "1시간전",
-      comment: "안녕하세요",
-    },
-    {
-      name: "김길동",
-      createdAt: "5시간전",
-      comment: "잘봤습니다.",
-    },
-    {
-      name: "임길동",
-      createdAt: "하루전",
-      comment: "잘봤습니다.",
-    },
-  ];
-
   return (
     <div className="warp">
       <div className="center">
@@ -69,36 +51,17 @@ function WatchCodyDetail() {
               </button>
             </div>
           </div>
+
           <div className="content-area">
             <label className="title">댓글 작성</label>
-            <CommentCodyDetail codyId={codyId} />
+
             <div className="rating">
               <div className="star">평점 {codydetails?.star}</div>
-              <button type="button">등록하기</button>
             </div>
+            <CommentCodyDetail codyId={codyId} />
           </div>
-          <div className="comment-wrap">
-            <label className="title">댓글 10개</label>
-            {num.map((item, i) => {
-              return (
-                <div className="comment-area">
-                  <div className="info">
-                    <span className="user-name">{item.name}</span>
-                    <span className="create-at">{item.createdAt}</span>
-                  </div>
-                  <div className="comment">{item.comment}</div>
-                  <div className="btn-wrap">
-                    <button type="button">
-                      <img src={Edit} alt="edit" />
-                    </button>
-                    <button type="button">
-                      <img src={Trash} alt="trash" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+
+          <div className="comment-wrap"></div>
         </WatchCodyDetailWrap>
       </div>
     </div>
@@ -109,7 +72,7 @@ const WatchCodyDetailWrap = styled.div`
   max-width: 60rem;
   margin: auto;
   .title {
-    font-size: 1.8rem;
+    font-size: 4rem;
     font-weight: bold;
     margin-bottom: 3.5rem;
   }
@@ -148,18 +111,18 @@ const WatchCodyDetailWrap = styled.div`
     }
 
     .brand {
-      font-size: 1.4rem;
+      font-size: 3rem;
       font-weight: bold;
       margin-bottom: 0.6rem;
     }
 
     .model {
-      font-size: 1.6rem;
+      font-size: 2.2rem;
       margin-bottom: 4.2rem;
     }
 
     .content {
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
   }
 

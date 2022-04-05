@@ -21,4 +21,10 @@ const Button = styled.button`
     color: #fff;
     background-color: #555c79;
   }
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+    color: #304ffe;
+  }
 `;

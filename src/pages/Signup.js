@@ -71,10 +71,15 @@ const Signup = () => {
               회원가입하신 후 Spring Watch의다양한 서비스를 이용해보세요.
             </span>
           </div>
+
           <div className="input-wrap">
+            {/* <div className="Id-wrap"> */}
             <span>*</span>
-            <label className="input-title">아이디</label>
+            <label className="input-title" style={{ margin: "10px" }}>
+              아이디
+            </label>
             <input
+              style={{ width: "100%" }}
               type="text"
               onChange={(e) => {
                 setId(e.target.value);
@@ -82,20 +87,20 @@ const Signup = () => {
               placeholder=""
               value={id}
             />
+            <button
+              className="checkid"
+              onClick={() => {
+                if (!idCheck(id)) {
+                  alert("영문 숫자만 가능합니다.");
+                  return false;
+                }
+                checkId(id);
+              }}
+            >
+              중복 확인
+            </button>
           </div>
-          <button
-            className="checkid"
-            onClick={() => {
-              if (!idCheck(id)) {
-                alert("영문 숫자만 가능합니다.");
-                return false;
-              }
-              checkId(id);
-            }}
-          >
-            중복 확인
-          </button>
-
+          {/* </div> */}
           <div className="input-wrap">
             <span>*</span>
             <label className="input-title">비밀번호</label>
@@ -193,7 +198,9 @@ const SignupWrap = styled.div`
       margin: 0;
     }
   }
-
+  .Id-wrap {
+    display: flex;
+  }
   .btn-wrap {
     margin-top: 4rem;
   }
@@ -207,7 +214,10 @@ const SignupWrap = styled.div`
     /* display: flex; */
   }
   .checkid {
-    width: 150px;
-    background-color: lightgreen;
+    width: 200px;
+    background-color: rgb(85, 92, 121);
+    color: white;
+    font-size: 2rem;
+    height: 5rem;
   }
 `;

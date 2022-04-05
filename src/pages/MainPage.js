@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
 import MoreButton from "../components/button/MoreButton";
 import ScrollTopButton from "../components/button/ScrollTopButton";
+import CodyCard from "../components/CodyCard";
 import WatchCard from "../components/WatchCard";
 import { Link } from "react-router-dom";
 import topBanner from "../images/topBanner.png";
-
+import { Button } from "react-bootstrap";
 export default function MainPage() {
   React.useEffect(() => {
     dispatch(MainlistActions.getBestListFB());
@@ -28,10 +29,6 @@ export default function MainPage() {
     <div className="wrap">
       <TopImg src={topBanner} alt="탑배너" />
       <div className="center">
-        <MoreButton bg />
-        <ScrollTopButton />
-        <ScrollTopButton border />
-
         <WatchCardWrap>
           <div className="category">
             <label className="title">Best</label>
@@ -47,9 +44,7 @@ export default function MainPage() {
                 );
               })}
           </Card>
-          <div className="btn-area">
-            <MoreButton />
-          </div>
+          <div className="btn-area"></div>
         </WatchCardWrap>
         <WatchCardWrap>
           <div className="category">
@@ -68,7 +63,31 @@ export default function MainPage() {
               })}
           </Card>
           <div className="btn-area">
-            <MoreButton />
+            <Link to="/watchpage">
+              <MoreButton />
+            </Link>
+          </div>
+        </WatchCardWrap>
+        <WatchCardWrap>
+          <div className="category">
+            <label className="title">Cody</label>
+            <span className="description">코디아이템</span>
+          </div>
+          <Card>
+            {codyList &&
+              codyList.slice(0, 5).map((data, i) => {
+                console.log(data);
+                return (
+                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
+                    <CodyCard data={data} />
+                  </Link>
+                );
+              })}
+          </Card>
+          <div className="btn-area">
+            <Link to="/watchcodymainpage">
+              <MoreButton />
+            </Link>
           </div>
         </WatchCardWrap>
       </div>

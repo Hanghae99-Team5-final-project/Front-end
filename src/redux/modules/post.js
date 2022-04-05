@@ -118,7 +118,7 @@ const getCodyDetailFB = (codyId) => {
 };
 
 const addPostFB = (title, brand, model, content, files, Value) => {
-  return async (dispatch, { history }) => {
+  return async (dispatch, getState, { history }) => {
     let formData = new FormData();
 
     formData.append("codyTitle", title);
@@ -143,13 +143,13 @@ const addPostFB = (title, brand, model, content, files, Value) => {
       .then((res) => {
         console.log(res.data);
         dispatch(addPost(res.data));
-        history.replace("/watchcodymainpage");
+        history.push("/watchcodymainpage");
       });
   };
 };
 
 const editPostDB = (title, brand, model, content, files, Value, codyId) => {
-  return async (dispatch, { history }) => {
+  return async (dispatch, getState, { history }) => {
     let formData = new FormData();
 
     formData.append("codyTitle", title);
@@ -175,7 +175,7 @@ const editPostDB = (title, brand, model, content, files, Value, codyId) => {
         console.log(res.data);
         dispatch(editPost(res.data, codyId));
         console.log(res.data);
-        history.replace("/watchcodymainpage");
+        history.push("/watchcodymainpage");
       });
   };
 };

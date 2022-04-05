@@ -51,7 +51,7 @@ const addCommentCodyFB = (
   codyId
 ) => {
   console.log(commentId);
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       const res = await apis.addCommentCody(
         commentUser,
@@ -63,7 +63,7 @@ const addCommentCodyFB = (
 
       dispatch(
         addComment({
-          commentUser,
+          commentUser: getState().user.user.username,
           commentContent,
           commentId: res.data.commentId,
           createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
@@ -82,7 +82,7 @@ const addCommentWatchFB = (
   createdAt
 ) => {
   console.log(commentId);
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       const res = await apis.addCommentWatch(
         commentUser,
@@ -93,7 +93,7 @@ const addCommentWatchFB = (
 
       dispatch(
         addComment({
-          commentUser,
+          commentUser: getState().user.user.username,
           commentContent,
           commentId: res.data.commentId,
           createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),

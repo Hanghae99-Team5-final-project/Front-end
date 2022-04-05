@@ -38,7 +38,7 @@ function NavbarButton() {
               to="/watchpage"
               activeStyle={{ color: "red", textDecoration: "underline" }}
             >
-              WATCH!
+              WATCH
             </NavLink>
             <NavLink
               to="/watchcodymainpage"

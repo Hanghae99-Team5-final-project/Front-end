@@ -4,7 +4,9 @@ import { Text, Input } from "../elements";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-
+import Trash from "../images/Trash.png";
+import Edit from "../images/Edit.png";
+import "../App.css";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useParams } from "react-router-dom";
 
@@ -29,60 +31,47 @@ const CommentItem = (props) => {
   };
   return (
     <React.Fragment>
-      <Box>
-        <span>
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/jaemagazine-45854.appspot.com/o/image%2FJULhtsuBmabuNrbQ5Vv6ZLivSUB3_1644407428385?alt=media&token=5cd591a8-4369-4c15-8865-2a5dc67e17cc"
-            alt="프로필"
-          />
-        </span>
-        <Text size="16px" margin="5px" padding="0" bold>
-          {commentUser}
-        </Text>
-        <Text size="16px" margin="5px 10px" padding="0">
-          {commentContent}
-        </Text>
-        <Text size="16px" margin="5px 10px" padding="0">
-          {createdAt}
-        </Text>
-        <Text size="16px" margin="5px 10px" padding="0">
-          {commentId}
-        </Text>
+      <div className="comment-area">
+        <div className="info">
+          <span className="user-name">{commentUser}</span>
+          <span className="create-at">{createdAt}</span>
+        </div>
+        <div className="comment">{commentContent}</div>
+        <div className="btn-wrap">
+          <div className="png-flex">
+            {open_edit && (
+              <>
+                <Input
+                  type="text"
+                  placeholder="댓글을 입력해주세요"
+                  _onChange={changeEditComment}
+                  value={edit_comment}
+                />
+                <button onClick={clickEditComment}>수정</button>
+              </>
+            )}
 
-        <div mTop="8px">
-          {open_edit && (
-            <>
-              <Input
-                type="text"
-                placeholder="댓글을 입력해주세요"
-                _onChange={changeEditComment}
-                value={edit_comment}
-              />
-              <FaPencilAlt role="button" onClick={clickEditComment}>
-                수정
-              </FaPencilAlt>
-            </>
-          )}
+            <button
+              type="button"
+              onClick={() => {
+                setOpenEdit(true);
+                setComment("");
+              }}
+            >
+              <img src={Edit} alt="edit" />
+            </button>
+          </div>
 
-          <FaPencilAlt
-            role="button"
+          <button
+            type="button"
             onClick={() => {
-              setOpenEdit(true);
-              setComment("");
+              dispatch(commentActions.deleteCommentFB(props.commentId));
             }}
           >
-            취소
-          </FaPencilAlt>
+            <img src={Trash} alt="trash" />
+          </button>
         </div>
-
-        <DeleteBtn
-          onClick={() => {
-            dispatch(commentActions.deleteCommentFB(props.commentId));
-          }}
-        >
-          <FaTrashAlt role="button" tabIndex="0" />
-        </DeleteBtn>
-      </Box>
+      </div>
     </React.Fragment>
   );
 };

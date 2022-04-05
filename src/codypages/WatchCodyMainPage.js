@@ -8,7 +8,7 @@ import CodyCard from "../components/CodyCard";
 
 const WatchCodyMainPage = () => {
   const dispatch = useDispatch();
-  const codydetails = useSelector((state) => state.post.codyMain);
+  const codyMains = useSelector((state) => state.post.codyMain);
   React.useEffect(() => {
     dispatch(codyDetailActions.getCodyMainFB());
   }, []);
@@ -21,7 +21,7 @@ const WatchCodyMainPage = () => {
             <Link to="/watchcodywrite">내 코디 글 쓰러가기</Link>
           </div>
           <Card>
-            {codydetails?.map((menu, idx) => {
+            {codyMains?.map((menu, idx) => {
               return (
                 <Link to={`/watchcodydetail/${menu.codyId}`} key={idx}>
                   <CodyCard data={menu} />
@@ -29,11 +29,7 @@ const WatchCodyMainPage = () => {
               );
             })}
           </Card>
-          <div className="btn-wrap">
-            <button type="button" className="short-btn">
-              More
-            </button>
-          </div>
+          <div className="btn-wrap"></div>
         </WatchPageWrap>
       </div>
     </div>
