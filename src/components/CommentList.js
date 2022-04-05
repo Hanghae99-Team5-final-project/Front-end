@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import CommentItem from "./CommentItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const CommentList = (props) => {
   const commentData = useSelector((state) => state.comment.list);

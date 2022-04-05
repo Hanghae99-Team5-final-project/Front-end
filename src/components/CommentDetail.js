@@ -1,12 +1,15 @@
 import React from "react";
 
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import moment from "moment";
 import CommentList from "./CommentList";
+import { useHistory } from "react-router-dom";
 
 const DetailComment = (props) => {
+  const history = useHistory();
+  const is_login = useSelector((state) => state.user.is_login);
   const dispatch = useDispatch();
   const [commentContent, setCommentContent] = React.useState("");
 
@@ -17,6 +20,11 @@ const DetailComment = (props) => {
   };
 
   const writeComment = () => {
+    if (!is_login) {
+      window.alert("로그인 후 이용 가능합니다!");
+      history.replace("/login");
+      return;
+    }
     console.log();
 
     dispatch(
@@ -34,12 +42,12 @@ const DetailComment = (props) => {
     <React.Fragment>
       <Wrap>
         <Input
-          placeholder="좀 되라"
+          placeholder=""
           onChange={cmtOnChange}
           value={commentContent}
           maxLength="100"
         />
-        <Button onClick={writeComment}>제발 좀 되라</Button>
+        <Button onClick={writeComment}>등록하기</Button>
       </Wrap>
       <CommentList watchId={props.watchId} />
     </React.Fragment>
@@ -61,7 +69,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background-color: lightgreen;
+  background-color: black;
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -69,9 +77,8 @@ const Button = styled.button`
   margin: 0px 10px;
   cursor: pointer;
 
-  transition: 1.5s;
-  &:hover {
-    background-color: black;
+  :hover {
+    opacity: 0.8;
   }
 `;
 export default DetailComment;

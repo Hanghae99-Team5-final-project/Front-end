@@ -112,7 +112,7 @@ const WatchCodyWrite = (props) => {
           />
 
           <div className="input-wrap">
-            <label className="input-title file" for="img">
+            <label className="input-title file" htmlFor="img">
               이미지 첨부
             </label>
             <input
@@ -121,7 +121,7 @@ const WatchCodyWrite = (props) => {
               className="file-input"
               onChange={onChange}
             />
-            <span class="upload">123</span>
+            <span className="upload">123</span>
           </div>
 
           <div className="input-wrap">

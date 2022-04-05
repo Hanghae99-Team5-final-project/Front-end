@@ -3,11 +3,10 @@ import styled from "styled-components";
 import Like from "../images/like.png";
 import emptyLike from "../images/empty-like.png";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import CommentDetail from "../components/CommentDetail";
-import Trash from "../images/Trash.png";
-import Edit from "../images/Edit.png";
+import Paypal from "../option/Paypal";
 import "../App.css";
 
 function WatchDetail(props) {
@@ -15,7 +14,8 @@ function WatchDetail(props) {
     dispatch(postActions.getDetail(watchId));
     dispatch(postActions.getLike(watchId));
   }, []);
-
+  const is_login = useSelector((state) => state.user.is_login);
+  const history = useHistory();
   const watchId = useParams().id;
   const dispatch = useDispatch();
   const like_state = useSelector((state) => state.post.like);
@@ -38,6 +38,11 @@ function WatchDetail(props) {
   }, []);
 
   const sendLike = () => {
+    if (!is_login) {
+      window.alert("로그인 후 이용 가능합니다!");
+      history.replace("/login");
+      return;
+    }
     dispatch(postActions.likePostFB(watchId));
     console.log("sendlike끝");
   };
@@ -48,25 +53,6 @@ function WatchDetail(props) {
   };
 
   console.log(props);
-
-  const num = [
-    {
-      name: "홍길동",
-      createdAt: "1시간전",
-      comment: "안녕하세요",
-    },
-    {
-      name: "김길동",
-      createdAt: "5시간전",
-      comment: "잘봤습니다.",
-    },
-    {
-      name: "임길동",
-      createdAt: "하루전",
-      comment: "잘봤습니다.",
-    },
-  ];
-
   return (
     <div className="wrap">
       <div className="center">
@@ -98,42 +84,16 @@ function WatchDetail(props) {
                   />
                 )}
               </button>
-              <button type="button" className="detail-btn color">
-                구매하기
-              </button>
+
+              <Paypal />
             </div>
           </div>
 
           <div className="comment-wrap">
-            <div className="all-review">전체 리뷰 보기 &gt </div>
-            {num.map((item, i) => {
-              return (
-                <div className="comment-area">
-                  <div className="info">
-                    <span className="user-name">{item.name}</span>
-                    <span className="create-at">{item.createdAt}</span>
-                  </div>
-                  <div className="comment">{item.comment}</div>
-                  <div className="btn-wrap">
-                    <button type="button">
-                      <img src={Edit} alt="edit" />
-                    </button>
-                    ㅋㅋㅋㅋ
-                    <button type="button">
-                      <img src={Trash} alt="trash" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-
             <div className="review-wrap">
               <div className="review">리뷰작성</div>
 
               <CommentDetail watchId={watchId} />
-              <button type="button" className="send-comment">
-                등록하기
-              </button>
             </div>
           </div>
         </DetailWrap>
@@ -230,15 +190,15 @@ const DetailWrap = styled.div`
         position: absolute;
         top: 0.5rem;
         right: 0;
-
+        display: flex;
         button {
           background-color: transparent;
           border: none;
 
           img {
-            width: 2.5rem;
-            height: 2.5rem;
-            margin-right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            margin-right: 1rem;
           }
         }
       }
