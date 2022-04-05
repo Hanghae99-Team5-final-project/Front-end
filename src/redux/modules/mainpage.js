@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import apis from "../../api/apis";
-import axios from "axios";
 
 const initialState = {};
 
@@ -41,7 +40,7 @@ export default handleActions(
       }),
     [GET_CODY_LIST]: (state, action) =>
       produce(state, (draft) => {
-        draft.codyList = action.payload.bestList;
+        draft.codyList = action.payload.codyList;
       }),
     [GET_COUPLE_LIST]: (state, action) =>
       produce(state, (draft) => {

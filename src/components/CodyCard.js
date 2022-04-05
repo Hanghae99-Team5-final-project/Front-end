@@ -1,33 +1,34 @@
 import styled from "styled-components";
-import Img from "../images/footerLogo.png";
 
 export default function WatchCard(props) {
   const data = props.data;
   const {
-    likeCount,
     lowestPrice,
     watchBrand,
     watchCategory,
-    watchId,
-    watchImageUrl,
+    codyId,
+    imageUrl,
+    codyContent,
+    userName,
   } = {
-    likeCount: data.likeCount,
+    userName: data.userName,
     lowestPrice: data.lowestPrice,
     watchBrand: data.watchBrand,
     watchCategory: data.watchCategory,
-    watchId: data.watchId,
-    watchImageUrl: data.watchImageUrl,
+    codyId: data.codyId,
+    imageUrl: data.imageUrl,
+    codyContent: data.codyContent,
   };
 
   return (
     <>
       <CardWrap>
         <div className="img-area">
-          <img src={watchImageUrl} alt="watchImg" />
+          <img src={imageUrl} alt="watchImg" />
         </div>
         <div className="content-area">
-          <label className="title">userName</label>
-          <span className="price">comment</span>
+          <label className="title">{userName}</label>
+          <span className="price">{codyContent}</span>
         </div>
       </CardWrap>
     </>

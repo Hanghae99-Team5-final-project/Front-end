@@ -8,8 +8,6 @@ const ADD_COMMENT = "ADD_COMMENT";
 const EDIT_COMMENT = "EDIT_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 
-const LOADING = "LOADING";
-
 const getComment = createAction(GET_COMMENT, (comments) => ({
   comments,
 }));
@@ -35,7 +33,7 @@ const initialState = {
 };
 
 const getCommentFB = (commentId) => {
-  return async function (dispatch, getState, { history }) {
+  return async function (dispatch) {
     try {
       const res = await apis.getComment(commentId);
       dispatch(getComment(res.data.comment));
@@ -53,7 +51,7 @@ const addCommentCodyFB = (
   codyId
 ) => {
   console.log(commentId);
-  return async function (dispatch, getState, { history }) {
+  return async function (dispatch, getState) {
     try {
       const res = await apis.addCommentCody(
         commentUser,
@@ -65,7 +63,7 @@ const addCommentCodyFB = (
 
       dispatch(
         addComment({
-          commentUser,
+          commentUser: getState().user.user.username,
           commentContent,
           commentId: res.data.commentId,
           createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
@@ -84,7 +82,7 @@ const addCommentWatchFB = (
   createdAt
 ) => {
   console.log(commentId);
-  return async function (dispatch, getState, { history }) {
+  return async function (dispatch, getState) {
     try {
       const res = await apis.addCommentWatch(
         commentUser,
@@ -95,7 +93,7 @@ const addCommentWatchFB = (
 
       dispatch(
         addComment({
-          commentUser,
+          commentUser: getState().user.user.username,
           commentContent,
           commentId: res.data.commentId,
           createdAt: moment().format("YYYY-MM-DD hh:mm:ss"),
@@ -108,7 +106,7 @@ const addCommentWatchFB = (
 };
 
 const editCommentDB = (commentId, watchId, edit_content) => {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     try {
       console.log(commentId, watchId);
       const { data } = await apis.UpdateComment(
@@ -125,7 +123,7 @@ const editCommentDB = (commentId, watchId, edit_content) => {
 };
 
 const deleteCommentFB = (commentId) => {
-  return async function (dispatch, getState, { history }) {
+  return async function (dispatch) {
     await apis.deleteComment(commentId).then((res) => {
       dispatch(deleteComment(commentId));
       console.log(res);

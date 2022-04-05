@@ -1,12 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-// import WebFont from "webfontloader";
-
-// WebFont.load({
-//   google: {
-//     families: ["Nanum Gothic:400,700,900", "sans-serif"],
-//   },
-// });
 
 const GlobalStyles = createGlobalStyle` 
     ${reset}

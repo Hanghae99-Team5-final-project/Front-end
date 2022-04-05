@@ -8,14 +8,12 @@ import apis from "../../api/apis";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
-const EDIT_EMAIL = "EDIT_EMAIL";
 
 // action creators
 // const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
-const editEmail = createAction(EDIT_EMAIL, (user) => ({ user }));
 
 const token = localStorage.getItem("token");
 // initialState
@@ -39,9 +37,11 @@ const loginFB = (username, password) => {
       }
       dispatch(setUser(res.data));
       console.log(res.data);
+      window.alert(` 환영합니다!`);
       history.replace("/");
+      window.location.reload("");
     } catch (err) {
-      alert(err.response);
+      alert("아이디 또는 비밀번호가 일치하지 않습니다!");
       console.log(err.response);
     }
   };
@@ -53,7 +53,7 @@ const loginCheckFB = () => {
     const token = localStorage.getItem("token");
     axios({
       method: "get",
-      url: "http://3.35.220.13:8080/check/user",
+      url: "https://choisw.shop/check/user",
       headers: {
         "content-type": "application/json;charset=UTF-8",
         accept: "application/json",
@@ -95,7 +95,11 @@ const signupFB = (id, password, email) => {
         password: password,
         email: email,
       });
-      window.alert(res.data);
+      if (res) {
+        window.alert("회원가입이 완료 되었습니다.");
+      } else {
+        window.alert("");
+      }
       history.push("/login");
       return;
     } catch (error) {
@@ -104,20 +108,6 @@ const signupFB = (id, password, email) => {
   };
 };
 
-const editEmailFB = (email) => {
-  return async function (dispatch, getState, { history }) {
-    try {
-      const res = await apis.UpdateEmail({
-        email: email,
-      });
-      const editEmail = res.data;
-      console.log(editEmail);
-      dispatch(editEmail(email));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 // reducer
 export default handleActions(
   {
@@ -126,11 +116,7 @@ export default handleActions(
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
-    [EDIT_EMAIL]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.user;
-        draft.is_login = true;
-      }),
+
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.user = null;
@@ -149,8 +135,7 @@ const actionCreators = {
   loginFB,
   signupFB,
   setUser,
-  editEmail,
-  editEmailFB,
+
   loginCheckFB,
 };
 

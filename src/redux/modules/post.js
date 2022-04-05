@@ -47,7 +47,7 @@ const initialState = {
 };
 
 const getPostFB = (watchId) => {
-  return async (dispatch, getState, { history }) => {
+  return async (dispatch) => {
     try {
       const response = await apis.getPostComment(watchId);
       console.log(response.data);
@@ -60,7 +60,7 @@ const getPostFB = (watchId) => {
 };
 
 const getCodyPostFB = (codyId) => {
-  return async (dispatch, getState, { history }) => {
+  return async (dispatch) => {
     try {
       const response = await apis.getcodyPostComment(codyId);
       console.log(response.data);
@@ -99,10 +99,14 @@ const getCodyDetailFB = (codyId) => {
       console.log();
       const doc = {
         userId: res.data.userId,
+        userName: res.data.userName,
         watchModel: res.data.watchModel,
         codyTitle: res.data.codyTitle,
         imageUrl: res.data.imageUrl,
         codyContent: res.data.codyContent,
+        watchBrand: res.data.watchBrand,
+        star: res.data.star,
+        createdAt: res.data.createdAt,
       };
       console.log();
       dispatch(getCodyDetail(doc));
@@ -126,7 +130,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
     console.log(formData);
     axios
       .post(
-        "http://3.35.220.13:8080/api/cody",
+        "https://choisw.shop/api/cody",
         formData,
 
         {
@@ -139,6 +143,7 @@ const addPostFB = (title, brand, model, content, files, Value) => {
       .then((res) => {
         console.log(res.data);
         dispatch(addPost(res.data));
+        history.push("/watchcodymainpage");
       });
   };
 };
@@ -156,7 +161,7 @@ const editPostDB = (title, brand, model, content, files, Value, codyId) => {
     console.log(formData);
     axios
       .put(
-        `http://3.35.220.13:8080/api/cody/${codyId}`,
+        `https://choisw.shop/api/cody/${codyId}`,
         formData,
 
         {
@@ -170,6 +175,7 @@ const editPostDB = (title, brand, model, content, files, Value, codyId) => {
         console.log(res.data);
         dispatch(editPost(res.data, codyId));
         console.log(res.data);
+        history.push("/watchcodymainpage");
       });
   };
 };
@@ -186,7 +192,7 @@ const deletePostDB = (postId) => {
 
 const likePostFB = (watchId) => {
   console.log(watchId);
-  return async (dispatch, getstate, { history }) => {
+  return async (dispatch) => {
     dispatch(like(true));
     const response = await apis.sendLike(watchId);
     console.log(response);
@@ -195,7 +201,7 @@ const likePostFB = (watchId) => {
 };
 
 const deleteDB = (data) => {
-  return async (dispatch, getstate, { history }) => {
+  return async (dispatch) => {
     dispatch(like(false));
     const response = await apis.deleteLike(data);
     console.log(response);

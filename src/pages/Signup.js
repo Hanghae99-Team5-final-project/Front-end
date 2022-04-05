@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import UserInput from "../components/UserInput";
-import { Text, Button } from "../elements";
+
 import { idCheck, emailCheck, pwdCheck } from "../common";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch } from "react-redux";
@@ -17,7 +16,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const checkId = (id) => {
     axios
-      .post("http://3.35.220.13:8080/user/redunancy", {
+      .post("https://choisw.shop/user/redunancy", {
         username: id,
       })
       .then((res) => {
@@ -72,24 +71,81 @@ const Signup = () => {
               회원가입하신 후 Spring Watch의다양한 서비스를 이용해보세요.
             </span>
           </div>
+
           <div className="input-wrap">
+            {/* <div className="Id-wrap"> */}
             <span>*</span>
-            <label className="input-title">아이디</label>
-            <input type="text" />
+            <label className="input-title" style={{ margin: "10px" }}>
+              아이디
+            </label>
+            <input
+              style={{ width: "100%" }}
+              type="text"
+              onChange={(e) => {
+                setId(e.target.value);
+              }}
+              placeholder=""
+              value={id}
+            />
+            <button
+              className="checkid"
+              onClick={() => {
+                if (!idCheck(id)) {
+                  alert("영문 숫자만 가능합니다.");
+                  return false;
+                }
+                checkId(id);
+              }}
+            >
+              중복 확인
+            </button>
           </div>
+          {/* </div> */}
           <div className="input-wrap">
             <span>*</span>
             <label className="input-title">비밀번호</label>
-            <input type="password" />
+            <input
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              placeholder=""
+              value={password}
+            />
+          </div>
+          <div className="input-wrap">
+            <span>*</span>
+            <label className="input-title">비밀번호 확인</label>
+            <input
+              type="password"
+              onChange={(e) => {
+                setPasswordCheck(e.target.value);
+              }}
+              placeholder=""
+              value={password_check}
+            />
           </div>
           <div className="input-wrap">
             <span>*</span>
             <label className="input-title">이메일</label>
-            <input type="text" />
+            <input
+              type="text"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              placeholder=""
+              value={email}
+            />
           </div>
 
           <div className="btn-wrap">
-            <button className="long-btn" type="button">
+            <button
+              className="long-btn"
+              type="button"
+              onClick={() => {
+                signup();
+              }}
+            >
               회원가입
             </button>
           </div>
@@ -142,7 +198,9 @@ const SignupWrap = styled.div`
       margin: 0;
     }
   }
-
+  .Id-wrap {
+    display: flex;
+  }
   .btn-wrap {
     margin-top: 4rem;
   }
@@ -153,10 +211,13 @@ const SignupWrap = styled.div`
     }
   }
   .flex-box {
-    display: flex;
+    /* display: flex; */
   }
   .checkid {
-    width: 150px;
-    background-color: lightgreen;
+    width: 200px;
+    background-color: rgb(85, 92, 121);
+    color: white;
+    font-size: 2rem;
+    height: 5rem;
   }
 `;

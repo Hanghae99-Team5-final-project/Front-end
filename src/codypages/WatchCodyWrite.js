@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import StarRating from "../option/StarRating";
 import { actionCreators as postActions } from "../redux/modules/post";
-import { useHistory } from "react-router-dom";
 
 import "../App.css";
 
 const WatchCodyWrite = (props) => {
-  const token = localStorage.getItem("token");
-  const history = useHistory();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [content, setContent] = useState("");
-  // const [files, setImages] = useState([]);
   const [Value, setValue] = useState(0);
   const [images, setImages] = useState();
   const [imageURL, setImageURL] = useState([]);
@@ -67,18 +62,6 @@ const WatchCodyWrite = (props) => {
 
   const onChange = (e) => {
     if (e.target.files) {
-      // useEffect(
-      //   (files) => {
-      //     if (images.length < 1) return;
-      //     const newImageUrl = [];
-      //     images.forEach((image) =>
-      //       newImageUrl.push(URL.createObjectURL(image))
-      //     );
-      //     setImageURL(newImageUrl);
-      //   },
-      //   [images]
-      // );
-
       setImages(e.target.files[0]);
     }
   };
@@ -89,34 +72,44 @@ const WatchCodyWrite = (props) => {
         <WatchCodyWriteWrap>
           <div className="input-wrap">
             <label className="input-title">제목</label>
-            <input type="text" />
+            <input type="text" onChange={changetitle} value={title} />
           </div>
           <div className="input-wrap">
             <label className="input-title">시계 브랜드</label>
-            <input type="text" />
+            <input type="text" onChange={changebrand} value={brand} />
           </div>
           <div className="input-wrap">
             <label className="input-title">시계 모델</label>
-            <input type="text" />
+            <input type="text" onChange={changemodel} value={model} />
           </div>
 
-          <textarea></textarea>
+          <textarea
+            onChange={changeContent}
+            value={content}
+            placeholder="내용"
+          />
 
           <div className="input-wrap">
-            <label className="input-title file" for="img">
+            <label className="input-title file" htmlFor="img">
               이미지 첨부
             </label>
-            <input type="file" id="img" className="file-input" />
-            <span class="upload">123</span>
+            <input
+              type="file"
+              id="img"
+              className="file-input"
+              onChange={onChange}
+            />
+
+            <span className="upload"></span>
           </div>
 
           <div className="input-wrap">
             <label className="input-title fill">평점</label>
-            <span>별</span>
+            <StarRating value={Value} changeValue={setValue} />
           </div>
 
           <div className="btn-wrap">
-            <button type="button" className="short-btn">
+            <button type="button" className="short-btn" onClick={submitHandler}>
               등록하기
             </button>
           </div>

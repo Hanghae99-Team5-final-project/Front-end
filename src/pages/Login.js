@@ -1,25 +1,24 @@
 import React from "react";
-import { Text, Input, Button } from "../elements";
 import styled from "styled-components";
-import Kakaologin from "../components/Kakaologin";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { deleteCookie, getCookie, setCookie } from "../Cookie";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const [username, setUsername] = React.useState("");
+  const [username, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   const login = () => {
     if (username === "" || password === "") {
       window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
       return;
     }
-    // const username = "jaemin";
-    // const password = "asdf1234";
+
     dispatch(userActions.loginFB({ username, password }));
   };
+
   return (
     <React.Fragment>
       <div className="wrap">
@@ -28,20 +27,42 @@ const Login = (props) => {
             <div className="title">LOGIN</div>
             <div className="input-wrap">
               <label className="input-title">아이디</label>
-              <input type="text" />
+              <input
+                type="text"
+                placeholder="아이디를 입력해주세요."
+                value={username}
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
+              />
             </div>
             <div className="input-wrap">
               <label className="input-title">비밀번호</label>
-              <input type="password" />
+              <input
+                type="password"
+                value={password}
+                placeholder="패스워드 입력해주세요."
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
 
             <div className="btn-wrap">
-              <button type="button" className="long-btn">
+              <button
+                type="button"
+                className="long-btn"
+                onClick={() => {
+                  console.log("로그인 했어!");
+                  login();
+                }}
+              >
                 로그인
               </button>
-              <button type="button" className="long-btn">
-                회원가입
-              </button>
+
+              <Link to="/signup">
+                <button className="go-signup">회원가입</button>
+              </Link>
             </div>
           </LoginWrap>
         </div>
@@ -71,6 +92,15 @@ const LoginWrap = styled.div`
 
   .btn-wrap {
     padding-top: 3rem;
+  }
+  .go-signup {
+    width: 540px;
+    height: 8rem;
+    background: #555c79;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2rem;
   }
 `;
 

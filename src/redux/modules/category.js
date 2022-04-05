@@ -1,17 +1,15 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import apis from "../../api/apis";
-import axios from "axios";
 
 const GET_CATEGORYLIST = "GET_CATEGORYLIST";
-const token = localStorage.getItem("token");
 const getCategoryList = createAction(GET_CATEGORYLIST, (categoryList) => ({
   categoryList,
 }));
 
 const getCategoryListFB = () => {
   console.log("도착1");
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       console.log("도착2");
       const res = await apis.categoryPage();

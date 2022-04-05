@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { setCookie } from "../Cookie";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+
+import { useHistory, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configStore";
@@ -11,89 +10,65 @@ import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";
 
-function WatchCodyDetail(props) {
+function WatchCodyDetail() {
   const dispatch = useDispatch();
-
   const { id } = useParams();
   const codyId = id;
   console.log(id);
-
-  const token = localStorage.getItem("token");
   const codydetails = useSelector((state) => state.post.codyDetail);
-  // const codydetails = _codydetails?.find((a) => a.codyId === +codyId);
   console.log(codydetails);
-
+  const is_login = useSelector((state) => state.user.is_login);
+  const history = useHistory();
   React.useEffect(() => {
+    if (!is_login) {
+      window.alert("로그인 후 이용 가능합니다!");
+      history.replace("/login");
+      return;
+    }
     dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
-
-  const num = [
-    {
-      name: "홍길동",
-      createdAt: "1시간전",
-      comment: "안녕하세요",
-    },
-    {
-      name: "김길동",
-      createdAt: "5시간전",
-      comment: "잘봤습니다.",
-    },
-    {
-      name: "임길동",
-      createdAt: "하루전",
-      comment: "잘봤습니다.",
-    },
-  ];
 
   return (
     <div className="warp">
       <div className="center">
         <WatchCodyDetailWrap>
           <div className="description-area">
-            <label className="title">제목</label>
-            <img src="" alt="img" />
-            <label className="brand">브랜드</label>
-            <span className="model">모델</span>
-            <div className="content">내용</div>
+            <label className="userName">{codydetails?.userName}</label>
+            <label className="title">{codydetails?.codyTitle}</label>
+            <img src={codydetails?.imageUrl} alt="시계 이미지" />
+            <label className="brand">{codydetails?.watchBrand}</label>
+            <span className="model">{codydetails?.watchModel}</span>
+            <div className="content">{codydetails?.codyContent}</div>
+            <div className="content"></div>
+
             <div className="btn-wrap">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => history.push(`/watchcodyupdate/${codyId}`)}
+              >
                 <img src={Edit} alt="edit" />
               </button>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(postActions.deletePostDB(codyId));
+                }}
+              >
                 <img src={Trash} alt="trash" />
               </button>
             </div>
           </div>
+
           <div className="content-area">
             <label className="title">댓글 작성</label>
-            <input type="text" />
+
             <div className="rating">
-              <div className="star">평점</div>
-              <button type="button">등록하기</button>
+              <div className="star">평점 {codydetails?.star}</div>
             </div>
+            <CommentCodyDetail codyId={codyId} />
           </div>
-          <div className="comment-wrap">
-            <label className="title">댓글 10개</label>
-            {num.map((item, i) => {
-              return (
-                <div className="comment-area">
-                  <div className="info">
-                    <span className="user-name">{item.name}</span>
-                    <span className="create-at">{item.createdAt}</span>
-                  </div>
-                  <div className="comment">{item.comment}</div>
-                  <div className="btn-wrap">
-                    <button type="button">
-                      <img src={Edit} alt="edit" />
-                    </button>
-                    <button type="button">
-                      <img src={Trash} alt="trash" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+
+          <div className="comment-wrap"></div>
         </WatchCodyDetailWrap>
       </div>
     </div>
@@ -103,15 +78,21 @@ function WatchCodyDetail(props) {
 const WatchCodyDetailWrap = styled.div`
   max-width: 60rem;
   margin: auto;
+  .userName {
+    font-size: 4rem;
+    font-weight: bold;
+
+    color: #2196f3;
+  }
   .title {
-    font-size: 1.8rem;
+    font-size: 4rem;
     font-weight: bold;
     margin-bottom: 3.5rem;
   }
 
   .btn-wrap {
     position: absolute;
-    top: 0.5rem;
+    top: 0.2rem;
     right: 0;
 
     button {
@@ -143,23 +124,22 @@ const WatchCodyDetailWrap = styled.div`
     }
 
     .brand {
-      font-size: 1.4rem;
+      font-size: 3rem;
       font-weight: bold;
-      margin-bottom: 0.6rem;
+      margin-bottom: 2rem;
     }
 
     .model {
-      font-size: 1.6rem;
+      font-size: 2.2rem;
       margin-bottom: 4.2rem;
     }
 
     .content {
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
   }
 
   .content-area {
-
     input {
       background: #f2f2f2;
       margin-bottom: 2.4rem;
@@ -176,7 +156,7 @@ const WatchCodyDetailWrap = styled.div`
 
       button {
         font-size: 1.4rem;
-        opacity: .8;
+        opacity: 0.8;
         width: 8rem;
         height: 3rem;
       }
@@ -213,10 +193,8 @@ const WatchCodyDetailWrap = styled.div`
       .comment {
         font-size: 1.6rem;
       }
-
-      
-      
     }
+  }
 `;
 
 export default WatchCodyDetail;
