@@ -22,17 +22,9 @@ function NavbarButton() {
     <Navbar>
       <img src={logo01} alt="logo01" className="logo-img img1" />
       <img src={logo01} alt="logo01" className="logo-img img2" />
-      <nav className="is-mb">
-        <div className="nav-wrap">
-          <GiHamburgerMenu size="30" className="hamburger" />
-          <ul className="title-wrap"></ul>
-        </div>
-      </nav>
 
-      <nav className="is-pc">
+      <nav>
         <div className="nav-wrap">
-          <GiHamburgerMenu size="30" className="hamburger" />
-
           <ul className="title-wrap">
             <NavLink
               to="/watchpage"
@@ -61,13 +53,6 @@ const Navbar = styled.div`
 
     width: 235px;
     height: 100px;
-  }
-  .is-pc {
-    display: none;
-  }
-
-  .is-mb {
-    display: block;
   }
 
   .logo-img {
@@ -143,7 +128,7 @@ const Navbar = styled.div`
         position: absolute;
 
         > a {
-          padding: 3%;
+          padding: 15%;
           color: #fff;
 
           &:hover {
@@ -161,14 +146,6 @@ const Navbar = styled.div`
   }
 
   @media (min-width: 992px) {
-    .is-pc {
-      display: block;
-    }
-
-    .is-mb {
-      display: none;
-    }
-
     .logo-img {
       width: 350px;
     }
