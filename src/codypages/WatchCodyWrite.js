@@ -14,7 +14,7 @@ const WatchCodyWrite = (props) => {
   const [content, setContent] = useState("");
   const [Value, setValue] = useState(0);
   const [images, setImages] = useState();
-  const [imageURL, setImageURL] = useState([]);
+
   const formData = new FormData();
 
   const changetitle = (e) => {
@@ -59,7 +59,6 @@ const WatchCodyWrite = (props) => {
       postActions.addPostFB(title, brand, model, content, images, Value)
     );
   };
-
   const onChange = (e) => {
     if (e.target.files) {
       setImages(e.target.files[0]);

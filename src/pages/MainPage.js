@@ -64,10 +64,7 @@ export default function MainPage() {
             <label className="title">Best</label>
             <span className="description">이번 주 가장 인기있는 아이템</span>
           </div>
-          {/* <Slider {...settings}>
-            <div>
-              <p>
-                <div> */}
+
           <Card>
             {bestList &&
               bestList.slice(0, 4).map((data, i) => {
@@ -78,11 +75,7 @@ export default function MainPage() {
                 );
               })}
           </Card>
-          {/* </div>
-              </p>
-            </div>
-            <div></div>
-          </Slider> */}
+
           <div className="btn-area"></div>
         </WatchCardWrap>
 

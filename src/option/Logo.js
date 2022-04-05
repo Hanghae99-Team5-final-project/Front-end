@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import MainLogo from "../images/logo3.jpg";
@@ -30,7 +31,6 @@ const Logo = () => {
               <p style={{ marginRight: "10px", display: "flex" }}>LOGIN</p>
             </Link>
           )}
-
           {localStorage.getItem("token") && (
             <button
               style={{
@@ -47,11 +47,9 @@ const Logo = () => {
             </button>
           )}
           <img style={{ marginRight: "10px" }} src={ShoppingCart} alt="logo3" />
-
           <Link to="/cartpage">
             <p style={{ marginRight: "10px", display: "flex" }}>LIKE</p>
           </Link>
-
           <img style={{ marginRight: "10px" }} src={User} alt="logo3" />
           <Link to="/signup">
             <p style={{ width: "100px", display: "flex" }}>SIGN UP</p>
@@ -67,7 +65,13 @@ const LogoBlock = styled.div`
   align-items: center;
   position: relative;
   height: 10rem;
+  width: 100%;
+  margin-left: 15rem;
 
+  .flex-item {
+    display: flex;
+    padding: 2rem 1rem;
+  }
   .btn-wrap {
     position: absolute;
     display: flex;
@@ -80,14 +84,12 @@ const LogoBlock = styled.div`
       img {
         margin: auto;
       }
-
       button {
         border: transparent;
         font-size: 1.4rem;
       }
     }
   }
-
   @media (max-width: 768px) {
     .logo {
       position: absolute;
@@ -95,5 +97,4 @@ const LogoBlock = styled.div`
     }
   }
 `;
-
 export default Logo;
