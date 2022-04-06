@@ -27,22 +27,10 @@ export default function MainPage() {
     codyList: state.mainpage.codyList,
     coupleList: state.mainpage.coupleList,
   }));
-  console.log(bestList);
-  console.log(codyList);
-  console.log(coupleList);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
+
   return (
     <div className="wrap">
-      <Carousel fade interval={900}>
+      <Carousel fade interval={1500}>
         <Carousel.Item>
           <img className="d-block w-100" src={topBanner} alt="First slide" />
           <Carousel.Caption></Carousel.Caption>
