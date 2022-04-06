@@ -21,7 +21,11 @@ const Logo = () => {
       <LogoBlock>
         <div className="logo">
           <Link to="/">
-            <img src={MainLogo} alt="logo3" />
+            <img
+              src={MainLogo}
+              alt="logo3"
+              style={{ display: "flex", justifyContent: "center" }}
+            />
           </Link>
         </div>
         <div className="flex-item">
@@ -61,21 +65,20 @@ const Logo = () => {
 };
 const LogoBlock = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
   height: 10rem;
   width: 100%;
-  margin-left: 15rem;
 
   .flex-item {
     display: flex;
-    padding: 2rem 1rem;
   }
   .btn-wrap {
     position: absolute;
     display: flex;
     align-items: center;
+
     right: 2rem;
     a {
       width: 6rem;
