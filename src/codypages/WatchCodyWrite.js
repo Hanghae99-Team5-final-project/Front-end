@@ -14,6 +14,7 @@ const WatchCodyWrite = (props) => {
   const [content, setContent] = useState("");
   const [Value, setValue] = useState(0);
   const [images, setImages] = useState();
+  const [imagesname, setImagesname] = useState();
 
   const formData = new FormData();
 
@@ -61,6 +62,8 @@ const WatchCodyWrite = (props) => {
   };
   const onChange = (e) => {
     if (e.target.files) {
+      console.log(imagesname);
+      setImagesname(e.target.files[0].name);
       setImages(e.target.files[0]);
     }
   };
@@ -99,7 +102,7 @@ const WatchCodyWrite = (props) => {
               onChange={onChange}
             />
 
-            <span className="upload"></span>
+            <span className="upload">{imagesname}</span>
           </div>
 
           <div className="input-wrap">
