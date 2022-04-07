@@ -3,12 +3,14 @@ import PaypalExpressBtn from "react-paypal-express-checkout";
 
 function Paypal(props) {
   const onSuccess = (payment) => {
+    window.alert("결제가 완료 되었습니다.");
     // Congratulation, it came here means everything's fine!
     console.log("The payment was succeeded!", payment);
     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
   };
 
   const onCancel = (data) => {
+    window.alert("결제가 취소 되었습니다.");
     // User pressed "cancel" or close Paypal's popup!
     console.log("The payment was cancelled!", data);
     // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
