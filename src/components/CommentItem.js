@@ -14,13 +14,19 @@ const CommentItem = (props) => {
   const watchId = useParams().id;
   const dispatch = useDispatch();
   const { commentUser, commentContent, commentId, createdAt } = props;
+  const commentedit = useSelector((state) => state.comment.commentContent);
   const [edit_comment, setEditComment] = useState("");
   const [open_edit, setOpenEdit] = useState(false);
   const [comment, setComment] = useState("");
+
   const changeEditComment = (e) => {
     setEditComment(e.target.value);
   };
   const clickEditComment = () => {
+    if (!edit_comment) {
+      window.alert("댓글을 입력해주세요!");
+      return;
+    }
     dispatch(
       commentActions.editCommentDB(props.commentId, watchId, edit_comment)
     );

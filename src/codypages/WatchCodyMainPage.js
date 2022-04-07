@@ -23,9 +23,9 @@ const WatchCodyMainPage = () => {
           <Card>
             {codyMains?.map((menu, idx) => {
               return (
-                <Link to={`/watchcodydetail/${menu.codyId}`} key={idx}>
+                <a href={`/watchcodydetail/${menu.codyId}`} key={idx}>
                   <CodyCard data={menu} />
-                </Link>
+                </a>
               );
             })}
           </Card>

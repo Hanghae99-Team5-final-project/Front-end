@@ -32,6 +32,11 @@ const Signup = () => {
       });
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      signup(e);
+    }
+  };
   const signup = () => {
     if (id === "" || password === "" || email === "") {
       window.alert("아이디, 패스워드 , 닉네임을 모두 입력해주세요!");
@@ -109,7 +114,7 @@ const Signup = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              placeholder=""
+              placeholder="(영문 소문자/숫자/ 중 2가지 이상 조합, 8자~16자)"
               value={password}
             />
           </div>
@@ -121,7 +126,7 @@ const Signup = () => {
               onChange={(e) => {
                 setPasswordCheck(e.target.value);
               }}
-              placeholder=""
+              placeholder="(영문 소문자/숫자/ 중 2가지 이상 조합, 8자~16자)"
               value={password_check}
             />
           </div>
@@ -135,17 +140,13 @@ const Signup = () => {
               }}
               placeholder=""
               value={email}
+              onKeyDown={onKeyPress}
+              onSubmit={signup}
             />
           </div>
 
           <div className="btn-wrap">
-            <button
-              className="long-btn"
-              type="button"
-              onClick={() => {
-                signup();
-              }}
-            >
+            <button className="long-btn" type="button" onClick={signup}>
               회원가입
             </button>
           </div>
