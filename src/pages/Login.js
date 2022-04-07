@@ -10,6 +10,12 @@ const Login = (props) => {
   const [username, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      login(e);
+    }
+  };
+
   const login = () => {
     if (username === "" || password === "") {
       window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
@@ -45,18 +51,13 @@ const Login = (props) => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
+                onKeyDown={onKeyPress}
+                onSubmit={login}
               />
             </div>
 
             <div className="btn-wrap">
-              <button
-                type="button"
-                className="long-btn"
-                onClick={() => {
-                  console.log("로그인 했어!");
-                  login();
-                }}
-              >
+              <button type="button" className="long-btn" onClick={login}>
                 로그인
               </button>
 

@@ -64,26 +64,17 @@ function WatchDetail(props) {
             <span className="price">{LowestPrice}</span>
 
             <div className="btn-wrap">
-              <button type="button" className="detail-btn like">
+              <button
+                type="button"
+                className="detail-btn like"
+                onClick={() => {
+                  sendLike();
+                }}
+              >
                 <span>찜하기</span>
-                {!like_state && (
-                  <img
-                    src={emptyLike}
-                    alt="emptyLike"
-                    onClick={() => {
-                      sendLike();
-                    }}
-                  />
-                )}
-                {like_state && (
-                  <img
-                    src={Like}
-                    alt="Like"
-                    onClick={() => {
-                      deleteLike();
-                    }}
-                  />
-                )}
+
+                {!like_state && <img src={emptyLike} alt="emptyLike" />}
+                {like_state && <img src={Like} alt="Like" />}
               </button>
 
               <Paypal />

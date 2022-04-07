@@ -10,15 +10,15 @@ import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";
 
-function WatchCodyDetail() {
+function WatchCodyDetail(props) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const codyId = id;
   console.log(id);
   const codydetails = useSelector((state) => state.post.codyDetail);
   console.log(codydetails);
-
   const history = useHistory();
+
   React.useEffect(() => {
     dispatch(postActions.getCodyDetailFB(codyId));
   }, []);
@@ -97,9 +97,9 @@ const WatchCodyDetailWrap = styled.div`
       border: none;
 
       img {
-        width: 2.5rem;
-        height: 2.5rem;
-        margin-right: 2rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-right: 1rem;
       }
     }
   }

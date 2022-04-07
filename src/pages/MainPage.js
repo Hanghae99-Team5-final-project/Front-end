@@ -33,6 +33,7 @@ export default function MainPage() {
       <Carousel fade interval={1500}>
         <Carousel.Item>
           <img className="d-block w-100" src={topBanner} alt="First slide" />
+
           <Carousel.Caption></Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -46,6 +47,7 @@ export default function MainPage() {
           <Carousel.Caption></Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+
       <div className="center">
         <WatchCardWrap>
           <div className="category">
@@ -57,9 +59,9 @@ export default function MainPage() {
             {bestList &&
               bestList.slice(0, 4).map((data, i) => {
                 return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
+                  <a href={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
-                  </Link>
+                  </a>
                 );
               })}
           </Card>
@@ -77,16 +79,16 @@ export default function MainPage() {
               coupleList.slice(0, 4).map((data, i) => {
                 console.log(data);
                 return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
+                  <a href={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
-                  </Link>
+                  </a>
                 );
               })}
           </Card>
           <div className="btn-area">
-            <Link to="/watchpage">
+            <a href="/watchpage">
               <MoreButton />
-            </Link>
+            </a>
           </div>
         </WatchCardWrap>
         <WatchCardWrap>
@@ -99,16 +101,16 @@ export default function MainPage() {
               codyList.slice(0, 5).map((data, i) => {
                 console.log(data);
                 return (
-                  <Link to={`/watchcodydetail/${data.codyId}`} key={i}>
+                  <a href={`/watchcodydetail/${data.codyId}`} key={i}>
                     <CodyCard data={data} />
-                  </Link>
+                  </a>
                 );
               })}
           </Card>
           <div className="btn-area">
-            <Link to="/watchcodymainpage">
+            <a href="/watchcodymainpage">
               <MoreButton />
-            </Link>
+            </a>
           </div>
         </WatchCardWrap>
       </div>

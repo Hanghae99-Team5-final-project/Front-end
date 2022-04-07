@@ -127,9 +127,7 @@ const deleteCommentFB = (commentId) => {
     await apis.deleteComment(commentId).then((res) => {
       dispatch(deleteComment(commentId));
       console.log(res);
-      // window.alert("삭제가 완료되었습니다.");
-
-      // window.location.reload();
+      window.alert("삭제되었습니다.");
     });
   };
 };

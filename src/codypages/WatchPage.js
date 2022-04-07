@@ -22,9 +22,9 @@ const WatchPage = () => {
             {CategoryList &&
               CategoryList.coupleList.map((data, i) => {
                 return (
-                  <Link to={`/watchdetail/${data.watchId}`} key={i}>
+                  <a href={`/watchdetail/${data.watchId}`} key={i}>
                     <WatchCard data={data} />
-                  </Link>
+                  </a>
                 );
               })}
             {CategoryList &&

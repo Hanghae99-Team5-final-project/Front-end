@@ -25,6 +25,10 @@ const DetailCodyComment = (props) => {
       history.replace("/login");
       return;
     }
+    if (!commentContent) {
+      window.alert("댓글을 입력해주세요!");
+      return;
+    }
     console.log();
 
     dispatch(
