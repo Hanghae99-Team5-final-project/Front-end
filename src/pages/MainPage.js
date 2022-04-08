@@ -4,17 +4,12 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionsCreators as MainlistActions } from "../redux/modules/mainpage";
 import MoreButton from "../components/button/MoreButton";
-import ScrollTopButton from "../components/button/ScrollTopButton";
 import CodyCard from "../components/CodyCard";
 import WatchCard from "../components/WatchCard";
-import { Link } from "react-router-dom";
 import topBanner from "../images/topBanner.png";
 import topBanner2 from "../images/topBanner2.jpeg";
 import topBanner3 from "../images/topBanner3.jpeg";
 import { Carousel } from "react-bootstrap";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export default function MainPage() {
   React.useEffect(() => {

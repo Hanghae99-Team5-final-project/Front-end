@@ -1,7 +1,7 @@
 import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 
-function Paypal(props) {
+function Paypal() {
   const onSuccess = (payment) => {
     window.alert("결제가 완료 되었습니다.");
     // Congratulation, it came here means everything's fine!

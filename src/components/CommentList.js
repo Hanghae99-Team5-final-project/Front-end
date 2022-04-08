@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CommentItem from "./CommentItem";
 import { useSelector } from "react-redux";
 
-const CommentList = (props) => {
+const CommentList = () => {
   const commentData = useSelector((state) => state.comment.list);
 
   return (

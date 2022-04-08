@@ -13,6 +13,6 @@ export const idCheck = (id) => {
 
 // 비밀번호 체크
 export const pwdCheck = (password_check) => {
-  let pwdreg = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,15}$/;
+  let pwdreg = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,16}$/;
   return pwdreg.test(password_check);
 };

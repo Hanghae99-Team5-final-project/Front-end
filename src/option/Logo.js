@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MainLogo from "../images/logo3.jpg";
 import Lock from "../svg/Lock.svg";

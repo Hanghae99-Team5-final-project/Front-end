@@ -2,15 +2,7 @@ import styled from "styled-components";
 
 export default function WatchCard(props) {
   const data = props.data;
-  const {
-    lowestPrice,
-    watchBrand,
-    watchCategory,
-    codyId,
-    imageUrl,
-    codyContent,
-    userName,
-  } = {
+  const { imageUrl, codyContent, userName } = {
     userName: data.userName,
     lowestPrice: data.lowestPrice,
     watchBrand: data.watchBrand,

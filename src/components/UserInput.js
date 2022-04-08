@@ -1,22 +1,9 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const UserInput = (props) => {
-  const {
-    placeholder,
-    _onChange,
-    type,
-    value,
-    is_width,
-    margin,
-    size,
-    center,
-  } = props;
-
-  const styles = {
-    margin: margin,
-    size: size,
-  };
+  const { placeholder, _onChange, type, value, is_width, margin, center } =
+    props;
 
   return (
     <>

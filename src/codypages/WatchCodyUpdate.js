@@ -19,7 +19,8 @@ const WatchCodyUpdate = (props) => {
   const [content, setContent] = useState("");
   const [Value, setValue] = useState(0);
   const [images, setImages] = useState();
-  const [imageURL, setImageURL] = useState([]);
+  const [imagesname, setImagesname] = useState();
+
   const formData = new FormData();
 
   const changetitle = (e) => {
@@ -80,6 +81,7 @@ const WatchCodyUpdate = (props) => {
 
   const onChange = (e) => {
     if (e.target.files) {
+      setImagesname(e.target.files[0].name);
       setImages(e.target.files[0]);
     }
   };
@@ -117,7 +119,7 @@ const WatchCodyUpdate = (props) => {
               className="file-input"
               onChange={onChange}
             />
-            <span className="upload">123</span>
+            <span className="upload">{imagesname}</span>
           </div>
 
           <div className="input-wrap">

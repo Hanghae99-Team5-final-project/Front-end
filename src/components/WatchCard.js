@@ -1,14 +1,11 @@
 import styled from "styled-components";
-import Img from "../images/footerLogo.png";
 
 export default function WatchCard(props) {
   const data = props.data;
   const {
-    likeCount,
     lowestPrice,
     watchBrand,
-    watchCategory,
-    watchId,
+
     watchImageUrl,
   } = {
     likeCount: data.likeCount,
