@@ -210,14 +210,14 @@ const deleteDB = (data) => {
 
 const getDetail = (watchId) => {
   console.log(watchId);
-  return async (dispatch, getstate, { history }) => {
+  return async () => {
     const response = await apis.detailPage(watchId);
     console.log(response);
   };
 };
 
 const getLike = (watchId) => {
-  return async (dispatch, getstate, { history }) => {
+  return async (dispatch) => {
     const response = await apis.detailButtonPage(watchId);
     console.log(response);
 

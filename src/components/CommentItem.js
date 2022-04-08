@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Text, Input } from "../elements";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaPencilAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { Input } from "../elements";
+
+import { useDispatch } from "react-redux";
 import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
 import "../App.css";
@@ -13,8 +12,7 @@ import { useParams } from "react-router-dom";
 const CommentItem = (props) => {
   const watchId = useParams().id;
   const dispatch = useDispatch();
-  const { commentUser, commentContent, commentId, createdAt } = props;
-  const commentedit = useSelector((state) => state.comment.commentContent);
+  const { commentUser, commentContent, createdAt } = props;
   const [edit_comment, setEditComment] = useState("");
   const [open_edit, setOpenEdit] = useState(false);
   const [comment, setComment] = useState("");

@@ -1,22 +1,15 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import axios from "axios";
-import { setCookie, deleteCookie } from "../../Cookie";
+
 import apis from "../../api/apis";
-// actions
-// const LOG_IN = "LOG_IN";
+
 const LOG_OUT = "LOG_OUT";
-const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
-// action creators
-// const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
-const token = localStorage.getItem("token");
-// initialState
 const initialState = {
   user: null,
   is_login: false,
@@ -122,7 +115,6 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       }),
-    [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
@@ -130,7 +122,6 @@ export default handleActions(
 // action creator export
 const actionCreators = {
   logOut,
-  getUser,
   logOutFB,
   loginFB,
   signupFB,

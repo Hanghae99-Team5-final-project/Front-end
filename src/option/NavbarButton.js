@@ -1,22 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 import logo01 from "../images/logo01.png";
-
 import "../App.css";
-import { actionCreators as userActions } from "../redux/modules/user";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function NavbarButton() {
-  const dispatch = useDispatch();
-
   let isLogin = useSelector((state) => state.user.is_login);
   console.log(isLogin);
-
-  const signOut = () => {
-    dispatch(userActions.logOut());
-  };
 
   return (
     <Navbar>

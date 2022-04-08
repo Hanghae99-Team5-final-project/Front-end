@@ -78,7 +78,6 @@ const Signup = () => {
           </div>
 
           <div className="input-wrap">
-            {/* <div className="Id-wrap"> */}
             <span>*</span>
             <label className="input-title" style={{ margin: "10px" }}>
               아이디
@@ -105,7 +104,7 @@ const Signup = () => {
               중복 확인
             </button>
           </div>
-          {/* </div> */}
+
           <div className="input-wrap">
             <span>*</span>
             <label className="input-title">비밀번호</label>

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useDispatch, useSelector } from "react-redux";
-import { history } from "../redux/configStore";
 import CommentCodyDetail from "../components/CommentCodyDetail";
 import Trash from "../images/Trash.png";
 import Edit from "../images/Edit.png";
